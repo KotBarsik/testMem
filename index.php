@@ -59,7 +59,7 @@ class App
 
         if($userData[0]['id']){
             $userSettings = json_decode($userData[0]['data'],true);
-            if($userData[0]['status'] == 'on'){
+            if($userData[0]['status'] == 'on' || $userData[0]['status'] == 'off'){
                 $yt = new YandexTranslate();
 
                 //Определяем язык текста, пока что не нужно
