@@ -4,7 +4,8 @@ $data = file_get_contents('http://149.154.71.22:88/');
 $data = (json_decode($data, true))['message'];
 */
 file_put_contents('log.txt',file_get_contents('php://input'));
-$data = json_decode(file_get_contents('php://input'),true);
+$data = file_get_contents('php://input');
+$data = (json_decode($data, true))['message'];
 
 require_once 'Telegram.php';
 require_once 'YandexTranslate.php';
