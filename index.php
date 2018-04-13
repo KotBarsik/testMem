@@ -3,7 +3,15 @@
 $data = file_get_contents('http://149.154.71.22:88/');
 $data = (json_decode($data, true))['message'];
 */
+
+
+if($_GET['get'] == 'get'){
+    echo file_get_contents('log.txt');
+    exit();
+}
+
 file_put_contents('log.txt',file_get_contents('php://input'));
+
 $data = file_get_contents('php://input');
 $data = (json_decode($data, true))['message'];
 
