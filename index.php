@@ -24,4 +24,5 @@ if($_GET['get'] == 'get'){
     $app = (new App)->run($data);
 
     unset($app);
+    exit();
 }
