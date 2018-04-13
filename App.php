@@ -49,20 +49,8 @@ class App
         if($userData[0]['id']){
             $userSettings = json_decode($userData[0]['data'],true);
             if($userData[0]['status'] == 'on' || $userData[0]['status'] == 'off'){
-                $yt = new YandexTranslate();
-
-                //Определяем язык текста, пока что не нужно
-                $detected = $yt->detected(array(
-                    'text' => $data['text']
-                ));
-
-                $translateText = $yt->translate(array(
-                    'text' => $data['text'],
-                    'lang' => $userSettings['lang']
-                ));
-
-                $text = $translateText['text'][0] ? $translateText['text'][0] : $data['text'];
-                $this->allSubscribers($text);
+                $users = $data['from']['first_name'].' '.$data['from']['last_name'];
+                $this->allSubscribers($data['text'],$chat_id,$users);
 
             }
             else{
@@ -78,7 +66,7 @@ class App
             if($data['text'] == '/start'){
                 $this->replyKeyboard($chat_id,'Your language
 Ваш язык');
-            }elseif ($data['text'] == 'Eng' || $data['text'] == 'Rus'){
+            }elseif ($data['text'] == 'en' || $data['text'] == 'ru'){
                 $result = $this->createUser($chat_id,json_encode(array(
                     'lang' => $data['text']
                 )));
@@ -93,6 +81,9 @@ class App
                     $this->reply($messages[$data['text']],$chat_id);
                 }
             }
+        }else{
+            $this->replyKeyboard($chat_id,'Your language
+Ваш язык');
         }
 
         return;
@@ -146,10 +137,21 @@ class App
         return $sendRessult;
     }
 
-    protected function allSubscribers($messges){
+    protected function allSubscribers($messges,$myID,$sendUserLogin){
         foreach ($this->getAllUsers() as $user){
-            if($user['id']) {
-                $this->reply($messges,$user['id']);
+            if($user['id'] != $myID && $user['id'] && !$this->thisCommands($messges)) {
+                $data = json_decode($user['data'],true);
+
+                $yt = new YandexTranslate();
+
+                $translateText = $yt->translate(array(
+                    'text' => $messges,
+                    'lang' => $data['lang']
+                ));
+                $text = $sendUserLogin.'
+';
+                $text .= $translateText['text'][0] ? $translateText['text'][0] : '';
+                $this->reply($text,$user['id']);
             }
         }
     }
