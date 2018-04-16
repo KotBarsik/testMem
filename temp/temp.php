@@ -21,8 +21,8 @@ $prepareWeather = function ($day){
             $data['hours'][] = array(
                 'interval' => $hour['interval'],
                 'temp' => $hour['temp'],
-                'symbolSkyDesc' => $day['symbol_description'],
-                'symbolSkyVal' => $day['symbol_value']
+                'symbolSkyDesc' => $hour['symbol_description'],
+                'symbolSkyVal' => $hour['symbol_value']
             );
         }
     }
@@ -127,7 +127,7 @@ function ucfirst_utf8($str)
             ?>
         </div>
         <div class="imgWeather">
-            <img src="./img/clouds/<?php echo $day['symbol_value'] ?>.png">
+            <img src="./img/colored/day/<?php echo $day['symbol_value'] ?>.png">
         </div>
     </div>
 </center>
@@ -141,7 +141,7 @@ function ucfirst_utf8($str)
                 list($date) = explode(':',$hour['interval'],2);
                 echo '<div class="cloudHours">';
                     echo "<div class='numberpadding'>$date</div>";
-                    echo "<div><img class='hoursImg' src='./img/white/{$hour['symbolSkyVal']}.png' /></div>";
+                    echo "<div><img class='hoursImg' src='./img/white/day/{$hour['symbolSkyVal']}.png' /></div>";
                     echo "<div class='numberpadding'>{$hour['temp']}</div>";
                 echo '</div>';
             }
@@ -157,7 +157,7 @@ function ucfirst_utf8($str)
                 echo "
                     <tr>
                         <td width='60%'>{$name}</td>
-                        <td width='20%'><img class='hoursImg' src='./img/white/{$day['symbolAvgSkyVal']}.png'/></td>
+                        <td width='20%'><img class='hoursImg' src='./img/white/day/{$day['symbolAvgSkyVal']}.png'/></td>
                         <td width='10%'>{$day['tempMax']}</td>
                         <td width='10%'>{$day['tempMin']}</td>
                     </tr>
