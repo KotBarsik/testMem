@@ -22,9 +22,9 @@ body {
     margin: 0px;
     max-width: 100%;
     font-family: Arial, Helvetica, sans-serif;;
-    background-image: url(img/background.png);
+    background-image: url(../img/background.png);
     font-size: 14px;
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;
     /*background-image: url(https://s8.hostingkartinok.com/uploads/images/2018/04/f73656a69a6f35c6ec28c9f53bc70346.jpg);*/
     background-position-x: 50%;
 
