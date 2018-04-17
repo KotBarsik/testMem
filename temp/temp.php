@@ -1,4 +1,23 @@
 <?php
+$serverTime = time();
+$serverHours = date('H',$serverTime);
+
+$themes = function ($time){
+    $time = (int)$time;
+    $str = '';
+    if($time >= 0 && $time <= 5){
+        $str.= 'night/';
+    }
+    elseif ($time >= 22 && $time <= 23){
+        $str.= 'night/';
+    }
+    else{
+        $str.= 'day/';
+    }
+
+    return $str;
+};
+
 function createCache ($data){
     $cache['time'] = time();
     $cache['weather'] = $data;
@@ -114,7 +133,7 @@ function ucfirst_utf8($str)
 
         .cloudHours{
             float:left;
-            margin-right: 20px;
+            margin-right: 25px;
             margin-left: 20px;
         }
 
@@ -135,7 +154,7 @@ function ucfirst_utf8($str)
         }
 
         .hoursImg{
-            width: 40px;
+            width: 36px;
         }
 
         .numberpadding{
@@ -158,7 +177,10 @@ function ucfirst_utf8($str)
             ?>
         </div>
         <div class="imgWeather">
-            <img src="./img/colored/day/<?php echo $day['symbol_value'] ?>.png">
+            <?php
+                $imgPath = './img/colored/'.$themes($serverHours).$day['symbol_value'].'.png';
+            ?>
+            <img src="<?php echo $imgPath ?>">
         </div>
     </div>
 </center>
@@ -170,9 +192,10 @@ function ucfirst_utf8($str)
         <?php
             foreach ($weather[0]['hours'] as $hour){
                 list($date) = explode(':',$hour['interval'],2);
+                $imgPath = './img/white/'.$themes($date).$hour['symbolSkyVal'].'.png';
                 echo '<div class="cloudHours">';
                     echo "<div class='numberpadding'>".(int)$date."</div>";
-                    echo "<div><img class='hoursImg' src='./img/white/day/{$hour['symbolSkyVal']}.png' /></div>";
+                    echo "<div><img class='hoursImg' src='{$imgPath}' /></div>";
                     echo "<div class='numberpadding'>{$hour['temp']}</div>";
                 echo '</div>';
             }
@@ -185,10 +208,11 @@ function ucfirst_utf8($str)
         <?php
             foreach ($weather as $day){
                 $name = ucfirst_utf8($day['dayName']);
+                $imgPath = './img/white/'.$themes($serverHours).$day['symbolAvgSkyVal'].'.png';
                 echo "
                     <tr>
                         <td width='60%'>{$name}</td>
-                        <td width='20%'><img class='hoursImg' src='./img/white/day/{$day['symbolAvgSkyVal']}.png'/></td>
+                        <td width='20%'><img class='hoursImg' src='{$imgPath}'/></td>
                         <td width='10%'>{$day['tempMax']}</td>
                         <td width='10%'>{$day['tempMin']}</td>
                     </tr>
