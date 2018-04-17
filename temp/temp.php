@@ -1,7 +1,38 @@
 <?php
-//$data = file_get_contents('http://api.pogoda.com/index.php?api_lang=ru&localidad=255783&affiliate_id=fv27z2phnfu2&v=3.0');
-$data = file_get_contents('http://api.pogoda.com/index.php?api_lang=ru&localidad=255788&affiliate_id=fv27z2phnfu2&v=3.0');
-$data = json_decode($data,true);
+function createCache ($data){
+    $cache['time'] = time();
+    $cache['weather'] = $data;
+
+    try {
+        file_put_contents('./weatherCache.txt', json_encode($cache), LOCK_EX);
+    }catch (Exception $e){
+        return false;
+    }
+
+    return true;
+};
+
+$getWeather = function (){
+    try{
+        $data = file_get_contents('http://api.pogoda.com/index.php?api_lang=ru&localidad=255783&affiliate_id=fv27z2phnfu2&v=3.0&h=1');
+        $data = json_decode($data,true);
+        if($data['status'] != 0 || count($data['status']) <= 0){
+            throw new Exception();
+        }
+        else{
+            createCache($data);
+        }
+
+    }catch (Exception $e){
+        $data = file_get_contents('./weatherCache.txt');
+        $data = json_decode($data,true);
+        $data = $data['weather'];
+    }
+
+    return $data;
+};
+
+$data = $getWeather();
 
 $weather = array();
 
@@ -70,7 +101,7 @@ function ucfirst_utf8($str)
         .line{
             border-top: 1px solid #e8e89d;
             border-bottom: 1px solid #e8e89d;
-            width: 1000px;
+            display: inline-flex;
         }
 
         .clear{
@@ -140,7 +171,7 @@ function ucfirst_utf8($str)
             foreach ($weather[0]['hours'] as $hour){
                 list($date) = explode(':',$hour['interval'],2);
                 echo '<div class="cloudHours">';
-                    echo "<div class='numberpadding'>$date</div>";
+                    echo "<div class='numberpadding'>".(int)$date."</div>";
                     echo "<div><img class='hoursImg' src='./img/white/day/{$hour['symbolSkyVal']}.png' /></div>";
                     echo "<div class='numberpadding'>{$hour['temp']}</div>";
                 echo '</div>';
