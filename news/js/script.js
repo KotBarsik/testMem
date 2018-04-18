@@ -5,7 +5,7 @@ function swhowEvent(type) {
         });
 
         $('#post').css({
-            "display": "tables"
+            "display": "table"
         });
     } else if (type == 'upcoming') {
         $('#post').css({
@@ -13,11 +13,15 @@ function swhowEvent(type) {
         });
 
         $('#upcoming').css({
-            "display": "tables"
+            "display": "table"
         });
     }
 }
 
+function getEvents(id) {
+    console.log(id);
+}
+
 window.onload = function () {
-    swhowEvent('post');
+    swhowEvent('upcoming');
 }

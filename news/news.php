@@ -1,9 +1,9 @@
 <?php
-require_once 'get.php';
+require_once 'CRUD.php';
 
-$get = new Get();
-$data['post'] = $get->getPostEvents();
-$data['upcoming'] = $get->getUpcomingEvents();
+$CRUD = new CRUD();
+$data['post'] = $CRUD->getPostEvents();
+$data['upcoming'] = $CRUD->getUpcomingEvents();
 
 $language = array(
     'ru' => array(
@@ -26,8 +26,8 @@ $lang = 'ru';
 <div class="main_content">
     <div class="button">
         <ul>
-            <li class="buttons active"><?php echo $language[$lang]['post'] ?></li>
-            <li class="buttons unActive"><?php echo $language[$lang]['upcoming'] ?></li>
+            <li class="buttons active" onclick="swhowEvent('post');"><?php echo $language[$lang]['post'] ?></li>
+            <li class="buttons unActive" onclick="swhowEvent('upcoming');"><?php echo $language[$lang]['upcoming'] ?></li>
             <div class="clear"></div>
         </ul>
         <div class="clear"></div>
@@ -39,7 +39,7 @@ $lang = 'ru';
                 $eventTypeName = json_decode($item['event_name'], true);
                 $eventTypeName = $eventTypeName[$lang] ? $eventTypeName[$lang] : '';
                 echo
-                    '<tr class="item">
+                    '<tr class="item" onclick="getEvents('.$item['id'].')">
                                 <td>
                                     <div style="font-size:28px">' . $item['events_start_day'] . '</div>
                                     <div>' . mb_strtoupper($item['events_start_month']) . '</div>
@@ -59,13 +59,13 @@ $lang = 'ru';
         </table>
     </div>
     <div class="content">
-        <table id="post" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px;">
+        <table id="post" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px; display: none;">
             <?php
             foreach ($data['post'] as $item) {
                 $eventTypeName = json_decode($item['event_name'], true);
                 $eventTypeName = $eventTypeName[$lang] ? $eventTypeName[$lang] : '';
                 echo
-                    '<tr class="item">
+                    '<tr class="item" onclick="getEvents('.$item['id'].')">
                                 <td>
                                     <div style="font-size:28px">' . $item['events_start_day'] . '</div>
                                     <div>' . mb_strtoupper($item['events_start_month']) . '</div>
