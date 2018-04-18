@@ -1,4 +1,5 @@
 <?php
+
 class Get
 {
     /**
@@ -8,15 +9,59 @@ class Get
 
     public function __construct()
     {
-        $this->db = new PDO('sqlite:./db.sqlite');
+        try {
+            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
+            $this->db->exec("set names utf8");
+        } catch (Exception $exception) {
+            exit($exception->getMessage());
+        }
+
     }
 
-    public function getAllEvents(){
+    public function getAllEvents()
+    {
         $query = $this->db->query("SELECT * FROM events LEFT JOIN event_type ON event_type.id = events.id");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function run($id){
+    public function getPostEvents()
+    {
+        $query = $this->db->query(
+            "SELECT
+                  events.id,events.title,events.text,events.start_time,events.stop_time,
+                  SUBSTR(DATE_FORMAT(events.start_time,'%M'),1,3) as events_start_month,
+                  DATE_FORMAT(events.start_time,'%d') as events_start_day,
+                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%m - '),DATE_FORMAT(events.stop_time,'%h:%m')) as events_start_preview,
+                  DATE_FORMAT(events.start_time,'%Y-%m-%d') as events_start_time_ymd,
+                  DATE_FORMAT(events.stop_time,'%Y-%m-%d') as events_stop_time_ymd,
+                  event_type.name as event_name
+                FROM events
+                  LEFT JOIN event_type ON event_type.id = events.id
+                HAVING events_start_time_ymd < CURDATE()"
+        );
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUpcomingEvents()
+    {
+        $query = $this->db->query(
+            "SELECT
+                  events.id,events.title,events.text,events.start_time,events.stop_time,
+                  SUBSTR(DATE_FORMAT(events.start_time,'%M'),1,3) as events_start_month,
+                  DATE_FORMAT(events.start_time,'%d') as events_start_day,
+                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%m - '),DATE_FORMAT(events.stop_time,'%h:%m')) as events_start_preview,
+                  DATE_FORMAT(events.start_time,'%Y-%m-%d') as events_start_time_ymd,
+                  DATE_FORMAT(events.stop_time,'%Y-%m-%d') as events_stop_time_ymd,
+                  event_type.name as event_name
+                FROM events
+                  LEFT JOIN event_type ON event_type.id = events.id
+                HAVING events_start_time_ymd >= CURDATE()"
+        );
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function run($id)
+    {
         $query = $this->db->query("
           SELECT * FROM events LEFT JOIN event_type ON event_type.id = events.id  WHERE events.id=?
         ");
@@ -24,24 +69,8 @@ class Get
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         print_r($result);
     }
-
-    public function mapping($data){
-        $maps = [];
-
-        foreach ($data as $item){
-            $maps[] = array(
-                'day' => $item['date_start'],
-                'month' => $item['date_start'],
-                'title' => $item['title'],
-                'eventType' => $item['name_ru'],
-                'date' => $item['date_start']
-            );
-        }
-
-        return $maps;
-    }
 }
 
-if(is_numeric($_GET['id']) && $_SERVER['HTTP_USER_AGENT']){
+if (is_numeric($_GET['id']) && $_SERVER['HTTP_USER_AGENT']) {
     (new Get())->run($_GET['id']);
 }
