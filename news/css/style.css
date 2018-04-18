@@ -90,3 +90,19 @@ body {
 .tdContent > div{
     margin-top: 4px;
 }
+
+.eventsContent{
+    margin-left:30px;
+    padding-top: 10px;
+    margin: 0px auto;
+}
+
+.eventTitle{
+    font-size: 16px;
+    text-align: center;
+}
+
+.eventDate{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

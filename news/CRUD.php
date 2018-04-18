@@ -62,9 +62,12 @@ class CRUD
 
     public function getEventById($id)
     {
-        $query = $this->db->query("
-          SELECT * FROM events LEFT JOIN event_type ON event_type.id = events.id  WHERE events.id=?
-        ");
+        $query = $this->db->prepare(
+            "SELECT title,text,
+            concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%m - '),DATE_FORMAT(events.stop_time,'%h:%m')) as events_start_preview
+          FROM events WHERE events.id=?"
+        );
+
         $query->execute(array($id));
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
