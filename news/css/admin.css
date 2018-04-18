@@ -1,0 +1,9 @@
+@font-face {
+    font-family: Pompadur; /* Гарнитура шрифта */
+    src: url(../font/OpenSans.ttf); /* Путь к файлу со шрифтом */
+}
+
+.content{
+    margin:0px auto;
+    max-width: 450px;
+}
