@@ -66,14 +66,16 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getEventAllDataById($id){
+    public function getEventAllDataById($id)
+    {
         $query = $this->db->prepare("SELECT * FROM events WHERE events.id=?");
 
         $query->execute(array($id));
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getEventTypeAllDataById($id){
+    public function getEventTypeAllDataById($id)
+    {
         $query = $this->db->prepare("SELECT * FROM event_type WHERE event_type.id=?");
 
         $query->execute(array($id));
@@ -92,8 +94,11 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateEventById($data){
-        $query = $this->db->prepare("UPDATE events SET title = :title,text = :text WHERE id=:id ");
+    public function updateEventById($data)
+    {
+        $query = $this->db->prepare("UPDATE events SET title = :title,text = :text,stop_time=:stop_time,stop_time=:stop_time WHERE id=:id");
+        $query->bindParam(':start_time', str_replace('T',' ',$data['startTime']));
+        $query->bindParam(':stop_time', $data['stopTime']);
         $query->bindParam(':title', $data['title']);
         $query->bindParam(':text', $data['text']);
         $query->bindParam(':id', $data['id']);
