@@ -58,8 +58,8 @@ class Admin{
         }
     }
 
-    public function update($_POST){
-        $_POST;
+    public function update($data){
+        $data = '';
     }
 
 };
