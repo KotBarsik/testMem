@@ -24,7 +24,7 @@ class Admin{
 
     public function event($id){
         require_once 'layout/menu.php';
-        if($id == false) {
+        if($id === false) {
             $events = $this->CRUD->getAllEvents();
             $eventsType = $this->CRUD->getAllEventsType();
 
@@ -39,22 +39,23 @@ class Admin{
             require_once 'layout/event.php';
         }
         elseif ($id == 0){
-
+            $eventById = $this->CRUD->getEventAllDataById($id);
+            require_once 'layout/event.php';
         }
     }
 
     public function categories($id){
         require_once 'layout/menu.php';
-        if($id == false) {
+        if($id === false) {
             $eventsType = $this->CRUD->getAllEventsType();
-
             require_once 'layout/eventTypeList.php';
         }
         elseif ($id >= 1){
-
+            $eventsType = $this->CRUD->getEventTypeAllDataById($id);
+            require_once 'layout/eventType.php';
         }
         elseif ($id == 0){
-
+            require_once 'layout/eventType.php';
         }
     }
 
@@ -81,7 +82,7 @@ $admin->load();
 <body>
 <?php
 
-$id = empty($_GET['id']) ? false : (int)$_GET['id'];
+$id = !isset($_GET['id']) ? false : (int)$_GET['id'];
 
 if($_GET['load'] == 'event') {
     $admin->event($id);

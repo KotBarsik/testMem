@@ -73,6 +73,13 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getEventTypeAllDataById($id){
+        $query = $this->db->prepare("SELECT * FROM event_type WHERE event_type.id=?");
+
+        $query->execute(array($id));
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getEventById($id)
     {
         $query = $this->db->prepare(

@@ -1,4 +1,5 @@
 <div class="content">
+    <a href="/news/admin.php?load=categories&id=0"><button type="button" class="btn btn-info">Создать</button></a>
     <div class="bd-example">
         <table id="upcoming" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px;border-spacing: 7px 11px !important;">
             <tr>
