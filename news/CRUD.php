@@ -18,9 +18,15 @@ class CRUD
 
     }
 
+    public function getAllEventsType()
+    {
+        $query = $this->db->query("SELECT * FROM event_type");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getAllEvents()
     {
-        $query = $this->db->query("SELECT * FROM events LEFT JOIN event_type ON event_type.id = events.id");
+        $query = $this->db->query("SELECT * FROM events");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -57,6 +63,13 @@ class CRUD
                   LEFT JOIN event_type ON event_type.id = events.event_type
                 HAVING events_start_time_ymd >= CURDATE()"
         );
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getEventAllDataById($id){
+        $query = $this->db->prepare("SELECT * FROM events WHERE events.id=?");
+
+        $query->execute(array($id));
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 

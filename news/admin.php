@@ -3,12 +3,63 @@ session_start();
 
 class Admin{
 
-    public function __construct(){
+    /**
+     * @var CRUD
+     */
+    public $CRUD;
 
+    public function __construct(){
+        require_once './CRUD.php';
+        $this->CRUD = new CRUD();
     }
 
     public function load(){
 
+    }
+
+    public function render(){
+        require_once 'layout/menu.php';
+        require_once 'layout/event.php';
+    }
+
+    public function event($id){
+        require_once 'layout/menu.php';
+        if($id == false) {
+            $events = $this->CRUD->getAllEvents();
+            $eventsType = $this->CRUD->getAllEventsType();
+
+            foreach ($eventsType as $eventType){
+                $eventsType['format'][$eventType['id']] = $eventType;
+            }
+
+            require_once 'layout/eventList.php';
+        }
+        elseif ($id >= 1){
+            $eventById = $this->CRUD->getEventAllDataById($id);
+            require_once 'layout/event.php';
+        }
+        elseif ($id == 0){
+
+        }
+    }
+
+    public function categories($id){
+        require_once 'layout/menu.php';
+        if($id == false) {
+            $eventsType = $this->CRUD->getAllEventsType();
+
+            require_once 'layout/eventTypeList.php';
+        }
+        elseif ($id >= 1){
+
+        }
+        elseif ($id == 0){
+
+        }
+    }
+
+    public function update($_POST){
+        $_POST;
     }
 
 };
@@ -28,22 +79,20 @@ $admin->load();
     <link href="http://bootstrap-v4.ru/dist/css/bootstrap.min.css" tppabs="http://bootstrap-v4.ru/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <a class="navbar-brand" href="#">Project name</a>
-    <ul class="nav navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-        </li>
-    </ul>
-</nav>
 <?php
-require_once 'layout/login.php';
+
+$id = empty($_GET['id']) ? false : (int)$_GET['id'];
+
+if($_GET['load'] == 'event') {
+    $admin->event($id);
+}
+elseif ($_GET['load'] == 'categories'){
+    $admin->categories($id);
+}
+elseif($_POST['update']){
+    $admin->update($_POST);
+}
+
 ?>
 </body>
 </html>
