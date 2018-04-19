@@ -91,4 +91,13 @@ class CRUD
         $query->execute(array($id));
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateEventById($data){
+        $query = $this->db->prepare("UPDATE events SET title = :title,text = :text WHERE id=:id ");
+        $query->bindParam(':title', $data['title']);
+        $query->bindParam(':text', $data['text']);
+        $query->bindParam(':id', $data['id']);
+        $result = $query->execute();
+        return $result;
+    }
 }

@@ -60,7 +60,14 @@ class Admin{
     }
 
     public function update($data){
+        if($data['type'] == 'event'){
+            $this->CRUD->updateEventById($data);
+        }
         $data = '';
+    }
+
+    public function create($data){
+
     }
 
 };

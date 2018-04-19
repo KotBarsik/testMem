@@ -33,6 +33,8 @@
             type: 'post',
             dataType : "json",
             data:{
+                type:'event',
+                id:$('button').attr('eventId'),
                 title:$('#title').val(),
                 startTime:$('#startTime').val(),
                 stopTime:$('#stopTime').val(),
