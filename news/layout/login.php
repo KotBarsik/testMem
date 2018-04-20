@@ -13,18 +13,42 @@
 <body>
 <div class="content">
     <div class="bd-example">
-        <form action="./admin.php" method="POST">
+        <?php
+        if(isset($_SESSION['userLoginError'])){
+            echo '<div style="color:red;">'.$_SESSION['userLoginError'].'</div>';
+        }
+        ?>
+        <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Login</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
+                <input id="login" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input id="pwd" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Вход</button>
+            <button class="btn btn-primary">Вход</button>
         </form>
     </div>
 </div>
 </body>
+<script>
+    $('button').on('click', function () {
+        $.ajax({
+            url: '/admin.php',
+            type: 'post',
+            dataType: "json",
+            data: {
+                email:$('#login').val(),
+                pwd:$('#pwd').val(),
+                login:true
+            },
+            statusCode: {
+                200: function (response) {
+                    //location.reload();
+                }
+            }
+        });
+    });
+</script>
 </html>

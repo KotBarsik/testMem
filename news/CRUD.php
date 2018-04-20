@@ -152,4 +152,10 @@ class CRUD
         $result = $query->execute();
         return $result;
     }
+
+    public function checkUser($login,$pwd){
+        $query = $this->db->prepare("SELECT * FROM users WHERE login=? AND pwd=?");
+        $result = $query->execute(array($login,$pwd));
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

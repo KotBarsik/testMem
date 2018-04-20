@@ -91,6 +91,10 @@ class Admin{
         require_once './layout/login.php';
     }
 
+    public function checkUser($data){
+        return $this->CRUD->checkUser($data['login'],md5($data['pwd']));
+    }
+
 };
 
 $admin = new Admin();
@@ -112,23 +116,52 @@ if($_GET['load']){
 <body>
 <?php
 }
+
+if($_SERVER['REQUEST_URI'] == '/admin.php' || $_SERVER['REQUEST_URI'] == '/admin.php?'){
+    if($_SESSION['userData']) {
+        $admin->event(false);
+    }
+    else{
+        $admin->login();
+    }
+}
+
 $id = !isset($_GET['id']) ? false : (int)$_GET['id'];
 
 if($_GET['load'] == 'event') {
     $admin->event($id);
 }
-elseif ($_GET['load'] == 'categories'){
+elseif($_GET['load'] == 'categories'){
     $admin->categories($id);
 }
-elseif ($_GET['load'] == 'delete'){
+elseif($_GET['load'] == 'delete'){
     $admin->delete($_GET['type'],$_GET['id']);
+}
+elseif ($_GET['load'] == 'exit'){
+    unset($_SESSION['userData']);
+    header("Location: ./admin.php");
 }
 elseif($_POST['update']){
     $admin->update($_POST);
 }
-elseif ($_POST['create']){
+elseif($_POST['create']){
     echo $admin->create($_POST);
-}else {
+}elseif($_POST['login']){
+    $result = $admin->checkUser(array(
+        'login' => $_POST['email'],
+        'pwd' => $_POST['pwd']
+    ));
+    if(isset($result[0]['id'])){
+        unset($result[0]['pwd']);
+        $_SESSION['userData'] = $result[0];
+        unset($_SESSION['userLoginError']);
+        echo 'ok';
+        exit();
+    }
+    else{
+        $_SESSION['userLoginError'] = 'Неверный логин или пароль';
+    }
+}else{
     $admin->login();
 }
 
