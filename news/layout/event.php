@@ -53,7 +53,7 @@ function selected($selectId,$itemId){
     if($('button').attr('eventId')) {
         $('button').on('click', function () {
             $.ajax({
-                url: '/news/admin.php',
+                url: '/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -77,7 +77,7 @@ function selected($selectId,$itemId){
     else{
         $('button').on('click', function () {
             $.ajax({
-                url: '/news/admin.php',
+                url: '/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -91,7 +91,7 @@ function selected($selectId,$itemId){
                 },
                 statusCode: {
                     200: function (response) { // выполнить функцию если код ответа HTTP 200
-                        location.href = '/news/admin.php?load=event';
+                        location.href = '/admin.php?load=event';
                     }
                 }
             });

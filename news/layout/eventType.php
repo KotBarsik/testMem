@@ -22,7 +22,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
     if($('button').attr('catId')) {
         $('button').on('click', function () {
             $.ajax({
-                url: '/news/admin.php',
+                url: '/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -42,7 +42,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
     }else {
         $('button').on('click', function () {
             $.ajax({
-                url: '/news/admin.php',
+                url: '/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -53,7 +53,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
                 },
                 statusCode: {
                     200: function (response) { // выполнить функцию если код ответа HTTP 200
-                        location.href = '/news/admin.php?load=categories';
+                        location.href = '/admin.php?load=categories';
                     }
                 }
             });

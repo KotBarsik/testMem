@@ -80,10 +80,10 @@ class Admin{
     public function delete($type,$id){
         if($type == 'categories') {
             $this->CRUD->deleteEventType($id);
-            header("Location: /news/admin.php?load=categories");
+            header("Location: /admin.php?load=categories");
         }elseif ($type == 'event'){
             $this->CRUD->deleteEvent($id);
-            header("Location: /news/admin.php?load=event");
+            header("Location: /admin.php?load=event");
         }
     }
 
