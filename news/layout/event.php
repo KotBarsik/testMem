@@ -10,6 +10,19 @@
                 <td><input id="startTime" class="form-control" type="datetime-local" id="date" name="date" value=""/></td>
             </tr>
             <tr>
+                <td>Категория</td>
+                <td>
+                    <select id="category" class="form-control">
+                        <?php
+                            foreach ($eventsType as $item){
+                                $name = json_decode($item['name'],true);
+                                echo '<option value="'.$item['id'].'">'.$name['ru'].'</option>';
+                            }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Дата конца</td>
                 <td><input id="stopTime" class="form-control" type="datetime-local" id="date" name="date" value=""/></td>
             </tr>
@@ -27,26 +40,52 @@
     $('#startTime').val("<?php echo str_replace(' ','T',$eventById[0]['start_time']);?>");
     $('#stopTime').val("<?php echo str_replace(' ','T',$eventById[0]['stop_time']);?>");
 
-    $('button').on('click',function () {
-        $.ajax({
-            url: '/news/admin.php',
-            type: 'post',
-            dataType : "json",
-            data:{
-                type:'event',
-                id:$('button').attr('eventId'),
-                title:$('#title').val(),
-                startTime:$('#startTime').val(),
-                stopTime:$('#stopTime').val(),
-                text:$('#text').val(),
-                update:true
-            },
-            statusCode: {
-                200: function (response) { // выполнить функцию если код ответа HTTP 200
-                    location.reload();
+    if($('button').attr('eventId')) {
+        $('button').on('click', function () {
+            $.ajax({
+                url: '/news/admin.php',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    type: 'event',
+                    id: $('button').attr('eventId'),
+                    title: $('#title').val(),
+                    category : $('#category').val(),
+                    startTime: $('#startTime').val(),
+                    stopTime: $('#stopTime').val(),
+                    text: $('#text').val(),
+                    update: true
+                },
+                statusCode: {
+                    200: function (response) { // выполнить функцию если код ответа HTTP 200
+                        location.reload();
+                    }
                 }
-            }
+            });
         });
-    });
+    }
+    else{
+        $('button').on('click', function () {
+            $.ajax({
+                url: '/news/admin.php',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    type: 'event',
+                    title: $('#title').val(),
+                    category : $('#category').val(),
+                    startTime: $('#startTime').val(),
+                    stopTime: $('#stopTime').val(),
+                    text: $('#text').val(),
+                    create: true
+                },
+                statusCode: {
+                    200: function (response) { // выполнить функцию если код ответа HTTP 200
+                        location.href = '/news/admin.php?load=event';
+                    }
+                }
+            });
+        });
+    }
 
 </script>

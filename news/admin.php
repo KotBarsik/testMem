@@ -24,10 +24,9 @@ class Admin{
 
     public function event($id){
         require_once 'layout/menu.php';
+        $eventsType = $eventsType = $this->CRUD->getAllEventsType();
         if($id === false) {
             $events = $this->CRUD->getAllEvents();
-            $eventsType = $this->CRUD->getAllEventsType();
-
             foreach ($eventsType as $eventType){
                 $eventsType['format'][$eventType['id']] = $eventType;
             }
@@ -63,18 +62,36 @@ class Admin{
         if($data['type'] == 'event'){
             $this->CRUD->updateEventById($data);
         }
+        elseif($data['type'] == 'categories'){
+            $this->CRUD->updateCategoryById($data);
+        }
         $data = '';
     }
 
     public function create($data){
+        if($data['type'] == 'event') {
+            return $this->CRUD->createEvent($data);
+        }
+        elseif($data['type'] == 'categories'){
+            return $this->CRUD->createEventType($data);
+        }
+    }
 
+    public function delete($type,$id){
+        if($type == 'categories') {
+            $this->CRUD->deleteEventType($id);
+            header("Location: /news/admin.php?load=categories");
+        }elseif ($type == 'event'){
+            $this->CRUD->deleteEvent($id);
+            header("Location: /news/admin.php?load=event");
+        }
     }
 
 };
 
 $admin = new Admin();
 $admin->load();
-
+if($_GET['load']){
 ?>
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html>
@@ -83,12 +100,14 @@ $admin->load();
     <script src="./js/jquery.min.js" type="text/javascript" async="" crossorigin=""></script>
     <script src="./js/admin.js" type="text/javascript" async="" crossorigin=""></script>
     <link rel="stylesheet" type="text/css" href="./css/admin.css">
-    <link href="http://bootstrap-v4.ru/examples/starter-template/starter-template.css" tppabs="http://bootstrap-v4.ru/examples/starter-template/starter-template.css" rel="stylesheet">
-    <link href="http://bootstrap-v4.ru/dist/css/bootstrap.min.css" tppabs="http://bootstrap-v4.ru/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://bootstrap-v4.ru/examples/starter-template/starter-template.css"
+          tppabs="http://bootstrap-v4.ru/examples/starter-template/starter-template.css" rel="stylesheet">
+    <link href="http://bootstrap-v4.ru/dist/css/bootstrap.min.css"
+          tppabs="http://bootstrap-v4.ru/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
-
+}
 $id = !isset($_GET['id']) ? false : (int)$_GET['id'];
 
 if($_GET['load'] == 'event') {
@@ -97,10 +116,19 @@ if($_GET['load'] == 'event') {
 elseif ($_GET['load'] == 'categories'){
     $admin->categories($id);
 }
+elseif ($_GET['load'] == 'delete'){
+    $admin->delete($_GET['type'],$_GET['id']);
+}
 elseif($_POST['update']){
     $admin->update($_POST);
 }
-
+elseif ($_POST['create']){
+    echo $admin->create($_POST);
+}
+if($_GET['load']) {
+    ?>
+    </body>
+    </html>
+    <?php
+}
 ?>
-</body>
-</html>

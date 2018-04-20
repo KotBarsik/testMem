@@ -96,12 +96,59 @@ class CRUD
 
     public function updateEventById($data)
     {
-        $query = $this->db->prepare("UPDATE events SET title = :title,text = :text,stop_time=:stop_time,stop_time=:stop_time WHERE id=:id");
+        $query = $this->db->prepare("UPDATE events SET title = :title,text = :text,start_time=:start_time,stop_time=:stop_time,event_type=:event_type WHERE id=:id");
         $query->bindParam(':start_time', str_replace('T',' ',$data['startTime']));
-        $query->bindParam(':stop_time', $data['stopTime']);
+        $query->bindParam(':stop_time', str_replace('T',' ',$data['stopTime']));
         $query->bindParam(':title', $data['title']);
         $query->bindParam(':text', $data['text']);
         $query->bindParam(':id', $data['id']);
+        $query->bindParam(':event_type', $data['category']);
+        $result = $query->execute();
+        return $result;
+    }
+
+    public function updateCategoryById($data)
+    {
+        $query = $this->db->prepare("UPDATE event_type SET name = :name WHERE id=:id");
+        $query->bindParam(':name', json_encode(array(
+            'ru' => $data['ru'],
+            'en' => $data['en'],
+        ),JSON_UNESCAPED_UNICODE));
+        $query->bindParam(':id', $data['id']);
+        $result = $query->execute();
+        return $result;
+    }
+
+    public function createEventType($data){
+        $name = json_encode(array(
+            'ru' => $data['ru'],
+            'en' => $data['en'],
+        ),JSON_UNESCAPED_UNICODE);
+        $query = $this->db->prepare("INSERT INTO event_type (`name`) VALUES ('{$name}')");
+        $result = $query->execute();
+        return $this->db->lastInsertId();
+    }
+
+    public function createEvent($data){
+        $query = $this->db->prepare(
+"INSERT INTO events 
+      (`title`,`text`,`start_time`,`stop_time`,`event_type`) 
+      VALUES 
+      ('{$data['title']}','{$data['text']}','{$data['startTime']}','{$data['stopTime']}',{$data['category']})");
+        $result = $query->execute();
+        return $this->db->lastInsertId();
+    }
+
+    public function deleteEventType($id){
+        $query = $this->db->prepare("DELETE FROM event_type WHERE id=:id");
+        $query->bindParam(':id', $id);
+        $result = $query->execute();
+        return $result;
+    }
+
+    public function deleteEvent($id){
+        $query = $this->db->prepare("DELETE FROM events WHERE id=:id");
+        $query->bindParam(':id', $id);
         $result = $query->execute();
         return $result;
     }
