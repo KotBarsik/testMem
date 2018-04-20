@@ -53,7 +53,7 @@ function selected($selectId,$itemId){
     if($('button').attr('eventId')) {
         $('button').on('click', function () {
             $.ajax({
-                url: '/admin.php',
+                url: '<?php echo bUrl?>/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -77,7 +77,7 @@ function selected($selectId,$itemId){
     else{
         $('button').on('click', function () {
             $.ajax({
-                url: '/admin.php',
+                url: '<?php echo bUrl?>/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {

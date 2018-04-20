@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+CONST bUrl = '/work/mriya/tests/afisha';
 class Admin{
 
     /**
@@ -117,7 +117,7 @@ if($_GET['load']){
 <?php
 }
 
-if($_SERVER['REQUEST_URI'] == '/admin.php' || $_SERVER['REQUEST_URI'] == '/admin.php?'){
+if($_SERVER['REQUEST_URI'] == '/work/mriya/tests/afisha/admin.php' || $_SERVER['REQUEST_URI'] == '/work/mriya/tests/afisha/admin.php?'){
     if($_SESSION['userData']) {
         $admin->event(false);
     }

@@ -22,7 +22,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
     if($('button').attr('catId')) {
         $('button').on('click', function () {
             $.ajax({
-                url: '/admin.php',
+                url: '<?php echo bUrl?>/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -42,7 +42,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
     }else {
         $('button').on('click', function () {
             $.ajax({
-                url: '/admin.php',
+                url: '<?php echo bUrl?>/admin.php',
                 type: 'post',
                 dataType: "json",
                 data: {
