@@ -1,3 +1,10 @@
+<?php
+function selected($selectId,$itemId){
+    if($selectId == $itemId){
+        return 'selected';
+    }
+}
+?>
 <div class="content">
     <div class="bd-example">
         <table style="width:100%;">
@@ -16,7 +23,10 @@
                         <?php
                             foreach ($eventsType as $item){
                                 $name = json_decode($item['name'],true);
-                                echo '<option value="'.$item['id'].'">'.$name['ru'].'</option>';
+                                echo '<option 
+                                        value="'.$item['id'].'" '.selected($eventById[0]['event_type'],$item['id']).' >
+                                    '.$name['ru'].'
+                                    </option>';
                             }
                         ?>
                     </select>
