@@ -87,6 +87,10 @@ class Admin{
         }
     }
 
+    public function login(){
+        require_once './layout/login.php';
+    }
+
 };
 
 $admin = new Admin();
@@ -124,7 +128,11 @@ elseif($_POST['update']){
 }
 elseif ($_POST['create']){
     echo $admin->create($_POST);
+}else {
+    $admin->login();
 }
+
+
 if($_GET['load']) {
     ?>
     </body>
