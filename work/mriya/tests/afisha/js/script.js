@@ -34,7 +34,7 @@ function swhowEvent(type) {
 
 function getEvents(id) {
     $.ajax({
-        url: '/get.php',
+        url: './get.php',
         type: 'post',
         dataType : "json",
         data:{id:id},
