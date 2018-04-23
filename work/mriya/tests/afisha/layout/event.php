@@ -91,7 +91,7 @@ function selected($selectId,$itemId){
                 },
                 statusCode: {
                     200: function (response) { // выполнить функцию если код ответа HTTP 200
-                        location.href = '/admin.php?load=event';
+                        location.href = <?php echo bUrl ?>'/admin.php?load=event';
                     }
                 }
             });

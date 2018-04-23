@@ -23,6 +23,7 @@ class Admin{
     }
 
     public function event($id){
+        require_once 'layout/header.php';
         require_once 'layout/menu.php';
         $eventsType = $eventsType = $this->CRUD->getAllEventsType();
         if($id === false) {
@@ -44,6 +45,7 @@ class Admin{
     }
 
     public function categories($id){
+        require_once 'layout/header.php';
         require_once 'layout/menu.php';
         if($id === false) {
             $eventsType = $this->CRUD->getAllEventsType();
@@ -80,10 +82,10 @@ class Admin{
     public function delete($type,$id){
         if($type == 'categories') {
             $this->CRUD->deleteEventType($id);
-            header("Location: /admin.php?load=categories");
+            header("Location: ".bUrl."/admin.php?load=categories");
         }elseif ($type == 'event'){
             $this->CRUD->deleteEvent($id);
-            header("Location: /admin.php?load=event");
+            header("Location: ".bUrl."/admin.php?load=event");
         }
     }
 
@@ -100,7 +102,7 @@ class Admin{
 $admin = new Admin();
 $admin->load();
 
-if($_SERVER['REQUEST_URI'] == '/work/mriya/tests/afisha/admin.php' || $_SERVER['REQUEST_URI'] == '/work/mriya/tests/afisha/admin.php?'){
+if($_SERVER['REQUEST_URI'] == bUrl.'/admin.php' || $_SERVER['REQUEST_URI'] == bUrl.'/admin.php?'){
     if($_SESSION['userData']) {
         $admin->event(false);
     }
@@ -122,7 +124,7 @@ elseif($_GET['load'] == 'delete'){
 }
 elseif ($_GET['load'] == 'exit'){
     unset($_SESSION['userData']);
-    header("Location: ./admin.php");
+    header('Location: '.bUrl.'/admin.php');
 }
 elseif($_POST['update']){
     $admin->update($_POST);
