@@ -41,57 +41,67 @@ class App
     }
 
     public function run($data){
-        $chat_id = $data['chat']['id'];
-        $userData = $this->getUserById($chat_id);
+        if(!isset($data['callback_query'])) {
+            $chat_id = $data['chat']['id'];
+            $userData = $this->getUserById($chat_id);
 
-        if(!$chat_id){return;}
-
-        if($userData[0]['id']){
-            $userSettings = json_decode($userData[0]['data'],true);
-            if($userData[0]['status'] == 'on' || $userData[0]['status'] == 'off'){
-                $users = $data['from']['first_name'].' '.$data['from']['last_name'];
-                $this->allSubscribers($data['text'],$chat_id,$users);
-
+            if (!$chat_id) {
+                return;
             }
-            else{
-                $messages = array(
-                    'Eng' => 'Wait until you are approved by the administrator',
-                    'Rus' => 'Дождитесь пока вас одобрит администратор'
-                );
 
-                $this->reply($messages[$userSettings['lang']],$chat_id);
-            }
-        }
-        elseif($this->thisCommands($data['text'])){
-            if($data['text'] == '/start'){
-                $this->replyKeyboard($chat_id,'Your language
-Ваш язык');
-            }elseif ($data['text'] == 'en' || $data['text'] == 'ru'){
-                $result = $this->createUser($chat_id,json_encode(array(
-                    'lang' => $data['text']
-                )));
+            if ($userData[0]['id']) {
+                $userSettings = json_decode($userData[0]['data'], true);
+                if ($userData[0]['status'] == 'on') {
+                    $users = $data['from']['first_name'] . ' ' . $data['from']['last_name'];
+                    $this->allSubscribers($data['text'], $chat_id, $users);
 
-                if($result){
-
+                } else {
                     $messages = array(
-                        'en' => 'Ok, wait until you are approved by the administrator',
-                        'ru' => 'Хорошо, дождитесь пока вас одобрит администратор'
+                        'Eng' => 'Wait until you are approved by the administrator',
+                        'Rus' => 'Дождитесь пока вас одобрит администратор'
                     );
 
-                    $this->reply($messages[$data['text']],$chat_id);
+                    $this->reply($messages[$userSettings['lang']], $chat_id);
                 }
+            } elseif ($this->thisCommands($data['text'])) {
+                if ($data['text'] == '/start') {
+                    $this->replyKeyboard($chat_id, 'Your language
+Ваш язык');
+                } elseif ($data['text'] == 'en' || $data['text'] == 'ru') {
+                    $result = $this->createUser($chat_id, json_encode(array(
+                        'lang' => $data['text']
+                    )));
+
+                    if ($result) {
+
+                        $messages = array(
+                            'en' => 'Ok, wait until you are approved by the administrator',
+                            'ru' => 'Хорошо, дождитесь пока вас одобрит администратор'
+                        );
+
+                        $this->reply($messages[$data['text']], $chat_id);
+                    }
+                }
+                elseif ($data['text'] == '/lang'){
+                    $this->replyKeyboard($chat_id, 'Your language
+Ваш язык');
+                }
+            } else {
+                $this->replyKeyboard($chat_id, 'Your language
+Ваш язык');
             }
         }else{
-            $this->replyKeyboard($chat_id,'Your language
-Ваш язык');
+            $messagesId = (int)str_replace('messagesid:','',$data['callback_query']['data']);
+            $messages = $this->getMessagesById($messagesId);
+            $this->repayCallback($data["callback_query"]["id"],$messages[0]['messages']);
         }
-
         return;
     }
 
     protected function thisCommands($command){
         $commands = array(
             '/start' => true,
+            '/lang' => true,
             'en' => true,
             'ru' => true
         );
@@ -154,5 +164,25 @@ class App
                 $this->reply($text,$user['id']);
             }
         }
+    }
+
+    public function repayCallback($id,$messages){
+        $sendRessult = $this->telegram->answerCallbackQuery(array(
+            'callback_query_id' => $id,
+            'text' => $messages,
+            'show_alert' => 1
+        ));
+
+        return $sendRessult;
+    }
+
+    public function getMessagesById($id){
+        $users = $this->db->query("SELECT * FROM messages WHERE id=?");
+        $users->execute(array($id));
+        return $users->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function createButtonOriginalSms($messagesId){
+
     }
 }

@@ -1,9 +1,4 @@
 <?php
-/*
-$data = file_get_contents('http://149.154.71.22:88/');
-$data = (json_decode($data, true))['message'];
-*/
-
 $server = 'dev';
 
 if($_GET['get'] == 'get'){
@@ -20,8 +15,15 @@ if($_GET['get'] == 'get'){
         $data = (json_decode($data, true))['message'];
     }
     elseif ($server == 'dev') {
-        $data = file_get_contents('http://149.154.71.22:88/?get=get');
-        $data = (json_decode($data, true))['message'];
+        if($_GET['type'] == 'local') {
+            $data = file_get_contents('http://149.154.71.22:88/?get=get');
+            $data = (json_decode($data, true))['message'];
+        }
+        elseif($_GET['type'] == 'tel'){
+            $data = file_get_contents('https://api.telegram.org/bot489423883:AAE2Uzv4WJshSvLEVOOcNZ3kUCrmaHrCszs/getUpdates');
+            $data = (json_decode($data, true))['result'];
+            $data = $data[count($data) - 1];
+        }
     }
 
     require_once 'Telegram.php';

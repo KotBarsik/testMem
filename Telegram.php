@@ -1,8 +1,8 @@
 <?php
 class Telegram
 {
-    private $token = '543899124:AAFGHVBLv4FFEqmo7cYHaiCrU42LMxCbMZA';
-
+    //private $token = '543899124:AAFGHVBLv4FFEqmo7cYHaiCrU42LMxCbMZA';
+    private $token = '489423883:AAE2Uzv4WJshSvLEVOOcNZ3kUCrmaHrCszs';
     public $apiLink = 'https://api.telegram.org/';
 
     /**
@@ -11,6 +11,16 @@ class Telegram
     public function sendMessage(array $params)
     {
         $method = 'sendmessage';
+        $link = $this->prepareRequest($method);
+        return $this->request($link, $params);
+    }
+
+    /**
+     * Отправка сообщений https://tlgrm.ru/docs/bots/api#sendmessage
+     */
+    public function answerCallbackQuery(array $params)
+    {
+        $method = 'answerCallbackQuery';
         $link = $this->prepareRequest($method);
         return $this->request($link, $params);
     }
