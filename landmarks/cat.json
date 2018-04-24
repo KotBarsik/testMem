@@ -1,0 +1,48 @@
+{
+  "best places": {},
+  "all places": {},
+  "historical": {
+    "archeology": {},
+    "history": {},
+    "architecture": {},
+    "palaces": {},
+    "excavations": {},
+    "fortresses": {},
+    "religion": {},
+    "ancient_cities": {}
+  },
+  "natural": {
+    "cliffs": {},
+    "mountains": {},
+    "species": {},
+    "waterfalls": {},
+    "caves": {},
+    "seas": {},
+    "lakes": {},
+    "beaches": {},
+    "reserves": {},
+    "rivers": {},
+    "springs": {},
+    "campings": {},
+    "capes": {}
+  },
+  "technogenic": {
+    "neglected": {},
+    "transport": {},
+    "camping": {},
+    "cable_cars": {},
+    "observatory": {},
+    "underwater": {}
+  },
+  "cultural": {
+    "museums": {},
+    "parks": {},
+    "theaters": {},
+    "zoos": {},
+    "water_parks": {},
+    "dolphinariums": {},
+    "aquarium": {},
+    "botanical_gardens": {}
+  },
+  "categories": {}
+}
