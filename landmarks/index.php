@@ -1,32 +1,27 @@
 <?php
-$file = file_get_contents('./mriya.csv');
-$data = explode('"cat_id","route"',$file);
-$data = explode(',""',$data[1]);
+require_once './CRUD.php';
+require_once './render.php';
+$crud = new CRUD();
+$render = new render($crud);
+$render->render('');
+/*
+$input = [
+    'lat' => 53.5303000,
+    'long' => 49.3461000
+];
 
-$newData = [];
+$output = [
+    'lat' => 53.2000700,
+    'long' => 50.1500000
+];
 
-function starsCount($str){
-    $str = explode(':',$str);
-    $stars = trim($str[1]);
-    $scale = preg_match_all('/✬/',$stars);
-    return $scale;
+
+$m = $crud->calculateTheDistance($input,$output);
+$category = $crud->getCategory();
+$categoryType = $crud->getCategoryType();
+
+foreach ($category as $cat){
+    echo '<a><img src="./images/'.$cat['eng_name'].'.jpg" /></a>';
 }
-
-foreach ($data as $items){
-    $item = explode('","',$items);
-    $newData[] = array(
-        'title' => trim(trim($item[0]),'"'),
-        'img' => $item[1],
-        'availability' => starsCount($item[2]),
-        'entertainment' => starsCount($item[3]),
-        'long' => $item[4],
-        'lat' => $item[5],
-        'description' => trim($item[6]),
-        'city' => $item[7],
-        'place' => $item[8],
-        'cat' => trim($item[9],'"')
-    );
-}
-
-file_put_contents('to.json',json_encode($newData,JSON_UNESCAPED_UNICODE));
+*/
 exit();
