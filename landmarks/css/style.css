@@ -1,4 +1,63 @@
-body {
-    margin: 0px;
-    padding: 0px;
+
+* {
+    margin: 0;
+    padding: 0;
 }
+body {
+    font-family: helvetica, arial;
+    padding-top: 40px;
+}
+h1 {
+    background-color: black;
+    color: white;
+    height: 40px;
+    font-size: 24px;
+    font-weight: normal;
+    left: 0;
+    line-height: 40px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+h1 a {
+    border-bottom: 1px solid white;
+    color: white;
+    display: inline-block;
+    line-height: 30px;
+    text-decoration: none;
+}
+.photo {
+    background-attachment: fixed;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    height: 450px;
+    position: relative;
+    width: 50%;
+}
+.photo span {
+    bottom: 0;
+    color: white;
+    display: block;
+    left: 50%;
+    margin-left: -640px;
+    font-size: 38px;
+    padding: 10px;
+    position: absolute;
+    text-shadow: 0 2px 0 black, 0 0 10px black;
+    width: 1280px;
+}
+.summer {
+    background-image: url('../images/categories.jpg');
+}
+.autumn {
+    background-image: url('../images/categories.jpg');
+}
+.winter {
+    background-image: url('../images/categories.jpg');
+}
+.spring {
+    background-image: url('../images/categories.jpg');
+}
+		
