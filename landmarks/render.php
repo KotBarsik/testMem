@@ -21,14 +21,27 @@ class render
         $this->categoryType = $CRUD->getCategoryType();
     }
 
-    public function render($data){
+    public function renderMainContent($data){
         $this->header();
-        $this->content();
+        $this->content('./layout/content.php');
         $this->footer();
     }
 
-    public function content(){
-        require_once './layout/content.php';
+    public function renderContentType($data){
+        //$this->header();
+        $this->content('./layout/contentType.php');
+        //$this->footer();
+    }
+
+    public function renderContentObject($data){
+        //$this->header();
+        $this->content('./layout/contentObject.php');
+        //$this->footer();
+    }
+
+
+    public function content($view){
+        require_once $view;
     }
 
     protected function header(){
