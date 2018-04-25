@@ -68,9 +68,10 @@ class CRUD
         foreach ($data as $items){
             $title = htmlentities($items['title']);
             $description = htmlentities($items['description']);
+            $img = json_encode([$items['img']]);
             $query = $this->db->prepare("INSERT INTO items 
 (`title`,`img`,`availability`,`entertainment`,`long`,`lat`,`description`,`city`,`place`,`cat`) VALUES 
-('{$title}','[]','{$items['availability']}','{$items['entertainment']}','{$items['long']}','{$items['lat']}','{$description}','{$items['city']}','{$items['place']}','{$items['cat']}')
+('{$title}','{$img}','{$items['availability']}','{$items['entertainment']}','{$items['long']}','{$items['lat']}','{$description}','{$items['city']}','{$items['place']}','{$items['cat']}')
 ");
             $query->execute();
             $inserts[] = $this->db->lastInsertId();
