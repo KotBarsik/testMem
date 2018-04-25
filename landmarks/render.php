@@ -4,6 +4,11 @@ class render
     protected $category;
     protected $categoryType;
 
+    /**
+     * @var CRUD
+     */
+    protected $CRUD;
+
     public function __construct(CRUD $CRUD)
     {
         $m = $CRUD->calculateTheDistance(
@@ -16,7 +21,7 @@ class render
                 'long' => 50.1500000
             ]
         );
-
+        $this->CRUD = $CRUD;
         $this->category = $CRUD->getCategory();
         $this->categoryType = $CRUD->getCategoryType();
     }
@@ -27,9 +32,12 @@ class render
         $this->footer();
     }
 
-    public function renderContentType($data){
-        //$this->header();
-        $this->content('./layout/contentType.php');
+    public function renderContentType($type){
+        $contentType = $this->CRUD->getCategoryTypeByName($type);
+        $this->content('./layout/contentType.php',[
+            'contentType' => $contentType,
+            'type' => $type
+        ]);
         //$this->footer();
     }
 
@@ -40,7 +48,7 @@ class render
     }
 
 
-    public function content($view){
+    public function content($view,$data = []){
         require_once $view;
     }
 

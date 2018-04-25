@@ -21,6 +21,15 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getCategoryTypeByName($type){
+        $query = $this->db->prepare(
+            "SELECT category.*,category_type.* FROM category LEFT JOIN category_type ON category_type.category_id = category.id WHERE category.eng_name=:type"
+        );
+        $query->bindParam(':type', $type);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getCategoryType(){
         $query = $this->db->query("SELECT * FROM category_type");
         return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -52,5 +61,21 @@ class CRUD
         $dist = $ad * $EARTH_RADIUS;
 
         return round($dist / 1000);
+    }
+
+    public function insertItems($data){
+        $inserts = [];
+        foreach ($data as $items){
+            $title = htmlentities($items['title']);
+            $description = htmlentities($items['description']);
+            $query = $this->db->prepare("INSERT INTO items 
+(`title`,`img`,`availability`,`entertainment`,`long`,`lat`,`description`,`city`,`place`,`cat`) VALUES 
+('{$title}','[]','{$items['availability']}','{$items['entertainment']}','{$items['long']}','{$items['lat']}','{$description}','{$items['city']}','{$items['place']}','{$items['cat']}')
+");
+            $query->execute();
+            $inserts[] = $this->db->lastInsertId();
+        }
+
+        return $inserts;
     }
 }

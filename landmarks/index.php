@@ -7,7 +7,7 @@ if(empty($_GET)) {
     $render->renderMainContent('');
 }
 elseif($_GET['render'] == 'contentType'){
-    $render->renderContentType('');
+    $render->renderContentType($_GET['type']);
 }
 elseif($_GET['render'] == 'contentObject'){
     $render->renderContentObject('');
