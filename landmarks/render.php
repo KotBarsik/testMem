@@ -28,26 +28,7 @@ class render
     }
 
     public function content(){
-        echo '
-        <script>
-            $(function(){
-                $.stellar({
-                    horizontalScrolling: false,
-                    verticalOffset: 40
-                });
-            });
-        </script>
-		<div class="photo summer" data-stellar-background-ratio="0.5" style="background-position: 50% -32.5px;"><span>Summer</span></div>
-		<div class="photo autumn" data-stellar-background-ratio="0.5" style="background-position: 50% 192.5px;"><span>Autumn</span></div>
-		<div class="photo winter" data-stellar-background-ratio="0.5" style="background-position: 50% 417.5px;"><span>Winter</span></div>
-		<div class="photo spring" data-stellar-background-ratio="0.5" style="background-position: 50% 642.5px;"><span>Spring</span></div>
-		<div class="photo summer" data-stellar-background-ratio="0.5" style="background-position: 50% 867.5px;"><span>Summer</span></div>
-		<div class="photo autumn" data-stellar-background-ratio="0.5" style="background-position: 50% 1092.5px;"><span>Autumn</span></div>
-		<div class="photo winter" data-stellar-background-ratio="0.5" style="background-position: 50% 1317.5px;"><span>Winter</span></div>
-';
-        foreach ($this->category as $cat){
-            //echo '<div><img src="./images/'.$cat['eng_name'].'.jpg" /></div>';
-        }
+        require_once './layout/content.php';
     }
 
     protected function header(){
