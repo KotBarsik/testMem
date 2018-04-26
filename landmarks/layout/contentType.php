@@ -2,6 +2,6 @@
 foreach ($data['contentType'] as $types){
     $imgPath = './images/'.$data['type'].'/'.$types['eng_name'].'.jpg';
     if(file_exists($imgPath)) {
-        echo '<div onclick="load("contentType",'.$types['id'].')" style="width:50%;float:left" type="' . $cat['eng_name'] . '"><img style="width:100%" src="' . $imgPath . '"></div>';
+        echo '<div onclick="load(\'contentObject\','.$types['id'].')" style="width:50%;float:left" type="' . $cat['eng_name'] . '"><img style="width:100%" src="' . $imgPath . '"></div>';
     }
 }

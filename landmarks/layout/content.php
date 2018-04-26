@@ -1,9 +1,10 @@
 <div id="mainContent" style="width:100%;">
     <?php
     foreach ($this->category as $cat){
-        echo '<div onclick="load(\'contentType\','.$cat['id'].')" style="width:100%;" type="'.$cat['eng_name'].'"><img style="width:100%;" src="./images/'.$cat['eng_name'].'.jpg" /></div>';
+        echo '<div onclick="load(\'contentType\',\''.$cat['eng_name'].'\')" style="width:100%;" type="'.$cat['eng_name'].'"><img style="width:100%;" src="./images/'.$cat['eng_name'].'.jpg" /></div>';
     }
     ?>
 </div>
-<div id="mainContentType" style="width:100%;">Type</div>
-<div id="mainContentObject" style="width:100%;">Object</div>
+<div id="mainContentType" style="width:100%;">mainContentType</div>
+<div id="mainContentObjects" style="width:100%;">mainContentObjects</div>
+<div id="mainObject" style="width:100%;">mainObject</div>
