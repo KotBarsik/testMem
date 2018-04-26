@@ -5,8 +5,14 @@
 
 body{
     width: 100%;
+    font-family: Pompadur;
 }
 
 .block{
 
+}
+
+@font-face {
+    font-family: Pompadur; /* Гарнитура шрифта */
+    src: url(../font/HelveticaNeue-Light.ttf); /* Путь к файлу со шрифтом */
 }

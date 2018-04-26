@@ -79,4 +79,22 @@ class CRUD
 
         return $inserts;
     }
+
+    public function getItemsByObjectType($objectType){
+        $query = $this->db->prepare(
+            "SELECT * FROM items WHERE cat=:cat"
+        );
+        $query->bindParam(':cat', $objectType);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getObjectById($id){
+        $query = $this->db->prepare(
+            "SELECT * FROM items WHERE id=:id"
+        );
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

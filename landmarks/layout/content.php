@@ -1,7 +1,7 @@
 <div id="mainContent" style="width:100%;">
     <?php
     foreach ($this->category as $cat){
-        echo '<div style="width:100%;" type="'.$cat['eng_name'].'"><img style="width:100%;" src="./images/'.$cat['eng_name'].'.jpg" /></div>';
+        echo '<div onclick="load(\'contentType\','.$cat['id'].')" style="width:100%;" type="'.$cat['eng_name'].'"><img style="width:100%;" src="./images/'.$cat['eng_name'].'.jpg" /></div>';
     }
     ?>
 </div>

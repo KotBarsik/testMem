@@ -41,12 +41,23 @@ class render
         //$this->footer();
     }
 
-    public function renderContentObject($data){
-        //$this->header();
-        $this->content('./layout/contentObject.php');
-        //$this->footer();
+    public function renderContentObject($objectType){
+        $this->header();
+        $contentType = $this->CRUD->getItemsByObjectType($objectType);
+        $this->content('./layout/contentObject.php',[
+            'contentType' => $contentType
+        ]);
+        $this->footer();
     }
 
+    public function renderObject($id){
+        $this->header();
+        $object = $this->CRUD->getObjectById($id);
+        $this->content('./layout/object.php',[
+            'object' => $object
+        ]);
+        $this->footer();
+    }
 
     public function content($view,$data = []){
         require_once $view;

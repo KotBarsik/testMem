@@ -10,8 +10,8 @@ elseif($_GET['render'] == 'contentType'){
     $render->renderContentType($_GET['type']);
 }
 elseif($_GET['render'] == 'contentObject'){
-    $render->renderContentObject('');
+    $render->renderContentObject($_GET['typeId']);
 }
-else{
-    exit();
+elseif($_GET['render'] == 'object'){
+    $render->renderObject($_GET['id']);
 }
