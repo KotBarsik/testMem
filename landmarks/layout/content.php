@@ -1,3 +1,4 @@
+<div viewId="1" class="back">back</div>
 <div id="mainContent" style="width:100%;">
     <?php
     foreach ($this->category as $cat){
@@ -5,6 +6,6 @@
     }
     ?>
 </div>
-<div id="mainContentType" style="width:100%;">mainContentType</div>
-<div id="mainContentObjects" style="width:100%;">mainContentObjects</div>
-<div id="mainObject" style="width:100%;">mainObject</div>
+<div id="mainContentType" style="width:100%;"></div>
+<div id="mainContentObjects" style="width:100%;"></div>
+<div id="mainObject" style="width:100%;"></div>
