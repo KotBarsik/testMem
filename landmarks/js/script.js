@@ -16,15 +16,20 @@ function load(type,id) {
         console.log('contnt');
         */
     }else if(type == 'contentType'){
-        document.windowsId = 1;
-        $.get('./index.php?render=contentType&type='+id, function(data) {
-            hideAll();
-            $('#mainContentType').empty();
-            $('#mainContentType').show();
-            $('#mainContentType').append(data);
-        });
-        console.log('mainContentType');
-        $('div.back').attr('viewid',2);
+        //if(id != 'categories') {
+            document.windowsId = 1;
+            $.get('./index.php?render=contentType&type=' + id, function (data) {
+                hideAll();
+                $('#mainContentType').empty();
+                $('#mainContentType').show();
+                $('#mainContentType').append(data);
+            });
+            console.log('mainContentType');
+            $('div.back').attr('viewid', 2);
+        //}
+        //else{
+            console.log(id);
+        //}
     }
     else if(type == 'contentObject'){
         document.windowsId = 2;
