@@ -68,7 +68,14 @@ function hideAll() {
 }
 
 function showView(id) {
+    console.log(id);
     if(id > 1) {
+        if(id === 1){
+            $('div.back').hide();
+        }
+        else if(id >= 2){
+            $('div.back').show();
+        }
         id = id - 1;
         hideAll();
         $('body > div:eq('+(id)+')').show();
