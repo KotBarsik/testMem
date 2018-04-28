@@ -72,23 +72,3 @@ class render
         require_once './layout/footer.php';
     }
 }
-
-/*
- *
-
-
-$m = $CRUD->calculateTheDistance(
-            [
-                'lat' => 53.5303000,
-                'long' => 49.3461000
-            ],
-            [
-                'lat' => 53.2000700,
-                'long' => 50.1500000
-            ]
-        );
-
-
-
-
- */
