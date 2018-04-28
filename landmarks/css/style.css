@@ -11,6 +11,8 @@ body{
 
 .back{
     background-color: #b4975b;
+    width: 100%;
+    height: 30px;
 }
 
 .block{
