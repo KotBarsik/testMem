@@ -2,6 +2,9 @@
     .clear{
         clear: both;
     }
+    ul{
+        background-color: #ffffff;
+    }
 </style>
 <ul>
 <?php

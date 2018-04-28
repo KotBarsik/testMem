@@ -93,7 +93,7 @@ class CRUD
             "SELECT category.id as cat_id, category_type.id as cat_type_id, items.* FROM category 
 LEFT JOIN category_type ON category_type.category_id = category.id
 LEFT JOIN items ON items.cat = category_type.id
-WHERE category.eng_name=:eng_name LIMIT 60"
+WHERE category.eng_name=:eng_name LIMIT"
         );
         $query->bindParam(':eng_name', $eng_name);
         $query->execute();

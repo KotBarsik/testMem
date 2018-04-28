@@ -130,11 +130,12 @@ class CRUD
     }
 
     public function createEvent($data){
+        $text = htmlentities(addslashes($data['text']));
         $query = $this->db->prepare(
 "INSERT INTO events 
       (`title`,`text`,`start_time`,`stop_time`,`event_type`) 
       VALUES 
-      ('{$data['title']}','{$data['text']}','{$data['startTime']}','{$data['stopTime']}',{$data['category']})");
+      ('{$data['title']}','{$text}','{$data['startTime']}','{$data['stopTime']}',{$data['category']})");
         $result = $query->execute();
         return $this->db->lastInsertId();
     }
