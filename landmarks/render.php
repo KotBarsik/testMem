@@ -25,9 +25,11 @@ class render
     public function renderContentType($type){
         if($type != 'categories') {
             $contentType = $this->CRUD->getCategoryTypeByName($type);
+            $contentObjectByContentType = $this->CRUD->getContentObjectByContentType($type);
             $this->content('./layout/contentType.php', [
                 'contentType' => $contentType,
-                'type' => $type
+                'type' => $type,
+                'contentObjectByContentType' => $contentObjectByContentType
             ]);
         }
         else{

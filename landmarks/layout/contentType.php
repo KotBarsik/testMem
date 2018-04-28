@@ -5,3 +5,10 @@ foreach ($data['contentType'] as $types){
         echo '<div onclick="load(\'contentObject\','.$types['id'].')" style="width:50%;float:left" type="' . $cat['eng_name'] . '"><img style="width:100%" src="' . $imgPath . '"></div>';
     }
 }
+
+if(count($data['contentObjectByContentType']) >= 1){
+    echo '<div style="clear:both"></div>';
+    $this->content('./layout/contentObject.php',[
+        'contentType' => $data['contentObjectByContentType']
+    ]);
+}

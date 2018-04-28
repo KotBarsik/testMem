@@ -1,19 +1,49 @@
 <?php
-   function start($stars){
-        $str = '';
-        for ($i=$stars;$i>=1;$i--){
-            $str .= '✬';
+function getDistanceBetweenPointsNew($one,$two) {
+    $latitude1 = $one['lat'];
+    $longitude1 = $one['long'];
+
+    $latitude2 = $two['lat'];
+    $longitude2 = $two['long'];
+
+    $theta = $longitude1 - $longitude2;
+    $miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
+    $miles = acos($miles);
+    $miles = rad2deg($miles);
+    $miles = $miles * 60 * 1.1515;
+    $feet = $miles * 5280;
+    $yards = $feet / 3;
+    $kilometers = $miles * 1.609344;
+    $meters = $kilometers * 1000;
+    return compact('miles','feet','yards','kilometers','meters');
+}
+
+function start($stars){
+    $str = '';
+    for ($i=$stars;$i>=1;$i--){
+        $str .= '✬';
+    }
+    while (true){
+        if(strlen($str) < 15){
+            $str .= '✩';
         }
-        while (true){
-            if(strlen($str) < 15){
-                $str .= '✩';
-            }
-            else{
-                break;
-            }
+        else{
+            break;
         }
-        return $str;
-   }
+    }
+    return $str;
+}
+
+$m = getDistanceBetweenPointsNew(
+    [
+        'lat' => $_GET['lat'],
+        'long' => $_GET['long']
+    ],
+    [
+        'lat' => $data['object'][0]['lat'],
+        'long' => $data['object'][0]['long']
+    ]
+);
 ?>
 <style>
     .img{
@@ -82,7 +112,7 @@
         </div>
         <div style="margin:5px;font-weight: bold;float: right;">
             <div class="point" style="background-image: url('./images/other/distance.png'); width: 40px"></div>
-            <div class="city">22.5 km</div>
+            <div class="city"><?php echo round($m['kilometers'],1) ?></div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
