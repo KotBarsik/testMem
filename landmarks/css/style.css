@@ -13,7 +13,8 @@ body{
     background-color: #b4975b;
     width: 100%;
     text-align: center;
-    padding: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     color: #fff;
     font-weight: 800;
 }
