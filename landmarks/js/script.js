@@ -32,6 +32,7 @@ function load(type,id) {
             });
             console.log('mainContentType');
             $('div.back').attr('viewid', 2);
+            $("body").scrollTop(0);
         //}
         //else{
             console.log(id);
@@ -44,6 +45,7 @@ function load(type,id) {
             $('#mainContentObjects').empty();
             $('#mainContentObjects').show();
             $('#mainContentObjects').append(data);
+            $("body").scrollTop(0);
         });
         console.log('mainContentObjects');
         $('div.back').attr('viewid',3);
@@ -54,6 +56,7 @@ function load(type,id) {
             $('#mainObject').empty();
             $('#mainObject').show();
             $('#mainObject').append(data);
+            $("body").scrollTop(0);
         });
         console.log('mainObject');
         $('div.back').attr('viewid',4);
