@@ -87,8 +87,8 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
     <div class="clear"></div>
 </div>
 <div id="content" class="main_content" style="display: none">
-    <div onclick="getBack('back')" style="position: absolute">
-        <img style="width: 17px;margin-top: 10px;transform: rotate(180deg);" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGfSURBVGhD7dnLKoVhGMXx7VCYyAwzhymSmYgMRTIxkihXIHIHiFyBHO5A3IBcgMhQmImRUznkEP6r7a0nKeO1vat+tfc3W+3v8HzPLuTk5OT8y4yhs/jRNyN4wS36dcAxdVCBz29PUDHLDOIBqcw7pmCZblwjlfnAHCzThgukMrKCMtilCSeIZTZRAbvU4wCxzA6qYZda7CGW2YeO26UK24hljqBfzC66NtYRy5yiGXbRXWsJscwlOmCZWej5ksrcoBeWmcQbUplHDMMymsU0k6UyKjYBy/QhDps65WZgGb2/XCGVkQVYjjStOEcss4Zy2KUBx4hlxmGXRtgXKYlT67eLfRFWF7uWFPa335J4IGopoeVEKqFCdiPKz6FRp5bV0KiLdxmpgNiN8Xqx2kAscYYW2ETLBi0dYgm96upJbhMtGbRsiCX0XStWm2i5cIhYYhc1sIkWdFouxBJbqIRN2qG7USyxCquRowdaJqQCel7MwypD0BIhldCTexpW0V3oDqnEM0ZhGQ2Br7jHgA44R3+GdhU/5uTk5OT8lULhC2e3oQrIGVz7AAAAAElFTkSuQmCC">
+    <div onclick="getBack('back')" style="position: relative; text-align: center; padding: 5px;">
+        Вернутся к списку
     </div>
     <div id="eventsContent" class="eventsContent content">
         <div class="eventTitle"></div>

@@ -114,23 +114,48 @@ if($_SERVER['REQUEST_URI'] == bUrl.'/admin.php' || $_SERVER['REQUEST_URI'] == bU
 $id = !isset($_GET['id']) ? false : (int)$_GET['id'];
 
 if($_GET['load'] == 'event') {
-    $admin->event($id);
+    if(checkUser()) {
+        $admin->event($id);
+    }
+    else{
+        $admin->login();
+    }
 }
 elseif($_GET['load'] == 'categories'){
-    $admin->categories($id);
+    if(checkUser()) {
+        $admin->categories($id);
+    }
+    else{
+        $admin->login();
+    }
 }
 elseif($_GET['load'] == 'delete'){
-    $admin->delete($_GET['type'],$_GET['id']);
+    if(checkUser()) {
+        $admin->delete($_GET['type'], $_GET['id']);
+    }
+    else{
+        $admin->login();
+    }
 }
 elseif ($_GET['load'] == 'exit'){
     unset($_SESSION['userData']);
     header('Location: '.bUrl.'/admin.php');
 }
 elseif($_POST['update']){
-    $admin->update($_POST);
+    if(checkUser()) {
+        $admin->update($_POST);
+    }
+    else{
+        $admin->login();
+    }
 }
 elseif($_POST['create']){
-    echo $admin->create($_POST);
+    if(checkUser()) {
+        echo $admin->create($_POST);
+    }
+    else{
+        $admin->login();
+    }
 }elseif($_POST['login']){
     $result = $admin->checkUser(array(
         'login' => $_POST['email'],
@@ -146,4 +171,12 @@ elseif($_POST['create']){
     else{
         $_SESSION['userLoginError'] = 'Неверный логин или пароль';
     }
+}
+
+function checkUser(){
+    if($_SESSION['userData']['id']){
+        return true;
+    }
+
+    return false;
 }
