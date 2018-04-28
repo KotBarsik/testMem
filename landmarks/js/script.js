@@ -12,7 +12,10 @@ function get(key) {
     return p ? p[1] : false;
 }
 
-function load(type,id) {
+function load(type,id,wId) {
+    if (wId === undefined) {
+        wId = false;
+    }
     if(type == 'content'){
         /*
         $.get('./index.php?render=contentType&type='+id, function(data) {
@@ -43,7 +46,14 @@ function load(type,id) {
         });
         $('div.back').attr('viewid',3);
     }else if(type == 'object'){
-        document.windowsId = 3;
+        if(wId){
+            document.windowsId = wId;
+            $('div.back').attr('viewid',3);
+        }
+        else {
+            document.windowsId = 3;
+            $('div.back').attr('viewid',4);
+        }
         $.get('./index.php?render=object&id='+id + '&lat=' + get('lat') + '&long=' + get('long'), function(data) {
             hideAll();
             $('#mainObject').empty();
@@ -51,7 +61,6 @@ function load(type,id) {
             $('#mainObject').append(data);
             $("body").scrollTop(0);
         });
-        $('div.back').attr('viewid',4);
     }
     showBack($('div.back').attr('viewid'));
 }

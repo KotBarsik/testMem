@@ -9,6 +9,7 @@ foreach ($data['contentType'] as $types){
 if(count($data['contentObjectByContentType']) >= 1){
     echo '<div style="clear:both"></div>';
     $this->content('./layout/contentObject.php',[
+        'objectLvl' => 'lvl',
         'contentType' => $data['contentObjectByContentType']
     ]);
 }

@@ -42,8 +42,9 @@ foreach ($data['contentType'] as $contentType){
         ]
     );
     $img = json_decode($contentType['img']);
+    $objectLvl = isset($data['objectLvl']) ? ',2' : '';
     echo '
-        <div onclick="load(\'object\','.$contentType['id'].')" style="background-image: url('.$img[0].');background-size: cover; width: 100%; height: 160px;">
+        <div onclick="load(\'object\','.$contentType['id'].$objectLvl.')" style="background-image: url('.$img[0].');background-size: cover; width: 100%; height: 160px;">
             <div style="width: 100%;height:100%;background-color: rgba(0,0,0,.3);">
                 <div class="text">
                     <div style="font-size: 22px;font-weight: bold;height:90px;display:table-cell;vertical-align:bottom;">'.$contentType['title'].'</div>
