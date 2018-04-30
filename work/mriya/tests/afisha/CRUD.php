@@ -37,7 +37,7 @@ class CRUD
                   events.id,events.title,events.text,events.start_time,events.stop_time,
                   SUBSTR(DATE_FORMAT(events.start_time,'%M'),1,3) as events_start_month,
                   DATE_FORMAT(events.start_time,'%d') as events_start_day,
-                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%m - '),DATE_FORMAT(events.stop_time,'%h:%m')) as events_start_preview,
+                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%i - '),DATE_FORMAT(events.stop_time,'%h:%i')) as events_start_preview,
                   DATE_FORMAT(events.start_time,'%Y-%m-%d') as events_start_time_ymd,
                   DATE_FORMAT(events.stop_time,'%Y-%m-%d') as events_stop_time_ymd,
                   event_type.name as event_name
@@ -56,7 +56,7 @@ class CRUD
                   events.id,events.title,events.text,events.start_time,events.stop_time,
                   SUBSTR(DATE_FORMAT(events.start_time,'%M'),1,3) as events_start_month,
                   DATE_FORMAT(events.start_time,'%d') as events_start_day,
-                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%m - '),DATE_FORMAT(events.stop_time,'%h:%m')) as events_start_preview,
+                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%i - '),DATE_FORMAT(events.stop_time,'%h:%i')) as events_start_preview,
                   DATE_FORMAT(events.start_time,'%Y-%m-%d') as events_start_time_ymd,
                   DATE_FORMAT(events.stop_time,'%Y-%m-%d') as events_stop_time_ymd,
                   event_type.name as event_name
