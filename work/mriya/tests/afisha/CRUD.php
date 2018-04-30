@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
+            $this->db = new PDO("mysql:host=localhost;dbname=psyvor_afisha", 'psyvor_afisha', 'm123456m');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());

@@ -1,5 +1,5 @@
 <?php
-$server = 'dev';
+$server = 'prod';
 
 if($_GET['get'] == 'get'){
     echo file_get_contents('log.txt');
