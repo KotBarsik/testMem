@@ -43,7 +43,8 @@ class CRUD
                   event_type.name as event_name
                 FROM events
                   LEFT JOIN event_type ON event_type.id = events.event_type
-                HAVING events_start_time_ymd < CURDATE()"
+                HAVING events_start_time_ymd < CURDATE()
+                ORDER BY events.start_time DESC"
         );
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -61,7 +62,8 @@ class CRUD
                   event_type.name as event_name
                 FROM events
                   LEFT JOIN event_type ON event_type.id = events.event_type
-                HAVING events_start_time_ymd >= CURDATE()"
+                HAVING events_start_time_ymd >= CURDATE()
+                ORDER BY events.start_time DESC"
         );
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

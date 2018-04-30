@@ -88,7 +88,7 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
 </div>
 <div id="content" class="main_content" style="display: none">
     <div onclick="getBack('back')" style="position: relative; text-align: center; padding: 5px;padding-top: 10px;">
-        Вернутся к списку
+        <div class="active" style="width: 140px; padding: 5px; color: #fff; margin: 0px auto;">Вернуться к списку</div>
     </div>
     <div id="eventsContent" class="eventsContent content">
         <div class="eventTitle"></div>
