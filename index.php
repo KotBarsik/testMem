@@ -1,22 +1,22 @@
 <?php
-$server = 'prod';
+$server = 'dev';
 
 if($_GET['get'] == 'get'){
-    echo file_get_contents('log.txt');
+    echo file_get_contents('./log.txt');
     exit();
 }elseif(strlen(file_get_contents('php://input')) >= 10 || $_GET['get'] == 'test') {
 
     if($server == 'prod') {
         $content = file_get_contents('php://input');
 
-        file_put_contents('log.txt', $content);
+        file_put_contents('./log.txt', $content);
 
         $data = $content;
         $data = (json_decode($data, true))['message'];
     }
     elseif ($server == 'dev') {
         if($_GET['type'] == 'local') {
-            $data = file_get_contents('http://149.154.71.22:88/?get=get');
+            $data = file_get_contents('http://162.219.29.88:88/?get=get');
             $data = (json_decode($data, true))['message'];
         }
         elseif($_GET['type'] == 'tel'){
