@@ -32,7 +32,13 @@ function load(type,id,wId) {
             $('#mainContentType').empty();
             $('#mainContentType').show();
             $('#mainContentType').append(data);
-            localStorage.setItem("bc2",$('#mainContentType').find('#backName').attr('text'));
+            if($('#mainContentType').find('#backName').length == 1) {
+                localStorage.setItem("bc2", $('#mainContentType').find('#backName').attr('text'));
+            }
+            else{
+                localStorage.setItem("bc2", $('#mainContentType').find('#backName:eq(1)').attr('text'));
+            }
+            console.log($('#mainContentType').find('#backName').attr('text'));
         });
         $('div.back').attr('viewid', 2);
         $("body").scrollTop(0);
@@ -86,6 +92,7 @@ function showView(id) {
 }
 
 function showBack(id) {
+    var backText = '';
     if(id == 1){
         $('div.back').hide();
     }
@@ -93,10 +100,12 @@ function showBack(id) {
         $('div.back').show();
     }
     if(localStorage.getItem('bc'+(id - 1)) != 'undefined') {
-        $('div.back').text(localStorage.getItem('bc' + (id - 1)));
+        backText = localStorage.getItem('bc' + (id - 1));
+        $('div.back').text(backText);
     }
     else {
-        $('div.back').text(localStorage.getItem('bc1'));
+        backText = localStorage.getItem('bc1')
+        $('div.back').text(backText);
     }
-    console.log('show ' + (id + 1));
+    console.log(backText,id);
 }

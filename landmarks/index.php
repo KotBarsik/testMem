@@ -14,4 +14,6 @@ elseif($_GET['render'] == 'contentObject'){
 }
 elseif($_GET['render'] == 'object'){
     $render->renderObject($_GET['id']);
+}elseif ($_GET['render'] == 'json'){
+    $render->renderJson();
 }

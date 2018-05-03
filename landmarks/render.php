@@ -112,6 +112,10 @@ class render
         $this->footer();
     }
 
+    public function renderJson($type){
+        echo '[1]';
+    }
+
     public function content($view,$data = []){
         require_once $view;
     }

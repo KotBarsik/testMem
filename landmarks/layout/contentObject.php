@@ -30,6 +30,26 @@ echo '
             }
         </style>
     ';
+
+if($_GET['lat'] && $_GET['long']){
+    $newFormatArray = [];
+    foreach ($data['contentType'] as $contentType){
+        $m = getDistanceBetweenPointsNew(
+            [
+                'lat' => $_GET['lat'],
+                'long' => $_GET['long']
+            ],
+            [
+                'lat' => $contentType['lat'],
+                'long' => $contentType['long']
+            ]
+        );
+        $newFormatArray[round($m['meters'])] = $contentType;
+    }
+    ksort($newFormatArray);
+    $data['contentType'] = $newFormatArray;
+}
+
 foreach ($data['contentType'] as $contentType){
     $m = getDistanceBetweenPointsNew(
         [
