@@ -113,7 +113,17 @@ class render
     }
 
     public function renderJson($type){
-        echo '[1]';
+        $json = $this->CRUD->getItemsByObjectType(2);
+        $newFormat = [];
+
+        foreach ($json as $id => $item){
+            $newFormat[$id]['title'] = $item['title'];
+            $newFormat[$id]['img'] = json_decode($item['img'])[0];
+            $newFormat[$id]['lat'] = $item['lat'];
+            $newFormat[$id]['long'] = $item['long'];
+        }
+
+        return $newFormat;
     }
 
     public function content($view,$data = []){

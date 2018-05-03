@@ -1,5 +1,6 @@
 <html>
 <head>
+    <script src="./js/jquery-1.7.min.js"></script>
     <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
             // Создаем карту
             var map = new ymaps.Map("map", {
                 center: [44.95719, 34.11079], // координаты центра карты, при загрузке
-                zoom: 15,  // коэффициент масштабирования
+                zoom: 8,  // коэффициент масштабирования
                 // элементы управления картой
                 // список элементов можно посмотреть на этой странице
                 // https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/controls-docpage/
@@ -29,17 +30,6 @@
                 ]
             });
 
-            // Создаем метку
-            var placemark = new ymaps.Placemark(placemarkConfig.coordinates, {
-                // всплывающая подсказка (выводим адрес объекта)
-                hintContent: placemarkConfig.name,
-                // Содержимое балуна
-                balloonContent: '<img src="' + placemarkConfig.photo + '"> <br/> <strong>' + placemarkConfig.name + '</strong> <br/> ' + placemarkConfig.desc
-            });
-
-            // Добавляем метку на карту
-            map.geoObjects.add(placemark);
-
             var zoomControl = new ymaps.control.ZoomControl({
                 options: {
                     size: "small"
@@ -47,8 +37,20 @@
             });
 
             map.controls.add(zoomControl);
+
+            $.get('./index.php?render=json', function (data) {
+                JSON.parse(data).forEach(function (item,id) {
+                    var placemark = new ymaps.Placemark([item.lat,item.long], {
+                        // всплывающая подсказка (выводим адрес объекта)
+                        hintContent: item.title,
+                        // Содержимое балуна
+                        balloonContent: '<h3 style="text-align: center">'+item.title+'</h3><img style="max-width: 480px;height: 320px;" src="' + item.img + '">'
+                    });
+                    map.geoObjects.add(placemark);
+                });
+            });
         }
     </script>
-    <div id="map" style="width: 600px; height: 400px"></div>
+    <div id="map" style="width: 100%; height: 100%"></div>
     </body>
 </html>
