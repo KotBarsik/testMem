@@ -1,4 +1,4 @@
-<div viewId="1" class="back">Вернуться к списку</div>
+<div viewId="1" class="back" style="display: none">Вернуться к списку</div>
 <div id="mainContent" style="width:100%;">
     <?php
     foreach ($this->category as $cat){
@@ -9,3 +9,4 @@
 <div id="mainContentType" style="width:100%;"></div>
 <div id="mainContentObjects" style="width:100%;"></div>
 <div id="mainObject" style="width:100%;"></div>
+

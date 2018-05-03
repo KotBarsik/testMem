@@ -21,11 +21,29 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getCategoryTypeById($id){
+        $query = $this->db->prepare(
+            "SELECT * FROM category_type WHERE id=:id"
+        );
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getCategoryTypeByName($type){
         $query = $this->db->prepare(
             "SELECT category.*,category_type.* FROM category LEFT JOIN category_type ON category_type.category_id = category.id AND category_type.status = 'on' WHERE category.eng_name=:type"
         );
         $query->bindParam(':type', $type);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCategoryTypeByNameOne($type){
+        $query = $this->db->prepare(
+            "SELECT * FROM category WHERE eng_name=:eng_name"
+        );
+        $query->bindParam(':eng_name', $type);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -93,7 +111,7 @@ class CRUD
             "SELECT category.id as cat_id, category_type.id as cat_type_id, items.* FROM category 
 LEFT JOIN category_type ON category_type.category_id = category.id
 LEFT JOIN items ON items.cat = category_type.id
-WHERE category.eng_name=:eng_name LIMIT"
+WHERE category.eng_name=:eng_name LIMIT 100"
         );
         $query->bindParam(':eng_name', $eng_name);
         $query->execute();

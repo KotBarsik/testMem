@@ -13,3 +13,5 @@ if(count($data['contentObjectByContentType']) >= 1){
         'contentType' => $data['contentObjectByContentType']
     ]);
 }
+
+echo '<div id="backName" text="'.$data['back'].'" style="display: none;" ></div>';

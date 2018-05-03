@@ -117,7 +117,7 @@ $m = getDistanceBetweenPointsNew(
         </div>
         <div class="clear"></div>
     </div>
-    <div class="navigation">Навигация по обьекту</div>
+    <div class="navigation"><a href="https://yandex.com/maps/?rtext='+this.state.lat+','+this.state.long+'~<?php echo $data['object'][0]['lat'].','.$data['object'][0]['long'];?>&rtt=auto&mode=routes&z=10" style="color: #fff;text-decoration: none;">Навигация по обьекту</a></div>
     <div style="text-align:left;padding:7px;font-weight: bold">
         <?php
             echo str_replace('_x000D_','',str_replace(PHP_EOL,'<br>',$object['description']));
@@ -125,3 +125,5 @@ $m = getDistanceBetweenPointsNew(
         <br><br>
     </div>
 </div>
+
+<?php echo '<div id="backName" text="'.$data['back'].'" style="display: none;" ></div>'; ?>

@@ -6,11 +6,10 @@
 body{
     width: 100%;
     font-family: Pompadur;
-    background-color: rgba(0,0,0,0.6);
 }
 
 .back{
-    background-color: #b4975b;
+    background-color: #4e4e4e;
     width: 100%;
     text-align: center;
     padding-top: 8px;

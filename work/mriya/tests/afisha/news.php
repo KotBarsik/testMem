@@ -94,6 +94,7 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
         <div class="eventTitle"></div>
         <div class="eventDate"></div>
         <div class="eventDescription"></div>
+        <br><br>
     </div>
 </div>
 </body>

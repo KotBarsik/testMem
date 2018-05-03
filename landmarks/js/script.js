@@ -13,6 +13,7 @@ function get(key) {
 }
 
 function load(type,id,wId) {
+    localStorage.setItem("bc1",'Вернуться к списку');
     if (wId === undefined) {
         wId = false;
     }
@@ -31,6 +32,7 @@ function load(type,id,wId) {
             $('#mainContentType').empty();
             $('#mainContentType').show();
             $('#mainContentType').append(data);
+            localStorage.setItem("bc2",$('#mainContentType').find('#backName').attr('text'));
         });
         $('div.back').attr('viewid', 2);
         $("body").scrollTop(0);
@@ -42,6 +44,7 @@ function load(type,id,wId) {
             $('#mainContentObjects').empty();
             $('#mainContentObjects').show();
             $('#mainContentObjects').append(data);
+            localStorage.setItem("bc3",$('#mainContentObjects').find('#backName').attr('text'));
             $("body").scrollTop(0);
         });
         $('div.back').attr('viewid',3);
@@ -59,6 +62,7 @@ function load(type,id,wId) {
             $('#mainObject').empty();
             $('#mainObject').show();
             $('#mainObject').append(data);
+            localStorage.setItem("bc4",$('#mainObject').find('#backName').attr('text'));
             $("body").scrollTop(0);
         });
     }
@@ -88,5 +92,11 @@ function showBack(id) {
     else if(id >= 2){
         $('div.back').show();
     }
-    console.log('show ' + id);
+    if(localStorage.getItem('bc'+(id - 1)) != 'undefined') {
+        $('div.back').text(localStorage.getItem('bc' + (id - 1)));
+    }
+    else {
+        $('div.back').text(localStorage.getItem('bc1'));
+    }
+    console.log('show ' + (id + 1));
 }

@@ -57,3 +57,5 @@ foreach ($data['contentType'] as $contentType){
         </div>
         ';
 }
+
+echo '<div id="backName" text="'.$data['back'].'" style="display: none;" ></div>';
