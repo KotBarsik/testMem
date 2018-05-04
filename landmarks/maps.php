@@ -1,10 +1,4 @@
-<html>
-<head>
-    <script src="./js/jquery-1.7.min.js"></script>
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
-</head>
-<body>
-    <script>
+ <script>
         // Параметры метки
         var placemarkConfig = {
             'coordinates': [44.95719, 34.11079], // Координаты метки
@@ -52,5 +46,3 @@
         }
     </script>
     <div id="map" style="width: 100%; height: 100%"></div>
-    </body>
-</html>
