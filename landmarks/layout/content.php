@@ -15,10 +15,7 @@
 <script>
     function showAllBlock() {
         $('div[class="back"]').show();
-        $('#mainContent').show();
-        $('#mainContentType').show();
-        $('#mainContentObjects').show();
-        $('#mainObject').show();
+        $('#'+localStorage.getItem('lastView')).show();
     }
 
     function hideAllblock() {
