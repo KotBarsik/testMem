@@ -10,8 +10,8 @@
 <div id="mainContentObjects" style="width:100%;"></div>
 <div id="mainObject" style="width:100%;"></div>
 <div id="maps" style="display: none;"></div>
-<div id="showMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 5px; left: 5px; background-color: #fff;display: none"></div>
-<div id="hideMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 5px; left: 5px; background-color: #fff;display: none;"></div>
+<div id="showMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 10px; left: 10px; background-color: #fff;display: none"></div>
+<div id="hideMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 10px; left: 10px; background-color: #fff;display: none;"></div>
 <script>
     function showAllBlock() {
         $('div[class="back"]').show();
