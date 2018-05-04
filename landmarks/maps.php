@@ -38,7 +38,7 @@
 
             map.controls.add(zoomControl);
 
-            $.get('./index.php?render=json', function (data) {
+            $.get('./index.php?render=json&id=<?php echo $_GET['id'];?>', function (data) {
                 JSON.parse(data).forEach(function (item,id) {
                     var placemark = new ymaps.Placemark([item.lat,item.long], {
                         // всплывающая подсказка (выводим адрес объекта)

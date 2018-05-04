@@ -15,6 +15,6 @@ elseif($_GET['render'] == 'contentObject'){
 elseif($_GET['render'] == 'object'){
     $render->renderObject($_GET['id']);
 }elseif ($_GET['render'] == 'json'){
-    $str = json_encode($render->renderJson(''),JSON_UNESCAPED_UNICODE);
+    $str = json_encode($render->renderJson($_GET['id']),JSON_UNESCAPED_UNICODE);
     echo $str;
 }

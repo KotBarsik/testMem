@@ -28,6 +28,7 @@ function load(type,id,wId) {
     }else if(type == 'contentType'){
         document.windowsId = 1;
         $.get('./index.php?render=contentType&type=' + id + '&lat=' + get('lat') + '&long=' + get('long'), function (data) {
+            localStorage.setItem("mapsUrl",'?id=' + id);
             hideAll();
             $('#mainContentType').empty();
             $('#mainContentType').show();
@@ -46,6 +47,7 @@ function load(type,id,wId) {
     else if(type == 'contentObject'){
         document.windowsId = 2;
         $.get('./index.php?render=contentObject&typeId='+id + '&lat=' + get('lat') + '&long=' + get('long'), function(data) {
+            localStorage.setItem("mapsUrl",'?id=' + id);
             hideAll();
             $('#mainContentObjects').empty();
             $('#mainContentObjects').show();
@@ -95,9 +97,11 @@ function showBack(id) {
     var backText = '';
     if(id == 1){
         $('div.back').hide();
+        $('#showMaps').hide();
     }
     else if(id >= 2){
         $('div.back').show();
+        $('#showMaps').show();
     }
     if(localStorage.getItem('bc'+(id - 1)) != 'undefined') {
         backText = localStorage.getItem('bc' + (id - 1));

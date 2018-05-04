@@ -113,8 +113,14 @@ class render
     }
 
     public function renderJson($type){
-        $json = $this->CRUD->getItemsByObjectType(2);
         $newFormat = [];
+
+        if(is_numeric($_GET['id'])){
+            $json = $this->CRUD->getItemsByObjectType($_GET['id']);
+        }
+        else{
+            $json = $this->CRUD->getContentObjectByContentType($_GET['id']);
+        }
 
         foreach ($json as $id => $item){
             $newFormat[$id]['title'] = $item['title'];

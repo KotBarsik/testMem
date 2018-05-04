@@ -9,16 +9,41 @@
 <div id="mainContentType" style="width:100%;"></div>
 <div id="mainContentObjects" style="width:100%;"></div>
 <div id="mainObject" style="width:100%;"></div>
-<div id="maps">
-
-</div>
-<div id="clickMe" style="width: 100px; position: absolute; height: 100px; z-index: 9999; top: 1px; background-color: #fff;">
-1
-</div>
+<div id="maps" style="display: none;"></div>
+<div id="showMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 5px; left: 5px; background-color: #fff;display: none"></div>
+<div id="hideMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 5px; left: 5px; background-color: #fff;display: none;"></div>
 <script>
-    $('#clickMe').on('click',function () {
-        $.get('./maps.php', function (data) {
+    function showAllBlock() {
+        $('div[class="back"]').show();
+        $('#mainContent').show();
+        $('#mainContentType').show();
+        $('#mainContentObjects').show();
+        $('#mainObject').show();
+    }
+
+    function hideAllblock() {
+        $('div[class="back"]').hide();
+        $('#mainContent').hide();
+        $('#mainContentType').hide();
+        $('#mainContentObjects').hide();
+        $('#mainObject').hide();
+    }
+
+    $('#showMaps').on('click',function () {
+        $.get('./maps.php'+localStorage.getItem('mapsUrl'), function (data) {
             $('#maps').append(data);
+            $('#maps').show();
+            $('#showMaps').hide();
+            $('#hideMaps').show();
+            hideAllblock();
         });
+    });
+
+    $('#hideMaps').on('click',function () {
+        $('#maps').hide();
+        $('#maps').empty();
+        $('#hideMaps').hide();
+        $('#showMaps').show();
+        showAllBlock();
     });
 </script>
