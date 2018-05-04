@@ -10,8 +10,8 @@
 <div id="mainContentObjects" style="width:100%;"></div>
 <div id="mainObject" style="width:100%;"></div>
 <div id="maps" style="display: none;"></div>
-<div id="showMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 10px; left: 10px; background-color: #fff;display: none; background-image: url(./images/other/world_map-96.png); background-size: 100%"></div>
-<div id="hideMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 10px; left: 10px; background-color: #fff;display: none; background-image: url(./images/other/igdtu.attendance.jpg); background-size: 100%"></div>
+<div id="showMaps" style="width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 10px; left: 10px; background-color: #fff;display: none; background-image: url(./images/other/_UaEqO1mHLg.jpg); background-size: 100%;border: 4px solid #000; border-radius: 30px;"></div>
+<div id="hideMaps" style="display:none; width: 30px; position: fixed; height: 30px; z-index: 9999; bottom: 10px; left: 10px; background-color: rgb(255, 255, 255); background-image: url(./images/other/884101_list_512x512.png); background-size: 20px; background-repeat: no-repeat; background-position-x: 50%; background-position-y: 49%; border: 4px solid rgb(0, 0, 0); border-radius: 30px;"></div>
 <script>
     function showAllBlock() {
         $('div[class="back"]').show();
