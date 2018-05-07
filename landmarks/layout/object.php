@@ -47,7 +47,7 @@ $m = getDistanceBetweenPointsNew(
 ?>
 <style>
     .img{
-        max-width: 380px;
+        max-width: 100%;
     }
     .content{
         width: 100%;
@@ -95,12 +95,12 @@ $m = getDistanceBetweenPointsNew(
 <script>
     function hideMaps() {
         $('div.content').show();
-        $('#maps').hide();
+        $('#mapsObj').hide();
         $('div[class="back"]').show();
     }
     function showMaps() {
         $('div.content').hide();
-        $('#maps').show();
+        $('#mapsObj').show();
         $('div[class="back"]').hide();
     }
 </script>
@@ -122,14 +122,27 @@ $m = getDistanceBetweenPointsNew(
             <div class="city"><?php echo $data['object'][0]['city']?></div>
             <div class="clear"></div>
         </div>
-        <div style="margin:5px;font-weight: bold;float: right;">
-            <div class="point" style="background-image: url('./images/other/distance.png'); width: 40px"></div>
-            <div class="city"><?php echo round($m['kilometers'],1) ?> км.</div>
-            <div class="clear"></div>
-        </div>
+        <?php
+        if(is_numeric($_GET['long'])) {
+            ?>
+            <div style="margin:5px;font-weight: bold;float: right;">
+                <div class="point" style="background-image: url('./images/other/distance.png'); width: 40px"></div>
+                <div class="city"><?php echo round($m['kilometers'], 1) ?> км.</div>
+                <div class="clear"></div>
+            </div>
+            <?php
+        };
+        ?>
         <div class="clear"></div>
     </div>
-    <div class="navigation"><a style="color: #fff;text-decoration: none;" onclick="showMaps();">Навигация по обьекту</a></div>
+    <?php
+    if(is_numeric($_GET['lat']) && is_numeric($_GET['long'])) {
+        echo '<div id="sendData" class="navigation" ><a style = "color: #fff;text-decoration: none;" > Навигация по обьекту </a ></div>';
+    }
+    else{
+        echo '<div class="navigation" ><a style = "color: #fff;text-decoration: none;" > Навигация по обьекту не доступна</a ></div>';
+    }
+    ?>
     <div style="text-align:left;padding:7px;font-weight: bold">
         <?php
             echo str_replace('_x000D_','',str_replace(PHP_EOL,'<br>',$object['description']));
@@ -137,37 +150,56 @@ $m = getDistanceBetweenPointsNew(
         <br><br>
     </div>
 </div>
-    <div class="maps" id="maps" style="padding: 10px;">
-        <script type="text/javascript">
-            var myMap, route;
+<?php
+if(is_numeric($_GET['long']) && is_numeric($_GET['lat'])){
+    ?>
+        <div class="mapsObj" id="mapsObj" style="padding: 10px;">
+            <script type="text/javascript">
+                var myMap, route;
 
-            // Как только будет загружен API и готов DOM, выполняем инициализацию
-            ymaps.ready(init);
+                // Как только будет загружен API и готов DOM, выполняем инициализацию
+                //ymaps.ready(init);
 
-            function init () {
-                myMap = new ymaps.Map("map", {
-                    center: [<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>],
-                    zoom: 12
-                });
+                function init() {
+                    myMap = new ymaps.Map("mapObject", {
+                        center: [<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>],
+                        zoom: 12
+                    });
 
-                ymaps.route([
-                    // Список точек, которые необходимо посетить
-                    [<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>], [<?php echo $data['object'][0]['lat'].','.$data['object'][0]['long'];?>]], {
-                    // Опции маршрутизатора
-                    mapStateAutoApply: true, // автоматически позиционировать карту
-                    boundedBy: [[<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>],[<?php echo $data['object'][0]['lat'].','.$data['object'][0]['long'];?>]],
-                    strictBounds: true
-                }).then(function (router) {
-                    route && myMap.geoObjects.remove(route);
-                    route = router;
-                    myMap.geoObjects.add(route);
-                }, function (error) {
-                    alert("Возникла ошибка: " + error.message);
-                });
-                hideMaps();
-            }
-        </script>
-        <div style="padding-top: 10px; padding-bottom: 8px; text-align: center; margin-top: -10px;" onclick="hideMaps()">Скрыть</div>
-        <div id="map" style="width:100%;height:90%;padding-top: 5px"></div>
+                    ymaps.route(
+                        [
+                            [<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>],
+                            [<?php echo $data['object'][0]['lat'];?>,<?php echo $data['object'][0]['long'];?>]
+                        ],
+                        { multiRoute: true },
+                        { routingMode: 'masstransit' },
+                        { avoidTrafficJams: true }
+                    ).then(function (router) {
+                        route && myMap.geoObjects.remove(route);
+                        route = router;
+                        myMap.geoObjects.add(route);
+                    }, function (error) {
+                        alert("Возникла ошибка: " + error.message);
+                    });
+                    hideMaps();
+                }
+            </script>
+            <div style="padding-top: 10px; padding-bottom: 8px; text-align: center; margin-top: -10px;"
+                 onclick="hideMaps()">Скрыть
+            </div>
+            <div id="mapObject" style="width:100%;height:90%;padding-top: 5px"></div>
+        <?php
+        }
+        ?>
     </div>
 <?php echo '<div id="backName" text="'.$data['back'].'" style="display: none;" ></div>'; ?>
+<script>
+    $(function() {
+        document.getElementById('sendData').onclick = function (e) {
+            var url = "https://yandex.com/maps/?rtext=<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>~44.397095,33.938965&rtt=auto&mode=routes&z=10";
+            e.preventDefault();
+            window.postMessage(url);
+            e.stopPropagation();
+        }
+    });
+</script>
