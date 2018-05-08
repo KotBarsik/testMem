@@ -17,6 +17,18 @@ class App
         "resize_keyboard" => true
     );
 
+    protected $inlineMenu = array(
+        "inline_keyboard" =>
+            array(
+                array(
+                    array(
+                        "text" => "asd",
+                        "callback_data" => 'id:'
+                    )
+                )
+            )
+    );
+
     /**
      * @var PDO
      */
@@ -41,7 +53,7 @@ class App
     }
 
     public function run($data){
-        if(!isset($data['callback_query'])) {
+        if(!isset($data['chat_instance'])) {
             $chat_id = $data['chat']['id'];
             $userData = $this->getUserById($chat_id);
 
@@ -57,8 +69,8 @@ class App
 
                 } else {
                     $messages = array(
-                        'Eng' => 'Wait until you are approved by the administrator',
-                        'Rus' => 'Дождитесь пока вас одобрит администратор'
+                        'en' => 'Wait until you are approved by administrator',
+                        'ru' => 'Дождитесь пока вас одобрит администратор'
                     );
 
                     $this->reply($messages[$userSettings['lang']], $chat_id);
@@ -70,12 +82,12 @@ class App
                 } elseif ($data['text'] == 'en' || $data['text'] == 'ru') {
                     $result = $this->createUser($chat_id, json_encode(array(
                         'lang' => $data['text']
-                    )));
+                    )),$data['chat']['first_name'].' '.$data['chat']['last_name']);
 
                     if ($result) {
 
                         $messages = array(
-                            'en' => 'Ok, wait until you are approved by the administrator',
+                            'en' => 'Ok, wait until you are approved by administrator',
                             'ru' => 'Хорошо, дождитесь пока вас одобрит администратор'
                         );
 
@@ -91,9 +103,9 @@ class App
 Ваш язык');
             }
         }else{
-            $messagesId = (int)str_replace('messagesid:','',$data['callback_query']['data']);
+            $messagesId = (int)str_replace('id:','',$data['data']);
             $messages = $this->getMessagesById($messagesId);
-            $this->repayCallback($data["callback_query"]["id"],$messages[0]['messages']);
+            $this->repayCallback($data["id"],$messages[0]['messages']);
         }
         return;
     }
@@ -121,9 +133,24 @@ class App
         return $users->fetchAll();
     }
 
-    protected function createUser($userId,$data){
-        $query = $this->db->query('INSERT INTO users (`id`,`data`) VALUES (?,?)');
-        return $query->execute(array($userId,$data));
+    protected function createUser($userId,$data,$name){
+        if(is_numeric($userId)) {
+            $query = $this->db->prepare('INSERT INTO users (`id`,`data`,`name`) VALUES (?,?,?)');
+            return $query->execute(array($userId, $data, $name));
+        }
+
+        return false;
+    }
+
+    protected function createMessages($messages){
+        if($messages) {
+            $query = $this->db->prepare('INSERT INTO messages (`messages`) VALUES (?)');
+            $result = $query->execute(array($messages));
+            $insertID = $this->db->lastInsertId();
+            return $insertID;
+        }
+
+        return false;
     }
 
     protected function reply($mesg,$chatId,$type = 'html'){
@@ -148,6 +175,8 @@ class App
     }
 
     protected function allSubscribers($messges,$myID,$sendUserLogin){
+        $messagesInsertId = $this->createMessages($messges);
+        ///Тут добавим сообщение в базу, отправим всем , и создадим кнопку с просмотром оригинального сообщения
         foreach ($this->getAllUsers() as $user){
             if($user['id'] != $myID && $user['id'] && !$this->thisCommands($messges)) {
                 $data = json_decode($user['data'],true);
@@ -158,10 +187,19 @@ class App
                     'text' => $messges,
                     'lang' => $data['lang']
                 ));
+
                 $text = $sendUserLogin.'
 ';
+                $langOriginalText = array(
+                    'en' => 'original',
+                    'ru' => 'оригинал'
+                );
+
+                $this->inlineMenu['inline_keyboard'][0][0]['text'] = $langOriginalText[$data['lang']];
+
                 $text .= $translateText['text'][0] ? $translateText['text'][0] : '';
-                $this->reply($text,$user['id']);
+                //$this->reply($text,$user['id']);
+                $this->createButtonOriginalSms($text,$user['id'],$messagesInsertId);
             }
         }
     }
@@ -182,7 +220,15 @@ class App
         return $users->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createButtonOriginalSms($messagesId){
+    public function createButtonOriginalSms($text,$chatId,$messagesId){
+        $this->inlineMenu['inline_keyboard'][0][0]['callback_data'] = 'id:'.$messagesId;
+        $sendRessult = $this->telegram->sendMessage(array(
+            'chat_id' => $chatId,
+            'text' => $text,
+            'parse_mode' => 'html',
+            'reply_markup' => json_encode($this->inlineMenu),
+        ));
 
+        return $sendRessult;
     }
 }
