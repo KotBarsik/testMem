@@ -12,7 +12,8 @@ if ($_GET['get'] == 'get') {
         file_put_contents('./log.txt', $content);
 
         $data = $content;
-        $data = (json_decode($data, true))['message'];
+        $data = (json_decode($data, true));
+        $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
     } elseif ($server == 'dev') {
         if ($_GET['type'] == 'local') {
             $data = file_get_contents('http://162.219.29.88:88/?get=get');
