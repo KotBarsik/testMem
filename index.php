@@ -17,7 +17,8 @@ if ($_GET['get'] == 'get') {
     } elseif ($server == 'dev') {
         if ($_GET['type'] == 'local') {
             $data = file_get_contents('http://162.219.29.88:88/?get=get');
-            $data = (json_decode($data, true))['message'];
+            $data = (json_decode($data, true));
+            $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
         } elseif ($_GET['type'] == 'tel') {
             $data = file_get_contents('https://api.telegram.org/bot489423883:AAE2Uzv4WJshSvLEVOOcNZ3kUCrmaHrCszs/getUpdates');
             $data = (json_decode($data, true))['result'];
