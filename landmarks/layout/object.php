@@ -196,7 +196,7 @@ if(is_numeric($_GET['long']) && is_numeric($_GET['lat'])){
 <script>
     $(function() {
         document.getElementById('sendData').onclick = function (e) {
-            var url = "https://yandex.com/maps/?rtext=<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>~44.397095,33.938965&rtt=auto&mode=routes&z=10";
+            var url = "https://yandex.com/maps/?rtext=<?php echo $_GET['lat'];?>,<?php echo $_GET['long'];?>~<?php echo $data['object'][0]['lat'];?>,<?php echo $data['object'][0]['long'];?>&rtt=auto&mode=routes&z=10";
             e.preventDefault();
             window.postMessage(url);
             e.stopPropagation();

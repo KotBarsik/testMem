@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=localhost;dbname=psyvor_afisha", 'psyvor_afisha', 'm123456m');
+            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -44,7 +44,7 @@ class CRUD
                 FROM events
                   LEFT JOIN event_type ON event_type.id = events.event_type
                 HAVING events_start_time_ymd < CURDATE()
-                ORDER BY events.start_time DESC"
+                ORDER BY events.start_time DESC LIMIT 100"
         );
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -63,7 +63,7 @@ class CRUD
                 FROM events
                   LEFT JOIN event_type ON event_type.id = events.event_type
                 HAVING events_start_time_ymd >= CURDATE()
-                ORDER BY events.start_time DESC"
+                ORDER BY events.start_time DESC LIMIT 100"
         );
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -88,7 +88,7 @@ class CRUD
     {
         $query = $this->db->prepare(
             "SELECT title,text,
-            concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%m - '),DATE_FORMAT(events.stop_time,'%h:%m')) as events_start_preview
+            concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%i - '),DATE_FORMAT(events.stop_time,'%h:%i')) as events_start_preview
           FROM events WHERE events.id=?"
         );
 

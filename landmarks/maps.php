@@ -9,7 +9,7 @@
             'photo': 'ex4_1.png'
         };
 
-        //ymaps.ready(init);
+        ymaps.ready(init);
 
         function init(){
             // Создаем карту

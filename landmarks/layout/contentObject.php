@@ -70,13 +70,13 @@ foreach ($data['contentType'] as $contentType){
                     <div style="font-size: 22px;font-weight: bold;height:90px;display:table-cell;vertical-align:bottom;">'.$contentType['title'].'</div>
                     <div style="font-weight: 100;">'.$contentType['city'].'</div>
                 </div>';
+
                 if(is_numeric($_GET['lat'])){
-                    $view .= '<div style="color: #fff; text-align: right; position: relative; top: 30px; right: 5px; font-weight: 500;">
-                    '.round($m['kilometers'],1).' км';
+                    $view .= '<div style="color: #fff; text-align: right; position: relative; top: 30px; right: 5px; font-weight: 500;">'.round($m['kilometers'],1).' км</div>';
                 }
-                $view .= '</div>;
-            </div>
+    $view .= '</div>
         </div>';
+
     echo $view;
 }
 
