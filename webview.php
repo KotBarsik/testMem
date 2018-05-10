@@ -8,7 +8,12 @@ class webview{
 
     public function __construct()
     {
-        $this->db = new PDO('sqlite:./db.sqlite');
+        try {
+            $this->db = new PDO("mysql:host=db;dbname=bot", 'root', 'Qwerty123');
+            $this->db->exec("set names utf8");
+        } catch (Exception $exception) {
+            exit($exception->getMessage());
+        }
     }
 
     public function run(){

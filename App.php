@@ -44,7 +44,8 @@ class App
     public function __construct()
     {
         try {
-            $this->db = new PDO('sqlite:./db.sqlite');
+            $this->db = new PDO("mysql:host=db;dbname=bot", 'root', 'Qwerty123');
+            $this->db->exec("set names utf8");
             $this->telegram = new Telegram();
         } catch
         (Exception $exception) {
@@ -122,20 +123,20 @@ class App
     }
 
     protected function getAllUsers(){
-        $users = $this->db->query("SELECT * FROM users");
+        $users = $this->db->prepare("SELECT * FROM users");
         $users->execute();
         return $users->fetchAll(PDO::FETCH_ASSOC);
     }
 
     protected function getUserById($userID){
-        $users = $this->db->query("SELECT * FROM users WHERE id=?");
+        $users = $this->db->prepare("SELECT * FROM users WHERE id=?");
         $users->execute(array($userID));
         return $users->fetchAll();
     }
 
     protected function createUser($userId,$data,$name){
         if(is_numeric($userId)) {
-            $query = $this->db->prepare('INSERT INTO users (`id`,`data`,`name`) VALUES (?,?,?)');
+            $query = $this->db->prepare('INSERT INTO users (`id`,`data`,`status`,`name`) VALUES (?,?,"off",?)');
             return $query->execute(array($userId, $data, $name));
         }
 
