@@ -65,8 +65,20 @@ class App
             if ($userData[0]['id']) {
                 $userSettings = json_decode($userData[0]['data'], true);
                 if ($userData[0]['status'] == 'on') {
-                    $users = $data['from']['first_name'] . ' ' . $data['from']['last_name'];
-                    $this->allSubscribers($data['text'], $chat_id, $users);
+                    if(!$this->thisCommands($data['text'])) {
+                        $users = $data['from']['first_name'] . ' ' . $data['from']['last_name'];
+                        $this->allSubscribers($data['text'], $chat_id, $users);
+                    }
+                    elseif ($data['text'] == 'en' || $data['text'] == 'ru'){
+                        $this->updateLang($data['text'],$userData[0]['id']);
+
+                        $messages = array(
+                            'en' => 'Language updated',
+                            'ru' => 'Язык сменен'
+                        );
+
+                        $this->reply($messages[$data['text']], $chat_id);
+                    }
 
                 } else {
                     $messages = array(
@@ -141,6 +153,11 @@ class App
         }
 
         return false;
+    }
+
+    protected function updateLang($lang,$userId){
+        $query = $this->db->prepare('UPDATE users SET data=? WHERE id=?');
+        return $query->execute(array(json_encode(array('lang' => $lang)),$userId));
     }
 
     protected function createMessages($messages){
