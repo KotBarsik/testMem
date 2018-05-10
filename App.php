@@ -216,7 +216,7 @@ class App
     }
 
     public function getMessagesById($id){
-        $users = $this->db->query("SELECT * FROM messages WHERE id=?");
+        $users = $this->db->prepare("SELECT * FROM messages WHERE id=?");
         $users->execute(array($id));
         return $users->fetchAll(PDO::FETCH_ASSOC);
     }
