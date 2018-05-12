@@ -2,7 +2,7 @@
 class Telegram
 {
     //private $token = '543899124:AAFGHVBLv4FFEqmo7cYHaiCrU42LMxCbMZA';
-    private $token = '503741111:AAFBu4MrTr5LV5EzYUc4ys5CPC3UEOeGvvs';
+    private $token = '510931604:AAFdYJTAHwBNBad4jp7FiXzgz2xIfp_EHF0';
     public $apiLink = 'https://api.telegram.org/';
 
     /**

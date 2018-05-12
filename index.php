@@ -20,7 +20,7 @@ if ($_GET['get'] == 'get') {
             $data = (json_decode($data, true));
             $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
         } elseif ($_GET['type'] == 'tel') {
-            $data = file_get_contents('https://api.telegram.org/bot503741111:AAFBu4MrTr5LV5EzYUc4ys5CPC3UEOeGvvs/getUpdates');
+            $data = file_get_contents('https://api.telegram.org/bot510931604:AAFdYJTAHwBNBad4jp7FiXzgz2xIfp_EHF0/getUpdates');
             $data = (json_decode($data, true))['result'];
             $data = $data[count($data) - 1];
             $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
