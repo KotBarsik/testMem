@@ -16,7 +16,7 @@ if ($_GET['get'] == 'get') {
         $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
     } elseif ($server == 'dev') {
         if ($_GET['type'] == 'local') {
-            $data = file_get_contents('http://162.219.29.88:88/?get=get');
+            $data = file_get_contents('http://85.143.173.196:88/?get=get');
             $data = (json_decode($data, true));
             $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
         } elseif ($_GET['type'] == 'tel') {
