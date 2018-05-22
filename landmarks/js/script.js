@@ -96,7 +96,7 @@ function showBack(id) {
     }
     else if(id >= 2){
         $('div.back').show();
-        $('#showMaps').show();
+        //$('#showMaps').show();
     }
     if(localStorage.getItem('bc'+(id - 1)) != 'undefined') {
         backText = localStorage.getItem('bc' + (id - 1));

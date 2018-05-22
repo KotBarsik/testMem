@@ -153,7 +153,7 @@ $m = getDistanceBetweenPointsNew(
 <?php
 if(is_numeric($_GET['long']) && is_numeric($_GET['lat'])){
     ?>
-        <div class="mapsObj" id="mapsObj" style="padding: 10px;">
+        <div class="mapsObj" id="mapsObj" style="padding: 10px;display: none;">
             <script type="text/javascript">
                 var myMap, route;
 
