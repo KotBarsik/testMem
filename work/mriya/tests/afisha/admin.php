@@ -1,6 +1,7 @@
 <?php
 session_start();
 CONST bUrl = '/work/mriya/tests/afisha';
+define('ROOT_DIR', dirname(__FILE__));
 class Admin{
 
     /**
@@ -60,12 +61,37 @@ class Admin{
         }
     }
 
+    public function poster($id){
+        require_once 'layout/header.php';
+        require_once 'layout/menu.php';
+        $posters = $this->CRUD->getAllPosters();
+
+        if(count($_FILES) >= 1){
+            $imgName = $this->saveImages($_FILES);
+            $this->CRUD->updateImagesById($imgName,$id);
+        }
+
+        if($id === false) {
+            require_once 'layout/posterList.php';
+        }
+        elseif ($id >= 1){
+            $eventById = $this->CRUD->getPosterAllDataById($id);
+            require_once 'layout/poster.php';
+        }
+        elseif ($id == 0){
+            require_once 'layout/poster.php';
+        }
+    }
+
     public function update($data){
         if($data['type'] == 'event'){
             $this->CRUD->updateEventById($data);
         }
         elseif($data['type'] == 'categories'){
             $this->CRUD->updateCategoryById($data);
+        }
+        elseif($data['type'] == 'poster'){
+            $this->CRUD->updatePosterById($data);
         }
         $data = '';
     }
@@ -77,6 +103,9 @@ class Admin{
         elseif($data['type'] == 'categories'){
             return $this->CRUD->createEventType($data);
         }
+        elseif ($data['type'] == 'poster'){
+            return $this->CRUD->createPoster($data);
+        }
     }
 
     public function delete($type,$id){
@@ -86,6 +115,10 @@ class Admin{
         }elseif ($type == 'event'){
             $this->CRUD->deleteEvent($id);
             header("Location: ".bUrl."/admin.php?load=event");
+        }
+        elseif ($type == 'poster'){
+            $this->CRUD->deletePoster($id);
+            header("Location: ".bUrl."/admin.php?load=poster");
         }
     }
 
@@ -97,6 +130,31 @@ class Admin{
         return $this->CRUD->checkUser($data['login'],md5($data['pwd']));
     }
 
+    public function saveImages($img){
+        $imageSize = getimagesize($img['images']['tmp_name']);
+        if(
+            $imageSize['mime'] == 'image/jpeg' ||
+            $imageSize['mime'] == 'image/jpg' ||
+            $imageSize['mime'] == 'image/png' ||
+            $imageSize['mime'] == 'image/gif'
+        ){
+            $path = ROOT_DIR.'/upload/';
+            $type = str_replace('image/','',$imageSize['mime']);
+            $imgName = $path.md5($img['images']['name']).'.'.$type;
+
+            try {
+                if (!move_uploaded_file($img['tmp_name'], $imgName)) {
+                    return $imgName;
+                } else {
+                    return $imgName;
+                }
+            }catch (Exception $exception){
+                $m = $exception->getMessage();
+            }
+        }
+
+        return false;
+    }
 };
 
 $admin = new Admin();
@@ -116,6 +174,14 @@ $id = !isset($_GET['id']) ? false : (int)$_GET['id'];
 if($_GET['load'] == 'event') {
     if(checkUser()) {
         $admin->event($id);
+    }
+    else{
+        $admin->login();
+    }
+}
+if($_GET['load'] == 'poster') {
+    if(checkUser()) {
+        $admin->poster($id);
     }
     else{
         $admin->login();

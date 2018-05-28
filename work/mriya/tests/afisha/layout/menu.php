@@ -8,6 +8,9 @@
             <a class="nav-link" href="<?php echo bUrl?>/admin.php?load=categories">Категория событий</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="<?php echo bUrl?>/admin.php?load=poster">Афиша</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="<?php echo bUrl?>/admin.php?load=exit">Выход</a>
         </li>
     </ul>

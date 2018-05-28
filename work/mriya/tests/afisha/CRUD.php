@@ -24,6 +24,12 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllPosters()
+    {
+        $query = $this->db->query("SELECT * FROM poster");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getAllEvents()
     {
         $query = $this->db->query("SELECT * FROM events");
@@ -84,6 +90,13 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getPosterAllDataById($id){
+        $query = $this->db->prepare("SELECT * FROM poster WHERE poster.id=?");
+
+        $query->execute(array($id));
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getEventById($id)
     {
         $query = $this->db->prepare(
@@ -121,6 +134,17 @@ class CRUD
         return $result;
     }
 
+    public function updatePosterById($data){
+        $query = $this->db->prepare("UPDATE poster SET title = :title,html = :html,start=:start,stop=:stop WHERE id=:id");
+        $query->bindParam(':start', str_replace('T',' ',$data['startTime']));
+        $query->bindParam(':stop', str_replace('T',' ',$data['stopTime']));
+        $query->bindParam(':title', $data['title']);
+        $query->bindParam(':html', $data['text']);
+        $query->bindParam(':id', $data['id']);
+        $result = $query->execute();
+        return $result;
+    }
+
     public function createEventType($data){
         $name = json_encode(array(
             'ru' => $data['ru'],
@@ -142,6 +166,19 @@ class CRUD
         return $this->db->lastInsertId();
     }
 
+    public function createPoster($data){
+        $text = htmlentities(addslashes($data['text']));
+        $query = $this->db->prepare(
+            'INSERT INTO poster (`title`,`html`,`images`,`start`,`stop`) VALUES (:title,:text,"",:startTime,:stopTime)'
+        );
+        $query->bindParam(':title', $data['title']);
+        $query->bindParam(':startTime', $data['startTime']);
+        $query->bindParam(':stopTime', $data['stopTime']);
+        $query->bindParam(':text', $text);
+        $result = $query->execute();
+        return $this->db->lastInsertId();
+    }
+
     public function deleteEventType($id){
         $query = $this->db->prepare("DELETE FROM event_type WHERE id=:id");
         $query->bindParam(':id', $id);
@@ -156,9 +193,24 @@ class CRUD
         return $result;
     }
 
+    public function deletePoster($id){
+        $query = $this->db->prepare("DELETE FROM poster WHERE id=:id");
+        $query->bindParam(':id', $id);
+        $result = $query->execute();
+        return $result;
+    }
+
     public function checkUser($login,$pwd){
         $query = $this->db->prepare("SELECT * FROM users WHERE login=? AND pwd=?");
         $result = $query->execute(array($login,$pwd));
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateImagesById($imgName,$id){
+        $query = $this->db->prepare("UPDATE poster SET images = :images WHERE id=:id");
+        $query->bindParam(':images', $imgName);
+        $query->bindParam(':id', $id);
+        $result = $query->execute();
+        return $result;
     }
 }
