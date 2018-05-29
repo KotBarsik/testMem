@@ -6,12 +6,41 @@
                 <td><input id="title" class="form-control" type="text" id="date" name="date" value="<?php echo $posters[0]['title'];?>"/></td>
             </tr>
             <tr>
+                <td>Тип предложения</td>
+                <td>
+                    <select name="typeSentence">
+                    <?php
+                        $option = array(' ','Специальная цена','Специальное предложение');
+
+                        foreach ($option as $op){
+                            echo '<option value="'.$op.'">'.$op.'</option>';
+                        }
+                    ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Дата начала</td>
                 <td><input id="startTime" class="form-control" type="datetime-local" id="date" name="date" value=""/></td>
             </tr>
             <tr>
                 <td>Дата конца</td>
                 <td><input id="stopTime" class="form-control" type="datetime-local" id="date" name="date" value=""/></td>
+            </tr>
+            <tr>
+                <td>Формат отображаемого времени</td>
+                <td>
+                    <select name="typeDate">
+                        <?php
+                        $option = array(0=>'Акция',1=>'23 февраля, 8 марта',2=>'23.02.18 - 29.12.18');
+
+                        foreach ($option as $index=>$op){
+                            echo '<option value="'.$index.'">'.$op.'</option>';
+                        }
+
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Текст (HTML)</td>
@@ -52,6 +81,8 @@
                     type: 'poster',
                     id: $('#poster').attr('eventId'),
                     title: $('#title').val(),
+                    typeSentence:$('select[name="typeSentence"]').val(),
+                    typeDate:$('select[name="typeDate"]').val(),
                     category : $('#category').val(),
                     startTime: $('#startTime').val(),
                     stopTime: $('#stopTime').val(),
@@ -72,9 +103,12 @@
                 url: '<?php echo bUrl?>/admin.php',
                 type: 'post',
                 dataType: "json",
+                processData:'application/x-www-form-urlencoded',
                 data: {
                     type: 'poster',
                     title: $('#title').val(),
+                    typeSentence:$('select[name="typeSentence"]').val(),
+                    typeDate:$('select[name="typeDate"]').val(),
                     category : $('#category').val(),
                     startTime: $('#startTime').val(),
                     stopTime: $('#stopTime').val(),

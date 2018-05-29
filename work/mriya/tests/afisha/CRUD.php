@@ -109,6 +109,17 @@ class CRUD
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getPostrById($id){
+        $query = $this->db->prepare(
+            "SELECT title,html,
+            concat(DATE_FORMAT(poster.start,'%Y-%m-%d %h:%i - '),DATE_FORMAT(poster.stop,'%h:%i')) as poster_start_preview
+          FROM poster WHERE poster.id=?"
+        );
+
+        $query->execute(array($id));
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function updateEventById($data)
     {
         $query = $this->db->prepare("UPDATE events SET title = :title,text = :text,start_time=:start_time,stop_time=:stop_time,event_type=:event_type WHERE id=:id");
@@ -135,9 +146,11 @@ class CRUD
     }
 
     public function updatePosterById($data){
-        $query = $this->db->prepare("UPDATE poster SET title = :title,html = :html,start=:start,stop=:stop WHERE id=:id");
+        $query = $this->db->prepare("UPDATE poster SET title = :title,html = :html,start=:start,stop=:stop,typeSentence=:typeSentence,typeDate=:typeDate WHERE id=:id");
         $query->bindParam(':start', str_replace('T',' ',$data['startTime']));
         $query->bindParam(':stop', str_replace('T',' ',$data['stopTime']));
+        $query->bindParam(':typeSentence', $data['typeSentence']);
+        $query->bindParam(':typeDate', $data['typeDate']);
         $query->bindParam(':title', $data['title']);
         $query->bindParam(':html', $data['text']);
         $query->bindParam(':id', $data['id']);
@@ -169,11 +182,13 @@ class CRUD
     public function createPoster($data){
         $text = htmlentities(addslashes($data['text']));
         $query = $this->db->prepare(
-            'INSERT INTO poster (`title`,`html`,`images`,`start`,`stop`) VALUES (:title,:text,"",:startTime,:stopTime)'
+            'INSERT INTO poster (`title`,`html`,`images`,`start`,`stop`,`typeSentence`,`typeDate`) VALUES (:title,:text,"",:startTime,:stopTime,:typeSentence,:typeDate)'
         );
         $query->bindParam(':title', $data['title']);
         $query->bindParam(':startTime', $data['startTime']);
         $query->bindParam(':stopTime', $data['stopTime']);
+        $query->bindParam(':typeSentence', $data['typeSentence']);
+        $query->bindParam(':typeDate', $data['typeDate']);
         $query->bindParam(':text', $text);
         $result = $query->execute();
         return $this->db->lastInsertId();

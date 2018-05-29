@@ -50,6 +50,21 @@ function getEvents(id) {
     });
 }
 
+function getPoster(id) {
+    $.ajax({
+        url: './get.php',
+        type: 'post',
+        dataType : "json",
+        data:{id:id,type:'postr'},
+        statusCode: {
+            200: function (response) {
+                $('div.eventDescription').html(response.html);
+                $('#posterList').hide();
+            }
+        }
+    });
+}
+
 function getBack(event) {
     if(event == 'forward'){
         $('#nav').css({display:"none"});

@@ -64,7 +64,6 @@ class Admin{
     public function poster($id){
         require_once 'layout/header.php';
         require_once 'layout/menu.php';
-        $posters = $this->CRUD->getAllPosters();
 
         if(count($_FILES) >= 1){
             $imgName = $this->saveImages($_FILES);
@@ -72,10 +71,11 @@ class Admin{
         }
 
         if($id === false) {
+            $posters = $this->CRUD->getAllPosters();
             require_once 'layout/posterList.php';
         }
         elseif ($id >= 1){
-            $eventById = $this->CRUD->getPosterAllDataById($id);
+            $posters = $this->CRUD->getPosterAllDataById($id);
             require_once 'layout/poster.php';
         }
         elseif ($id == 0){
