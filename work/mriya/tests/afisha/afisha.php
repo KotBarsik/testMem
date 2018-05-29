@@ -30,7 +30,7 @@ $data['poster'] = $CRUD->getAllPosters();
         padding-bottom: 16px;
         color: #fff;
         font-weight: 800;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Arial, Helvetica, sans-serif !important;
         display: none;
     }
 </style>
@@ -74,7 +74,7 @@ $data['poster'] = $CRUD->getAllPosters();
         $date = formatDate($item['start'],$item['stop'],$item['typeDate']);
         $imgPath = './upload/'.$item['images'];
         echo
-            '<div onclick="getPoster(\''.$item['id'].'\');" style="background-image: url('.$imgPath.'); background-size: cover; width: 100%; height: 190px;color: #fff;display: table;">
+            '<div onclick="getPoster(\''.$item['id'].'\');" style="background-image: url('.$imgPath.'); background-size: cover; width: 100%; height: 190px;color: #fff;display: table;font-family: Arial, Helvetica, sans-serif !important;">
                 <div style="vertical-align: bottom; display: table-cell;">
                     <table style="width: 100%">
                         <tr>
