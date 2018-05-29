@@ -138,13 +138,13 @@ class Admin{
             $imageSize['mime'] == 'image/png' ||
             $imageSize['mime'] == 'image/gif'
         ){
-            $path = ROOT_DIR.'/upload/';
+            $path = './upload/';
             $type = str_replace('image/','',$imageSize['mime']);
-            $imgName = $path.md5($img['images']['name']).'.'.$type;
+            $imgName = md5($img['images']['name']).'.'.$type;
 
             try {
-                if (!move_uploaded_file($img['tmp_name'], $imgName)) {
-                    return $imgName;
+                if (!move_uploaded_file($img['images']['tmp_name'], $path.$imgName)) {
+                    return false;
                 } else {
                     return $imgName;
                 }
