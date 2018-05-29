@@ -21,6 +21,20 @@ $data['poster'] = $CRUD->getAllPosters();
     <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
+<style>
+    body > div.back {
+        background-color: #4e4e4e;
+        width: 100%;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 16px;
+        color: #fff;
+        font-weight: 800;
+        font-family: Arial, Helvetica, sans-serif;
+        display: none;
+    }
+</style>
+<div id="back" class="back" onclick="$('#posterList').show();$('#poster').hide();$('#back').hide();">Вернуться к списку</div>
 <div id="posterList">
 <?php
     function formatDate ($start,$stop,$format){
@@ -77,8 +91,8 @@ $data['poster'] = $CRUD->getAllPosters();
     }
 ?>
 </div>
-<div id="poster">
-    <div class="eventDescription"></div>
+<div id="poster" style="display: none;">
+    <div id="eventDescription" class="eventDescription"></div>
 </div>
 </body>
 </html>

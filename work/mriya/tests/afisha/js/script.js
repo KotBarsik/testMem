@@ -58,8 +58,12 @@ function getPoster(id) {
         data:{id:id,type:'postr'},
         statusCode: {
             200: function (response) {
-                $('div.eventDescription').html(response.html);
+                console.log(response.html);
+                $('#eventDescription').empty();
+                $('#eventDescription').append(response.html);
+                $('#poster').show();
                 $('#posterList').hide();
+                $('#back').show();
             }
         }
     });
