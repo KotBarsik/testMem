@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
+            $this->db = new PDO("mysql:host=localhost;dbname=psyvor_afisha", 'psyvor_afisha', 'm123456m');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -182,14 +182,13 @@ class CRUD
     public function createPoster($data){
         $text = htmlentities(addslashes($data['text']));
         $query = $this->db->prepare(
-            'INSERT INTO poster (`title`,`html`,`images`,`start`,`stop`,`typeSentence`,`typeDate`) VALUES (:title,:text,"",:startTime,:stopTime,:typeSentence,:typeDate)'
+            'INSERT INTO poster (`title`,`html`,`images`,`start`,`stop`,`typeSentence`,`typeDate`) VALUES (:title,"'.$text.'","",:startTime,:stopTime,:typeSentence,:typeDate)'
         );
         $query->bindParam(':title', $data['title']);
         $query->bindParam(':startTime', $data['startTime']);
         $query->bindParam(':stopTime', $data['stopTime']);
         $query->bindParam(':typeSentence', $data['typeSentence']);
         $query->bindParam(':typeDate', $data['typeDate']);
-        $query->bindParam(':text', $text);
         $result = $query->execute();
         return $this->db->lastInsertId();
     }
