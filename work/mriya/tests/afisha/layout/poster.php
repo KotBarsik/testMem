@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                 <tr>
-                    <td><button id="poster" eventId="<?php echo $posters[0]['id'] ?>" type="submit" class="btn btn-primary">Сохранить</button></td>
+                    <td><button id="poster" eventId="<?php echo $posters[0]['id'] ?>" class="btn btn-primary">Сохранить</button></td>
                 </tr>
                 <tr>
                     <td> </td>
@@ -96,4 +96,54 @@
 <script>
     $('#startTime').val("<?php echo str_replace(' ','T',$posters[0]['start']);?>");
     $('#stopTime').val("<?php echo str_replace(' ','T',$posters[0]['stop']);?>");
+
+    $('button').on('click',function () {
+        if(!valid()){
+            alert('Некорректные дата или время');
+        }
+        else{
+            $('#form').submit();
+        }
+        return false;
+    });
+
+    function valid() {
+        var startTime = ($('#startTime').val().split('T')[0]).split('-');
+        var stopTime = ($('#stopTime').val().split('T')[0]).split('-');
+
+        if(valudDate(startTime) && valudDate(stopTime)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    function valudDate(date) {
+        console.log(date);
+        var flag = true;
+
+        if(date[0] >= 1900 && date[0] <= 2900){
+
+        }
+        else{
+            flag = false;
+        }
+
+        if(date[1] >= 1 && date[1] <= 12){
+
+        }
+        else{
+            flag = false;
+        }
+
+        if(date[2] >= 1 && date[2] <= 31){
+
+        }
+        else{
+            flag = false;
+        }
+
+        return flag;
+    }
 </script>

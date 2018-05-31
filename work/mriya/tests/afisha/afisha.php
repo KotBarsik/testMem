@@ -78,7 +78,7 @@ $data['poster'] = $CRUD->getAllPosters();
                 <div style="vertical-align: bottom; display: table-cell;">
                     <table style="width: 100%">
                         <tr>
-                            <td>icon</td>
+                            <td><img src="./img/clock.png"></td>
                             <td style="text-align: right;"><div style="font-weight: bold;font-size: 16px">'.$item['title'].'</div></td>
                         </tr>
                         <tr>

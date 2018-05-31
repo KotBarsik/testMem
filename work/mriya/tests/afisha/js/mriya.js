@@ -1,11 +1,16 @@
 ﻿function footer() {
-document.getElementsByClassName('eventDescription').write('<div class="us-footer"><a href="tel:88002343504">8 800 2343504</a></div>');
-if(navigator.userAgent.indexOf('Android') > -1){
-	for(var i = 0; i < document.getElementsByClassName('us-p360').length; i++ ) document.getElementsByClassName('us-p360')[i].style.display='none';
-	for(var i = 0; i < document.getElementsByClassName('us-vidh').length; i++ ) document.getElementsByClassName('us-vidh')[i].style.display='none';
-	for(var i = 0; i < document.getElementsByClassName('us-vid').length; i++ ) document.getElementsByClassName('us-vid')[i].style.display='none';
-	//document.getElementsByClassName('us-p360')[0].style.display='none';
-}
+	if($) {
+        $('#eventDescription').append('<div class="us-footer"><a href="tel:88002343504">8 800 2343504</a></div>');
+    }
+    else{
+        document.write('<div class="us-footer"><a href="tel:88002343504">8 800 2343504</a></div>');
+	}
+	if(navigator.userAgent.indexOf('Android') > -1){
+		for(var i = 0; i < document.getElementsByClassName('us-p360').length; i++ ) document.getElementsByClassName('us-p360')[i].style.display='none';
+		for(var i = 0; i < document.getElementsByClassName('us-vidh').length; i++ ) document.getElementsByClassName('us-vidh')[i].style.display='none';
+		for(var i = 0; i < document.getElementsByClassName('us-vid').length; i++ ) document.getElementsByClassName('us-vid')[i].style.display='none';
+		//document.getElementsByClassName('us-p360')[0].style.display='none';
+	}
 }
 
 function Panorama(psrc) {

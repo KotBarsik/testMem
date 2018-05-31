@@ -1,6 +1,7 @@
 <?php
 session_start();
-CONST bUrl = '/work/mriya/tests/afisha';
+
+define('bUrl',str_replace('/admin.php','',$_SERVER['REQUEST_URI']));
 define('ROOT_DIR', dirname(__FILE__));
 class Admin{
 
@@ -118,14 +119,14 @@ class Admin{
     public function delete($type,$id){
         if($type == 'categories') {
             $this->CRUD->deleteEventType($id);
-            header("Location: ".bUrl."/admin.php?load=categories");
+            header("Location: ./admin.php?load=categories");
         }elseif ($type == 'event'){
             $this->CRUD->deleteEvent($id);
-            header("Location: ".bUrl."/admin.php?load=event");
+            header("Location: ./admin.php?load=event");
         }
         elseif ($type == 'poster'){
             $this->CRUD->deletePoster($id);
-            header("Location: ".bUrl."/admin.php?load=poster");
+            header("Location: ./admin.php?load=poster");
         }
     }
 
@@ -195,6 +196,10 @@ elseif($_POST['create']){
     }
 }
 
+if(empty($_GET['load']) && empty($_POST['login'])){
+    $_GET['load'] = 'event';
+}
+
 if($_GET['load'] == 'event') {
     if(checkUser()) {
         $admin->event($id);
@@ -203,7 +208,7 @@ if($_GET['load'] == 'event') {
         $admin->login();
     }
 }
-if($_GET['load'] == 'poster') {
+elseif($_GET['load'] == 'poster') {
     if(checkUser()) {
         $admin->poster($id);
     }
@@ -229,7 +234,7 @@ elseif($_GET['load'] == 'delete'){
 }
 elseif ($_GET['load'] == 'exit'){
     unset($_SESSION['userData']);
-    header('Location: '.bUrl.'/admin.php');
+    header('Location: ./admin.php');
 }
 elseif($_POST['login']){
     $result = $admin->checkUser(array(

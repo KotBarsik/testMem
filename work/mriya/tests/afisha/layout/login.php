@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="<?php echo bUrl?>/js/jquery.min.js" type="text/javascript" async="" crossorigin=""></script>
-    <script src="<?php echo bUrl?>/js/admin.js" type="text/javascript" async="" crossorigin=""></script>
+    <script src="./js/jquery.min.js" type="text/javascript" async="" crossorigin=""></script>
+    <script src="./js/admin.js" type="text/javascript" async="" crossorigin=""></script>
     <link rel="stylesheet" type="text/css" href="./css/admin.css">
-    <link href="http://bootstrap-v4.ru/examples/starter-template/starter-template.css"
-          tppabs="http://bootstrap-v4.ru/examples/starter-template/starter-template.css" rel="stylesheet">
-    <link href="http://bootstrap-v4.ru/dist/css/bootstrap.min.css"
-          tppabs="http://bootstrap-v4.ru/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/starter-template.css"
+          tppabs="./css/starter-template.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css"
+          tppabs="./css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="content">
@@ -35,7 +35,7 @@
 <script>
     $('button').on('click', function () {
         $.ajax({
-            url: '<?php echo bUrl?>/admin.php',
+            url: './admin.php',
             type: 'post',
             dataType: "json",
             data: {
