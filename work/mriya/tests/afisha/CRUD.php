@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=localhost;dbname=psyvor_afisha", 'psyvor_afisha', 'm123456m');
+            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -153,7 +153,7 @@ class CRUD
         $query->bindParam(':typeDate', $data['typeDate']);
         $query->bindParam(':title', $data['title']);
         $query->bindParam(':html', $data['text']);
-        $query->bindParam(':id', $data['id']);
+        $query->bindParam(':id', $data['itemId']);
         $result = $query->execute();
         return $result;
     }

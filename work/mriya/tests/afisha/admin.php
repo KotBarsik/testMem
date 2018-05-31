@@ -65,11 +65,6 @@ class Admin{
         require_once 'layout/header.php';
         require_once 'layout/menu.php';
 
-        if(count($_FILES) >= 1){
-            $imgName = $this->saveImages($_FILES);
-            $this->CRUD->updateImagesById($imgName,$id);
-        }
-
         if($id === false) {
             $posters = $this->CRUD->getAllPosters();
             require_once 'layout/posterList.php';
@@ -92,6 +87,12 @@ class Admin{
         }
         elseif($data['type'] == 'poster'){
             $this->CRUD->updatePosterById($data);
+
+            if(strlen($_FILES['images']['name']) >= 2){
+                $imgName = $this->saveImages($_FILES);
+                $this->CRUD->updateImagesById($imgName,$data['itemId']);
+            }
+
         }
         $data = '';
     }
@@ -104,7 +105,13 @@ class Admin{
             return $this->CRUD->createEventType($data);
         }
         elseif ($data['type'] == 'poster'){
-            return $this->CRUD->createPoster($data);
+            $posetrId =  $this->CRUD->createPoster($data);
+
+            if(count($_FILES) >= 1){
+                $imgName = $this->saveImages($_FILES);
+                $this->CRUD->updateImagesById($imgName,$posetrId);
+            }
+            return $posetrId;
         }
     }
 
@@ -171,6 +178,23 @@ if($_SERVER['REQUEST_URI'] == bUrl.'/admin.php' || $_SERVER['REQUEST_URI'] == bU
 
 $id = !isset($_GET['id']) ? false : (int)$_GET['id'];
 
+if($_POST['update']){
+    if(checkUser()) {
+        $admin->update($_POST);
+    }
+    else{
+        $admin->login();
+    }
+}
+elseif($_POST['create']){
+    if(checkUser()) {
+        echo $admin->create($_POST);
+    }
+    else{
+        $admin->login();
+    }
+}
+
 if($_GET['load'] == 'event') {
     if(checkUser()) {
         $admin->event($id);
@@ -207,22 +231,7 @@ elseif ($_GET['load'] == 'exit'){
     unset($_SESSION['userData']);
     header('Location: '.bUrl.'/admin.php');
 }
-elseif($_POST['update']){
-    if(checkUser()) {
-        $admin->update($_POST);
-    }
-    else{
-        $admin->login();
-    }
-}
-elseif($_POST['create']){
-    if(checkUser()) {
-        echo $admin->create($_POST);
-    }
-    else{
-        $admin->login();
-    }
-}elseif($_POST['login']){
+elseif($_POST['login']){
     $result = $admin->checkUser(array(
         'login' => $_POST['email'],
         'pwd' => $_POST['pwd']
