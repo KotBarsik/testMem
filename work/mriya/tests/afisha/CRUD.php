@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=localhost;dbname=afisha", 'mriya_manager', ')2Hh340oJoPrz34(');
+            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -100,7 +100,7 @@ class CRUD
     public function getEventById($id)
     {
         $query = $this->db->prepare(
-            "SELECT title,text,
+            "SELECT title,text,start_time,stop_time,
             concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %H:%i - '),DATE_FORMAT(events.stop_time,'%H:%i')) as events_start_preview
           FROM events WHERE events.id=?"
         );
@@ -111,7 +111,7 @@ class CRUD
 
     public function getPostrById($id){
         $query = $this->db->prepare(
-            "SELECT title,html,
+            "SELECT title,html,start,stop,
             concat(DATE_FORMAT(poster.start,'%Y-%m-%d %H:%i - '),DATE_FORMAT(poster.stop,'%H:%i')) as poster_start_preview
           FROM poster WHERE poster.id=?"
         );

@@ -18,7 +18,7 @@
                     echo
                         '<tr>
                             <td>' . $item['id'] . '</td>
-                            <td>' . $start[0].' '.$start[1] . ' - '.$stop[0].' '.$stop[1].'</td>
+                            <td style="font-weight: bold;">' . $start[0].' '.$start[1] . ' - '.$stop[0].' '.$stop[1].'</td>
                             <td>' . $item['title'] . '</td>
                             <td>' . $eventsTypeLang['ru'] . '</td>
                             <td><a href="./admin.php?load=event&id='.$item['id'].'"><button type="button" class="btn btn-success" style="line-height: 1.2;">Изменить</button></a></td>
