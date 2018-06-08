@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/jquery.min.js" type="text/javascript" async="" crossorigin=""></script>
-    <script src="./js/admin.js" type="text/javascript" async="" crossorigin=""></script>
+    <script src="./js/jquery.min.js" type="text/javascript"></script>
+    <script src="./js/admin.js?id=<?php echo rand(9999,999999) ?>" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="./css/admin.css">
     <link href="./css/starter-template.css"
           tppabs="./css/starter-template.css" rel="stylesheet">

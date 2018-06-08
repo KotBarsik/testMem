@@ -13,6 +13,25 @@ $CRUD = new CRUD();
 $data['post'] = $CRUD->getPostEvents();
 $data['upcoming'] = $CRUD->getUpcomingEvents();
 
+function dateDiff($start,$stop,$preview){
+    $dateArray = array();
+    foreach (array($start,$stop) as $date){
+        $dateArray[] = explode(' ',$date);
+    }
+    if($dateArray[0][0] == $dateArray[1][0]){
+        return $preview;
+    }
+    else{
+        $str = '';
+        foreach (array($dateArray[0],$dateArray[1]) as $date){
+            $d = explode('-',$date[0]);
+            $t = explode(':',$date[1]);
+            $str .= $d[1].'-'.$d[2].'-'.str_replace('20','',$d[0]).' '.$t[0].':'.$t[1].' - ';
+        }
+        return trim($str,' - ');
+    }
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html>
@@ -36,6 +55,7 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
         <table id="upcoming" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px;">
             <?php
             foreach ($data['upcoming'] as $item) {
+                $preview = dateDiff($item['start_time'],$item['stop_time'],$item['events_start_preview']);
                 $eventTypeName = json_decode($item['event_name'], true);
                 $eventTypeName = $eventTypeName[$lang] ? $eventTypeName[$lang] : '';
                 echo
@@ -48,7 +68,7 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
                                     <div style="margin-top: 5px"></div>
                                     <div>' . $item['title'] . '</div>
                                     <div>' . $eventTypeName . '</div>
-                                    <div>' . $item['events_start_preview'] . '</div>
+                                    <div>' . $preview. '</div>
                                 </td>
                                 <td>
                                     <img style="width: 17px;margin-top: 10px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGfSURBVGhD7dnLKoVhGMXx7VCYyAwzhymSmYgMRTIxkihXIHIHiFyBHO5A3IBcgMhQmImRUznkEP6r7a0nKeO1vat+tfc3W+3v8HzPLuTk5OT8y4yhs/jRNyN4wS36dcAxdVCBz29PUDHLDOIBqcw7pmCZblwjlfnAHCzThgukMrKCMtilCSeIZTZRAbvU4wCxzA6qYZda7CGW2YeO26UK24hljqBfzC66NtYRy5yiGXbRXWsJscwlOmCZWej5ksrcoBeWmcQbUplHDMMymsU0k6UyKjYBy/QhDps65WZgGb2/XCGVkQVYjjStOEcss4Zy2KUBx4hlxmGXRtgXKYlT67eLfRFWF7uWFPa335J4IGopoeVEKqFCdiPKz6FRp5bV0KiLdxmpgNiN8Xqx2kAscYYW2ETLBi0dYgm96upJbhMtGbRsiCX0XStWm2i5cIhYYhc1sIkWdFouxBJbqIRN2qG7USyxCquRowdaJqQCel7MwypD0BIhldCTexpW0V3oDqnEM0ZhGQ2Br7jHgA44R3+GdhU/5uTk5OT8lULhC2e3oQrIGVz7AAAAAElFTkSuQmCC">
@@ -62,6 +82,7 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
         <table id="post" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px; display: none;">
             <?php
             foreach ($data['post'] as $item) {
+                $preview = dateDiff($item['start_time'],$item['stop_time'],$item['events_start_preview']);
                 $eventTypeName = json_decode($item['event_name'], true);
                 $eventTypeName = $eventTypeName[$lang] ? $eventTypeName[$lang] : '';
                 echo
@@ -74,7 +95,7 @@ $data['upcoming'] = $CRUD->getUpcomingEvents();
                                     <div style="margin-top: 5px"></div>
                                     <div>' . $item['title'] . '</div>
                                     <div>' . $eventTypeName . '</div>
-                                    <div>' . $item['events_start_preview'] . '</div>
+                                    <div>' . $preview . '</div>
                                 </td>
                                 <td>
                                     <img style="width: 17px;margin-top: 10px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGfSURBVGhD7dnLKoVhGMXx7VCYyAwzhymSmYgMRTIxkihXIHIHiFyBHO5A3IBcgMhQmImRUznkEP6r7a0nKeO1vat+tfc3W+3v8HzPLuTk5OT8y4yhs/jRNyN4wS36dcAxdVCBz29PUDHLDOIBqcw7pmCZblwjlfnAHCzThgukMrKCMtilCSeIZTZRAbvU4wCxzA6qYZda7CGW2YeO26UK24hljqBfzC66NtYRy5yiGXbRXWsJscwlOmCZWej5ksrcoBeWmcQbUplHDMMymsU0k6UyKjYBy/QhDps65WZgGb2/XCGVkQVYjjStOEcss4Zy2KUBx4hlxmGXRtgXKYlT67eLfRFWF7uWFPa335J4IGopoeVEKqFCdiPKz6FRp5bV0KiLdxmpgNiN8Xqx2kAscYYW2ETLBi0dYgm96upJbhMtGbRsiCX0XStWm2i5cIhYYhc1sIkWdFouxBJbqIRN2qG7USyxCquRowdaJqQCel7MwypD0BIhldCTexpW0V3oDqnEM0ZhGQ2Br7jHgA44R3+GdhU/5uTk5OT8lULhC2e3oQrIGVz7AAAAAElFTkSuQmCC">

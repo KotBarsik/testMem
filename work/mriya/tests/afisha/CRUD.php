@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
+            $this->db = new PDO("mysql:host=localhost;dbname=afisha", 'mriya_manager', ')2Hh340oJoPrz34(');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -20,19 +20,19 @@ class CRUD
 
     public function getAllEventsType()
     {
-        $query = $this->db->query("SELECT * FROM event_type");
+        $query = $this->db->query("SELECT * FROM event_type ORDER BY id DESC");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllPosters()
     {
-        $query = $this->db->query("SELECT * FROM poster");
+        $query = $this->db->query("SELECT * FROM poster ORDER BY id DESC");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllEvents()
     {
-        $query = $this->db->query("SELECT * FROM events");
+        $query = $this->db->query("SELECT * FROM events ORDER BY id DESC");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -43,7 +43,7 @@ class CRUD
                   events.id,events.title,events.text,events.start_time,events.stop_time,
                   SUBSTR(DATE_FORMAT(events.start_time,'%M'),1,3) as events_start_month,
                   DATE_FORMAT(events.start_time,'%d') as events_start_day,
-                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%i - '),DATE_FORMAT(events.stop_time,'%h:%i')) as events_start_preview,
+                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %H:%i - '),DATE_FORMAT(events.stop_time,'%H:%i')) as events_start_preview,
                   DATE_FORMAT(events.start_time,'%Y-%m-%d') as events_start_time_ymd,
                   DATE_FORMAT(events.stop_time,'%Y-%m-%d') as events_stop_time_ymd,
                   event_type.name as event_name
@@ -62,7 +62,7 @@ class CRUD
                   events.id,events.title,events.text,events.start_time,events.stop_time,
                   SUBSTR(DATE_FORMAT(events.start_time,'%M'),1,3) as events_start_month,
                   DATE_FORMAT(events.start_time,'%d') as events_start_day,
-                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%i - '),DATE_FORMAT(events.stop_time,'%h:%i')) as events_start_preview,
+                  concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %H:%i - '),DATE_FORMAT(events.stop_time,'%H:%i')) as events_start_preview,
                   DATE_FORMAT(events.start_time,'%Y-%m-%d') as events_start_time_ymd,
                   DATE_FORMAT(events.stop_time,'%Y-%m-%d') as events_stop_time_ymd,
                   event_type.name as event_name
@@ -101,7 +101,7 @@ class CRUD
     {
         $query = $this->db->prepare(
             "SELECT title,text,
-            concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %h:%i - '),DATE_FORMAT(events.stop_time,'%h:%i')) as events_start_preview
+            concat(DATE_FORMAT(events.start_time,'%Y-%m-%d %H:%i - '),DATE_FORMAT(events.stop_time,'%H:%i')) as events_start_preview
           FROM events WHERE events.id=?"
         );
 
@@ -112,7 +112,7 @@ class CRUD
     public function getPostrById($id){
         $query = $this->db->prepare(
             "SELECT title,html,
-            concat(DATE_FORMAT(poster.start,'%Y-%m-%d %h:%i - '),DATE_FORMAT(poster.stop,'%h:%i')) as poster_start_preview
+            concat(DATE_FORMAT(poster.start,'%Y-%m-%d %H:%i - '),DATE_FORMAT(poster.stop,'%H:%i')) as poster_start_preview
           FROM poster WHERE poster.id=?"
         );
 
