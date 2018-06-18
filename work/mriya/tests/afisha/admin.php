@@ -1,4 +1,6 @@
 <?php
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 session_start();
 
 define('bUrl',str_replace('/admin.php','',$_SERVER['REQUEST_URI']));
@@ -41,7 +43,7 @@ class Admin{
             require_once 'layout/event.php';
         }
         elseif ($id == 0){
-            $eventById = $this->CRUD->getEventAllDataById($id);
+            //$eventById = $this->CRUD->getEventAllDataById($id);
             require_once 'layout/event.php';
         }
     }
@@ -168,7 +170,7 @@ class Admin{
 $admin = new Admin();
 $admin->load();
 
-if($_SERVER['REQUEST_URI'] == bUrl.'/admin.php' || $_SERVER['REQUEST_URI'] == bUrl.'/admin.php?'){
+if($_SERVER['REQUEST_URI'] == bUrl.'/admin.php' || $_SERVER['REQUEST_URI'] == bUrl.'/admin.php?' AND empty($_POST['pwd'])){
     if($_SESSION['userData']) {
         $admin->event(false);
     }

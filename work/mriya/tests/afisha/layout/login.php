@@ -18,7 +18,7 @@
             echo '<div style="color:red;">'.$_SESSION['userLoginError'].'</div>';
         }
         ?>
-        <form>
+        <div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Login</label>
                 <input id="login" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
@@ -28,7 +28,7 @@
                 <input id="pwd" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
             <button class="btn btn-primary">Вход</button>
-        </form>
+        </div>
     </div>
 </div>
 </body>
@@ -45,7 +45,9 @@
             },
             statusCode: {
                 200: function (response) {
-                    //location.reload();
+                    if(response.responseText == 'ok'){
+                        location.reload();
+                    }
                 }
             }
         });

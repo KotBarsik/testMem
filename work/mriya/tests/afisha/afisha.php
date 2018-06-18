@@ -32,6 +32,8 @@ $data['poster'] = $CRUD->getAllPosters();
         font-weight: 800;
         font-family: Arial, Helvetica, sans-serif !important;
         display: none;
+        position: fixed;
+        z-index: 999;
     }
 </style>
 <div id="back" class="back" onclick="$('#posterList').show();$('#poster').hide();$('#back').hide();">Вернуться к списку</div>
