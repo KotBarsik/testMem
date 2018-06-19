@@ -12,7 +12,7 @@ function dateDiff($start,$stop,$preview){
         foreach (array($dateArray[0],$dateArray[1]) as $date){
             $d = explode('-',$date[0]);
             $t = explode(':',$date[1]);
-            $str .= $d[1].'-'.$d[2].'-'.str_replace('20','',$d[0]).' '.$t[0].':'.$t[1].' - ';
+            $str .= $d[1].'.'.$d[2].'.'.str_replace('20','',$d[0]).' '.$t[0].':'.$t[1].' - ';
         }
         return trim($str,' - ');
     }

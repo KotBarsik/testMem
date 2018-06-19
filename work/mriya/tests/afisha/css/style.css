@@ -69,8 +69,8 @@ body div.content {
 }
 
 .button > ul{
-    margin: 0px auto;
-    width: fit-content;
+    margin: 0px auto !important;
+    width: 230px;
     margin-top: 8px;
 }
 

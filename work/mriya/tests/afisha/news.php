@@ -26,7 +26,7 @@ function dateDiff($start,$stop,$preview){
         foreach (array($dateArray[0],$dateArray[1]) as $date){
             $d = explode('-',$date[0]);
             $t = explode(':',$date[1]);
-            $str .= $d[1].'-'.$d[2].'-'.str_replace('20','',$d[0]).' '.$t[0].':'.$t[1].' - ';
+            $str .= $d[1].'.'.$d[2].'.'.str_replace('20','',$d[0]).' '.$t[0].':'.$t[1].' - ';
         }
         return trim($str,' - ');
     }
@@ -43,13 +43,15 @@ function dateDiff($start,$stop,$preview){
 </head>
 <body>
 <div id="nav" style="display: block" class="main_content">
-    <div class="button">
-        <ul>
-            <li id="bPost" class="buttons active" onclick="swhowEvent('post');"><?php echo $language[$lang]['post'] ?></li>
-            <li id="bUpcoming" class="buttons unActive" onclick="swhowEvent('upcoming');"><?php echo $language[$lang]['upcoming'] ?></li>
+    <div style="width: 100% !important;">
+        <div class="button" style="margin: 0px auto; width: 230px;margin-top: 8px;">
+            <div style="margin: 0px; auto;">
+                <li id="bPost" class="buttons active" onclick="swhowEvent('post');"><?php echo $language[$lang]['post'] ?></li>
+                <li id="bUpcoming" class="buttons unActive" onclick="swhowEvent('upcoming');"><?php echo $language[$lang]['upcoming'] ?></li>
+                <div class="clear"></div>
+            </div>
             <div class="clear"></div>
-        </ul>
-        <div class="clear"></div>
+        </div>
     </div>
     <div class="content">
         <table id="upcoming" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px;">
