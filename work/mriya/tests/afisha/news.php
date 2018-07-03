@@ -46,8 +46,8 @@ function dateDiff($start,$stop,$preview){
     <div style="width: 100% !important;">
         <div class="button" style="margin: 0px auto; width: 230px;margin-top: 8px;">
             <div style="margin: 0px; auto;">
-                <li id="bPost" class="buttons active" onclick="swhowEvent('post');"><?php echo $language[$lang]['post'] ?></li>
-                <li id="bUpcoming" class="buttons unActive" onclick="swhowEvent('upcoming');"><?php echo $language[$lang]['upcoming'] ?></li>
+                <li id="bPost" class="buttons active" style="float: left;" onclick="swhowEvent('post');"><?php echo $language[$lang]['post'] ?></li>
+                <li id="bUpcoming" style="float: left;" class="buttons unActive" onclick="swhowEvent('upcoming');"><?php echo $language[$lang]['upcoming'] ?></li>
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>

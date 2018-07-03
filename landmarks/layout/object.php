@@ -114,7 +114,7 @@ $m = getDistanceBetweenPointsNew(
     ?>
     <br>
     <div class="goldColor">Доступность : <?php echo start((int)$object['availability']);?></div>
-    <div class="goldColor">Зрелешность : <?php echo start((int)$object['entertainment']);?></div>
+    <div class="goldColor">Зрелищность : <?php echo start((int)$object['entertainment']);?></div>
     <br><br>
     <div>
         <div style="margin:5px;font-weight: bold;float: left;">

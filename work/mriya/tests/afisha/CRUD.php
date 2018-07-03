@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=db;dbname=events", 'root', 'Qwerty123');
+            $this->db = new PDO("mysql:host=db;dbname=prodd", 'root', 'Qwerty123');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -226,5 +226,51 @@ class CRUD
         $query->bindParam(':id', $id);
         $result = $query->execute();
         return $result;
+    }
+
+    // addict 
+
+    public function createCode(){
+        $q1 = $this->db->prepare(
+            "SELECT * FROM `codes` ORDER BY `id` DESC LIMIT 1"
+        );
+
+        $q1->execute();
+        $b = $q1->fetchAll()[0]["id"];
+
+        $q = $this->db->prepare("INSERT INTO codes (val) 
+            SELECT random_num
+            FROM (
+              SELECT FLOOR(RAND() * 99999)+200000 AS random_num 
+              UNION
+              SELECT FLOOR(RAND() * 99999)+200000 AS random_num
+            ) AS numbers_mst_plus_1
+            WHERE `random_num` NOT IN (SELECT val FROM codes)
+            LIMIT 1");
+        $r = $q->execute();
+
+        $q2 = $this->db->prepare(
+            "SELECT * FROM `codes` ORDER BY `id` DESC LIMIT 1"
+        );
+
+        $q2->execute();
+        $tmp = $q2->fetchAll()[0];
+        $a = $tmp["id"];
+        $res = $tmp["val"];
+        
+        return $b === $a ? "Коды скидок закончились" : $res;
+    } 
+
+    public function updateVisitById($v) {
+        $q = $this->db->prepare("UPDATE poster SET visit = visit+1 WHERE id=:id");
+        $q->bindParam(':id', $v);
+        $r = $q->execute();
+        return $r;
+    }
+    public function updateClickById($v) {
+        $q = $this->db->prepare("UPDATE poster SET click = click+1 WHERE id=:id");
+        $q->bindParam(':id', $v);
+        $r = $q->execute();
+        return $r;
     }
 }
