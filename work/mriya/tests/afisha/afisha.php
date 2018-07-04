@@ -56,7 +56,6 @@ $data['poster'] = $CRUD->getAllPosters();
 
         #messages{
             text-align: center;
-            margin-top: 10px;
         }
 
     </style>
@@ -70,7 +69,7 @@ $data['poster'] = $CRUD->getAllPosters();
         <table style="width: 100%">
             <tbody><tr>
                 <td></td>
-                <td style="text-align: right;"><div style="font-weight: bold;font-size: 16px">Специальные предложения</div></td>
+                <td style="text-align: right;"><div style="font-weight: bold;font-size: 16px">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</div></td>
             </tr>
             <tr>
                 <td style="font-size: 12px; color: #d6d6d6;"></td>

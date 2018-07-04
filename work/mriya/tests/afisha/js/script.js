@@ -2,6 +2,17 @@ window.showElementsValue = false;
 window.showElementsPosterValue = false;
 window.posterLvl = false;
 
+function dparring(v) {
+    $('body').scrollTop(0);
+    v = typeof v !== 'undefined' ? v : 'hide';
+    if(v == 'show') {
+        $('#posterList').css({"padding-bottom": "67px"});
+    }
+    else{
+        $('#posterList').css({"padding-bottom": "0px"});
+    }
+}
+
 function findGetParameter(parameterName) {
     var result = null,
         tmp = [];
@@ -111,6 +122,7 @@ function getBack(event) {
 
 function showElements(el) {
     window.showElementsValue = true;
+    dparring('show');
     $('#back').show();
     $('div[group="list"]').hide();
     //$('div[typesentence="'+el+'"]').show();
@@ -148,15 +160,18 @@ function backFunction(el) {
         if(window.posterLvl == '99'){
             $('div[group="list"]').show();
             $('#back').hide();
+            dparring();
         }
         else{
             $('div[group="list"]').hide();
             $('#back').show();
+            dparring('show');
         }
     }
     else{
         $('div[group="list"]').show();
         $('#back').hide();
+        dparring();
     }
     window.posterLvl = false;
 
@@ -193,4 +208,5 @@ window.onload = function () {
         $('#list').show();
         $('#posterList').show();
     }
+    dparring();
 }

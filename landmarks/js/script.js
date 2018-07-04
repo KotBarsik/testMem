@@ -1,4 +1,5 @@
 window.onload = function () {
+    dparring();
     $('div.back').on('click',function () {
         var viewId = $(this).attr('viewid');
         showView(viewId);
@@ -88,13 +89,30 @@ function showView(id) {
     }
 }
 
+function dparring(v) {
+    $('body').scrollTop(0);
+    v = typeof v !== 'undefined' ? v : 'hide';
+    if(v == 'show') {
+        $('#mainContentType').css({"padding-top": "47px"});
+        $('#mainContentObjects').css({"padding-top": "47px"});
+        $('#mainObject').css({"padding-top": "47px"});
+    }
+    else{
+        $('#mainContentType').css({"padding-top": "0px"});
+        $('#mainContentObjects').css({"padding-top": "0px"});
+        $('#mainObject').css({"padding-top": "0px"});
+    }
+}
+
 function showBack(id) {
     var backText = '';
     if(id == 1){
         $('div.back').hide();
         $('#showMaps').hide();
+        dparring()
     }
     else if(id >= 2){
+        dparring('show');
         $('div.back').show();
         //$('#showMaps').show();
     }
@@ -108,3 +126,6 @@ function showBack(id) {
     }
     console.log(backText,id);
 }
+$(function() {
+    dparring();
+});
