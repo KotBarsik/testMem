@@ -18,7 +18,7 @@
                                 <td>' . $eventsTypeLang['en'] . '</td>
                                 <td>' . $eventsTypeLang['ru'] . '</td>
                                 <td><a href="./admin.php?load=categories&id='.$item['id'].'"><button type="button" class="btn btn-success" style="line-height: 1.2;">Изменить</button></a></td>
-                                <td><a href="./admin.php?load=delete&type=categories&id='.$item['id'].'"><button type="button" class="btn btn-danger" style="line-height: 1.2;">Удалить</button></a></td>
+                                <td><a href="./admin.php?load=delete&type=categories&id='.$item['id'].'&formCode='.$_SESSION['formCode'].'"><button type="button" class="btn btn-danger" style="line-height: 1.2;">Удалить</button></a></td>
                             </tr>';
                 }
             ?>

@@ -44,6 +44,7 @@ function selected($selectId,$itemId){
                 <td><button eventId="<?php echo $eventById[0]['id'] ?>" type="submit" class="btn btn-primary">Сохранить</button></td>
             </tr>
         </table>
+        <input id="formCode" type="hidden" value="<?php echo isset($_SESSION['formCode']) ? $_SESSION['formCode'] : '';?>">
     </div>
 </div>
 <script>
@@ -57,6 +58,7 @@ function selected($selectId,$itemId){
                 type: 'post',
                 dataType: "json",
                 data: {
+                    formCode: $('#formCode').val(),
                     type: 'event',
                     id: $('button').attr('eventId'),
                     title: $('#title').val(),
@@ -81,6 +83,7 @@ function selected($selectId,$itemId){
                 type: 'post',
                 dataType: "json",
                 data: {
+                    formCode: $('#formCode').val(),
                     type: 'event',
                     title: $('#title').val(),
                     category : $('#category').val(),

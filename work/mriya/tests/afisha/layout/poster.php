@@ -90,6 +90,7 @@
                 }
             ?>
             <input name="type" value="poster" hidden>
+            <input name="formCode" type="hidden" value="<?php echo isset($_SESSION['formCode']) ? $_SESSION['formCode'] : '';?>">
         </form>
     </div>
 </div>

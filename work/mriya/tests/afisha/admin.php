@@ -2,6 +2,10 @@
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
 session_start();
+if(session_name() && session_id()) {
+    setcookie(session_name(), session_id(), time() + 60 * 60 * 24, '/; samesite=strict');
+}
+
 
 define('bUrl',str_replace('/admin.php','',$_SERVER['REQUEST_URI']));
 define('ROOT_DIR', dirname(__FILE__));
@@ -170,6 +174,27 @@ class Admin{
 $admin = new Admin();
 $admin->load();
 
+if(empty($_POST['formCode']) && empty($_GET['formCode'])){
+    $_SESSION['formCode'] = md5((md5(time() - 7823).rand(111111,999999999)));
+}
+else{
+    if(isset($_POST) || isset($_GET['formCode'])){
+        if(empty($_POST['formCode']) && empty($_GET['formCode'])){
+            $formCode == '0';
+        }
+        else{
+            $formCode = isset($_GET['formCode']) ? $_GET['formCode'] : $_POST['formCode'];
+        }
+
+        if($formCode != $_SESSION['formCode']) {
+            echo json_encode([
+                'error' => 'Не соглосованый Ajax запрос'
+            ]);
+            exit();
+        }
+    }
+}
+
 if($_SERVER['REQUEST_URI'] == bUrl.'/admin.php' || $_SERVER['REQUEST_URI'] == bUrl.'/admin.php?' AND empty($_POST['pwd'])){
     if($_SESSION['userData']) {
         $admin->event(false);
@@ -228,7 +253,13 @@ elseif($_GET['load'] == 'categories'){
 }
 elseif($_GET['load'] == 'delete'){
     if(checkUser()) {
-        $admin->delete($_GET['type'], $_GET['id']);
+        if($_GET['formCode'] == $_SESSION['formCode']) {
+            $admin->delete($_GET['type'], $_GET['id']);
+        }
+        else{
+            header("Refresh:2; url=./admin.php");
+            echo 'Кажется что то пошло не так :(';
+        }
     }
     else{
         $admin->login();
@@ -239,19 +270,28 @@ elseif ($_GET['load'] == 'exit'){
     header('Location: ./admin.php');
 }
 elseif($_POST['login']){
-    $result = $admin->checkUser(array(
-        'login' => $_POST['email'],
-        'pwd' => $_POST['pwd']
-    ));
-    if(isset($result[0]['id'])){
-        unset($result[0]['pwd']);
-        $_SESSION['userData'] = $result[0];
-        unset($_SESSION['userLoginError']);
-        echo 'ok';
-        exit();
+    if($_SESSION['loginData']['loginCount'] >= 3){
+        $_SESSION['loginData']['timeStop'] = time() + 90;
+        $_SESSION['loginData']['loginCount'] = 0;
+        $_SESSION['userLoginError'] = 'Возможность авторизоваться приостановлена на 90 секунд';
     }
-    else{
-        $_SESSION['userLoginError'] = 'Неверный логин или пароль';
+
+    if($_SESSION['loginData']['timeStop'] <= time()) {
+        $_SESSION['loginData']['loginCount']++;
+        $result = $admin->checkUser(array(
+            'login' => $_POST['email'],
+            'pwd' => $_POST['pwd']
+        ));
+
+        if (isset($result[0]['id'])) {
+            unset($result[0]['pwd']);
+            $_SESSION['userData'] = $result[0];
+            unset($_SESSION['userLoginError']);
+            echo 'ok';
+            exit();
+        } else {
+            $_SESSION['userLoginError'] = 'Неверный логин или пароль';
+        }
     }
 }
 

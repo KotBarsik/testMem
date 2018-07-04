@@ -16,6 +16,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
                 <td><button catId="<?php echo $eventsType[0]['id'];?>" type="submit" class="btn btn-primary">Сохранить</button></td>
             </tr>
         </table>
+        <input id="formCode" type="hidden" value="<?php echo isset($_SESSION['formCode']) ? $_SESSION['formCode'] : '';?>">
     </div>
 </div>
 <script>
@@ -29,6 +30,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
                     type: 'categories',
                     ru: $('#nameRus').val(),
                     en: $('#nameEng').val(),
+                    formCode: $('#formCode').val(),
                     id: $('button').attr('catId'),
                     update: true
                 },
@@ -47,6 +49,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
                 dataType: "json",
                 data: {
                     type: 'categories',
+                    formCode: $('#formCode').val(),
                     ru: $('#nameRus').val(),
                     en: $('#nameEng').val(),
                     create: true

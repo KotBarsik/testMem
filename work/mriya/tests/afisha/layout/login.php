@@ -27,6 +27,7 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input id="pwd" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
+            <input id="formCode" type="hidden" value="<?php echo isset($_SESSION['formCode']) ? $_SESSION['formCode'] : '';?>">
             <button class="btn btn-primary">Вход</button>
         </div>
     </div>
@@ -39,15 +40,14 @@
             type: 'post',
             dataType: "json",
             data: {
+                formCode: $('#formCode').val(),
                 email:$('#login').val(),
                 pwd:$('#pwd').val(),
                 login:true
             },
             statusCode: {
                 200: function (response) {
-                    if(response.responseText == 'ok'){
-                        location.reload();
-                    }
+                    location.reload();
                 }
             }
         });
