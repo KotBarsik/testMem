@@ -3,10 +3,10 @@
     <div class="bd-example">
         <table id="upcoming" style="width: 100%;margin-top: 10px;border-spacing: 0px 0px;border-spacing: 7px 11px !important;">
             <tr>
-                <td>ID</td>
+                <td style="min-width: 30px">ID</td>
                 <td>Время проведения </td>
                 <td>Заголовок</td>
-                <td>Категория</td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -14,10 +14,15 @@
                 foreach ($posters as $item) {
                     $start = explode(' ',$item['start']);
                     $stop = explode(' ',$item['stop']);
+
+                    $start[1] = implode(':',array_slice(explode(':',$stop[1]),0,2));
+                    $stop[1] = implode(':',array_slice(explode(':',$stop[1]),0,2));
+
+
                     echo
                         '<tr>
                             <td>' . $item['id'] . '</td>
-                            <td style="font-weight: bold;">' . $start[0].' '.$start[1] . ' - '.$stop[0].' '.$stop[1].'</td>
+                            <td><b>' . $start[0].'</b> '.$start[1] . ' - <b>'.$stop[0].'</b> '.$stop[1].'</td>
                             <td>' . $item['title'] . '</td>
                             <td><a href="./admin.php?load=poster&id='.$item['id'].'"><button type="button" class="btn btn-success" style="line-height: 1.2;">Изменить</button></a></td>
                             <td><a href="./admin.php?load=delete&type=poster&id='.$item['id'].'&formCode='.$_SESSION['formCode'].'"><button type="button" class="btn btn-danger" style="line-height: 1.2;">Удалить</button></a></td>
