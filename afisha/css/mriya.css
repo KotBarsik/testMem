@@ -1,0 +1,883 @@
+/* ===[ Mriya Resort & Spa ]=== */
+
+@font-face {
+    font-family:'PFDinTextCondPro-Thin';
+    src:url('https://mrdata.mriyaresort.com:5343/mp/css/PFDinTextCondPro-Thin.ttf') format('truetype');
+}
+@font-face {
+    font-family:'PFDinTextCondPro-Bold';
+    src:url('https://mrdata.mriyaresort.com:5343/mp/css/PFDinTextCondPro-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family:'GothamProRegular';
+    src:url('https://mrdata.mriyaresort.com:5343/mp/css/GothamProRegular.ttf') format('truetype');
+}
+@font-face {
+    font-family:'GothamProMedium';
+    src:url('https://mrdata.mriyaresort.com:5343/mp/css/GothamProMedium.ttf') format('truetype');
+}
+@font-face {
+    font-family:'GothamProBold';
+    src:url('https://mrdata.mriyaresort.com:5343/mp/css/GothamProBold.ttf') format('truetype');
+}
+@font-face {
+    font-family:'GothamProItalic';
+    src:url('https://mrdata.mriyaresort.com:5343/mp/css/GothamProItalic.ttf') format('truetype');
+}
+
+@viewport { width:device-width; }
+@-ms-viewport { width:device-width; }
+@-webkit-viewport { width:device-width; }
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+body, html { width:100%; height:100%; font-size:100%; -webkit-text-size-adjust:100%; padding:0; margin:0; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+iframe {border:0;}
+
+/* ===[ MAIN ]=== */
+
+body {
+	color:#000 !important;
+	font-family:'GothamProRegular';
+	font-size:14px;
+	line-height:18px;
+}
+html {
+	background:url('https://mrdata.mriyaresort.com:5343/mp/css/mr-bg.jpg'), #fcfcfc;
+	background-size:52px 45px;
+}
+.wrapper {
+	min-height:100%;
+	margin-bottom:-100px;
+}
+* html .wrapper {
+	height:100%;
+}
+.buffer {
+	height:100px; /* h.buffer = h.us-border + h.footer */
+}
+#RU { display:block }
+#EN { display:none }
+span { font-family:'GothamProBold'; color:#572700; }
+a, button {
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+a { font-family:'GothamProBold'; color:#005984; font-weight:700; }
+a:hover { text-decoration:none; }
+.ermenu { display:flex; }
+.ermenu > img { width:100%; vertical-align:bottom; }
+.us-clock {
+	padding-left:20px;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-clock.png') left top no-repeat;
+	background-size:16px 16px;
+}
+.us-phone {
+	padding-left:20px;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-phone.png') left top no-repeat;
+	background-size:16px 16px;
+}
+.us-wtime {
+	display:block;
+	position:relative;
+	width:200px;
+	height:53px;
+	margin:20px auto;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-wtime.png') center no-repeat;
+	background-size:200px 53px;
+}
+.wt1, .wt2 {
+	position:absolute;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wt1 { top:20px; left:15px; }
+.wt2 { top:20px; right:16px; }
+.us-wprice {
+	display:block;
+	position:relative;
+	width:200px;
+	height:41px;
+	margin:15px 0;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-wprice.png') left center no-repeat;
+	background-size:200px 41px;
+}
+.wp1, .wp2 {
+	position:absolute;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:16px;
+	color:#fff;
+}
+.wp1 { top:13px; left:45px; }
+.wp2 { top:13px; right:17px; }
+.us-wlevel {
+	display:block;
+	position:relative;
+	width:200px;
+	height:53px;
+	margin:0 auto 20px;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-wlevel.png') center no-repeat;
+	background-size:200px 53px;
+}
+.wl1 {
+	position:absolute;
+	top:20px; left:0;
+	width:100%;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:36px;
+	text-align:center;
+	color:#8a724a;
+}
+.wl1:before {
+	position:absolute;
+	top:0px; left:15px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	content:"Р‘Р›РћРљ";
+	color:#fff;
+}
+.wl1e {
+	position:absolute;
+	top:20px; left:0;
+	width:100%;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:36px;
+	text-align:center;
+	color:#8a724a;
+}
+.wl1e:before {
+	position:absolute;
+	top:0px; left:12px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	content:"BLOCK";
+	color:#fff;
+}
+.wl2 {
+	position:absolute;
+	top:20px; right:12px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wl2:before {
+	position:absolute;
+	top:-1px; right:28px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Thin';
+	font-size:12px;
+	content:"Р­РўРђР–";
+	color:#fff;
+}
+.wl2e {
+	position:absolute;
+	top:20px; right:12px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wl2e:before {
+	position:absolute;
+	top:-1px; right:28px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Thin';
+	font-size:12px;
+	content:"LEVEL";
+	color:#fff;
+}
+.wl3 {
+	position:absolute;
+	top:20px; right:16px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wl3:before {
+	position:absolute;
+	top:-1px; right:20px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Thin';
+	font-size:12px;
+	content:"Р­РўРђР–";
+	color:#fff;
+}
+.wl3e {
+	position:absolute;
+	top:20px; right:16px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wl3e:before {
+	position:absolute;
+	top:-1px; right:20px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Thin';
+	font-size:12px;
+	content:"LEVEL";
+	color:#fff;
+}
+.wl4 {
+	position:absolute;
+	top:20px; right:10px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wl4:before {
+	position:absolute;
+	top:-1px; right:32px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Thin';
+	font-size:12px;
+	content:"Р­РўРђР–";
+	color:#fff;
+}
+.wl4e {
+	position:absolute;
+	top:20px; right:10px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Bold';
+	font-size:22px;
+	color:#fff;
+}
+.wl4e:before {
+	position:absolute;
+	top:-1px; right:32px;
+	margin:0; padding:0;
+	font-family:'PFDinTextCondPro-Thin';
+	font-size:12px;
+	content:"LEVEL";
+	color:#fff;
+}
+.us-wplace {
+	display:block;
+	position:relative;
+	width:200px;
+	height:53px;
+	margin:20px auto;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-wplace.png') center no-repeat;
+	background-size:200px 53px;
+	font-family:'PFDinTextCondPro-Bold';
+    font-size:22px;
+	text-align:left;
+    color:#fff;
+	line-height:53px;
+	padding-left:75px;
+}
+
+/* ===[ EXKURSII ]=== */
+
+.inf_view1, .inf_view2, .inf_view3, .inf_view4, .inf_view5 {
+	font-family:'PFDinTextCondPro-Bold';
+    font-size:15px;
+	text-align:left;
+    color:#fff;
+	height:50px;
+	line-height:50px;
+	padding-left:54px;
+}
+.inf_view1 {
+    background-image:url(https://mrdata.mriyaresort.com:5343/mp/foto/exkursii/line1.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.inf_view2 {
+    background-image:url(https://mrdata.mriyaresort.com:5343/mp/foto/exkursii/line2.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.inf_view3 {
+    background-image:url(https://mrdata.mriyaresort.com:5343/mp/foto/exkursii/line3.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.inf_view4 {
+    background-image:url(https://mrdata.mriyaresort.com:5343/mp/foto/exkursii/line4.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.inf_view5 {
+    background-image:url(https://mrdata.mriyaresort.com:5343/mp/foto/exkursii/line5.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.inf_view2 a { font-family:'PFDinTextCondPro-Bold'; font-size:15px; color:#fff; }
+.inf_view2 a:hover { text-decoration:none; }
+
+b, strong { font-family:'GothamProBold'; }
+em { font-family:'GothamProItalic'; }
+.us-comment {
+	font-size:11px;
+	text-align:left;
+	line-height:14px;
+	color:grey;
+}
+.us-inline { display:inline-block; }
+h1 {
+	font-family:'PFDinTextCondPro-Thin';
+    font-size:32px;
+	font-weight:100;
+    line-height:38px;
+    text-transform: uppercase;
+	margin:6px 0 0;
+}
+h1 span {
+    font-family:'PFDinTextCondPro-Thin';
+    font-size:14px;
+	line-height:17px;
+    color:#89724d;
+    text-transform:uppercase;
+    display:block;
+	letter-spacing:2px;
+}
+h2 {
+	font-family:'GothamProBold';
+	font-size:15px;
+	line-height:20px;
+}
+
+/* ===[ COLOR ]=== */
+
+.hcolor0g {color:#89724d}
+.pcolor0g {background:#b49a60}
+.hcolor01 {color:#89724d}
+.pcolor01 {background:#b49a60}
+.hcolor02 {color:#89724d}
+.pcolor02 {background:#b49a60}
+.hcolor03 {color:#89724d}
+.pcolor03 {background:#b49a60}
+
+/*.hcolor01 {color:#3e871e}
+.pcolor01 {background:#3e871e}
+.hcolor02 {color:#98412c}
+.pcolor02 {background:#c24d2a}
+.hcolor03 {color:#1946d8}
+.pcolor03 {background:#0031D3}*/
+
+/* ===[ CONTENT ]=== */
+
+.us-main {
+	width:100%;
+	margin:0 auto;
+	overflow:hidden;
+	padding:10px 10px 20px;
+	text-align:left;
+}
+.us-header {
+	width:100%;
+	margin:0 auto;
+	overflow:hidden;
+	padding:20px 10px 15px;
+	text-align:center;
+}
+.us-p360 {
+	width:100%;
+	margin:0 auto;
+	overflow:hidden;
+	padding:20px 10px;
+	text-align:center;
+}
+.us-gb {
+	margin:20px -10px;
+	overflow:hidden;
+	padding:10px;
+	text-align:left;
+	color:#fff;
+	background:#b49a60;
+}
+.us-zblock {
+	position:relative;
+}
+.us-line {
+	height:15px;
+	margin:10px -10px 20px;
+	border-bottom:1px solid #e0cda7;
+}
+.us-top-img {
+	position:relative;
+	width:100%;
+	height:300px;
+	overflow:hidden;
+}
+.us-img {
+	display:block;
+	max-width:100%;
+	width:auto;
+	height:auto;
+	margin:20px auto;
+	vertical-align:bottom;
+	background-color:#fff;
+	border: 5px solid #fff;
+	box-shadow: 0 1px 4px #aaa;
+}
+.us-mimg {
+	display:block;
+	max-width:100%;
+	width:auto;
+	height:auto;
+	margin:0 auto 20px;
+	vertical-align:bottom;
+	background-color:#fff;
+}
+.us-doctor {
+    width:100%;
+    background:#fff;
+    box-shadow: 0 1px 4px #aaa;
+    overflow:hidden;
+	padding:10px;
+	border-radius:4px;
+	margin:0 0 10px;
+}
+.us-doctor img {
+    width:40%;
+	float:left;
+	margin-right:10px;
+	vertical-align:bottom;
+}
+.us-doctor h2 {
+	margin-top:0;
+}
+.us-doctor p {
+	margin-bottom:0;
+}
+.us-round-img {
+	display:block;
+	max-width:90%;
+	width:auto;
+	height:auto;
+	margin:20px auto;
+	vertical-align:bottom;
+	background-color:#fff;
+    overflow: hidden;
+    border-radius: 50%;
+}
+#panorama {display:block;position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;background:#000;}
+
+/* ===[ VID ]=== */
+
+.us-vid {
+	position:relative;
+	width:170px;
+	height:170px;
+	margin:0 auto;
+}
+@media (min-width:640px) {
+	.us-vid { width:330px; height:330px; }
+}
+.us-bvid1 {
+	position:absolute;
+	width:76px;
+	height:26px;
+	line-height:26px;
+	margin:0; padding:0;
+	border:0;
+	color:#0f9983;
+	font-family:'GothamProMedium';
+	font-size:9px;
+	text-align:center;
+	outline:none;
+	cursor:pointer;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-bvid1-1.png') center no-repeat;
+	background-size:76px 26px;
+}
+.us-bvid1:hover {
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-bvid1-2.png') center no-repeat;
+	background-size:76px 26px;
+	color:#fff;
+}
+.us-bvid2 {
+	position:absolute;
+	width:76px;
+	height:26px;
+	line-height:26px;
+	margin:0; padding:0;
+	border:0;
+	color:#0f9983;
+	font-family:'GothamProMedium';
+	font-size:9px;
+	text-align:center;
+	outline:none;
+	cursor:pointer;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-bvid2-1.png') center no-repeat;
+	background-size:76px 26px;
+}
+.us-bvid2:hover {
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-bvid2-2.png') center no-repeat;
+	background-size:76px 26px;
+	color:#fff;
+}
+
+/* ===[ UL ]=== */
+
+.us-ul {
+	max-width:640px;
+	margin:0 0 20px 20px;
+}
+@media (min-width:960px) {
+	.us-ul { margin:0 auto 20px; }
+}
+.us-ul li {
+	text-align:left;
+	list-style: none;
+}
+.us-ul li:before {
+	content:'';
+	float:left;
+	margin:7px 0 0 -15px;
+	background-color:#572700;
+	width:6px;
+	height:6px;
+	border-radius:50%;
+}
+.us-ul1 {
+	margin:10px 0 10px -28px;
+	padding-right:0;
+}
+.us-ul1 li {
+	font-size:13px;
+}
+.us-ul1 li:before {
+	content:'';
+	float:left;
+	margin:8px 0 0 -10px;
+	background-color:#572700;
+	width:4px;
+	height:4px;
+	border-radius:50%;
+}
+.us-ol {
+	max-width:640px;
+	margin:0 0 20px -20px;
+}
+.us-ol li {
+	text-align:left;
+	font-size:14px;
+	line-height:18px;
+}
+@media (min-width:960px) {
+	.us-ol { margin:0 auto 20px; }
+}
+
+/* ===[ FOOTER ]=== */
+
+.us-footer {
+	position:relative;
+	margin:0;
+	overflow:hidden;
+	width:100%;
+	height:100px;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/css/mr-logo.png') center no-repeat, #333;
+	background-size:100px 100px;
+	text-align:center;
+}
+.us-footer a {
+	font-family:'PFDinTextCondPro-Thin';
+    font-size:26px;
+	line-height:108px;
+	color:#fff;
+	text-decoration:none;
+}
+.us-footer a:hover {
+	color:#999;
+}
+
+/* ===[ BUTTON ]=== */
+
+.us-bzap {
+	position:absolute;
+	bottom:5px; right:-5px;
+	height:30px;
+	padding-left:5px;
+	padding-right:5px;
+	color:#0f9983;
+	font-family:'GothamProMedium';
+	font-size:12px;
+	line-height:26px;
+	text-align:center;
+	outline:none;
+	cursor:pointer;
+	border-radius:4px;
+	border:2px solid #0f9983;
+	background-color:transparent;
+}
+@media (max-width:380px) {
+	.us-bzap {position:relative;right:0;}
+}
+.us-bzap:hover {
+	background:#0f9983;
+	color:#fff;
+}
+.us-button-bron {
+	display:block;
+	max-width:250px;
+	width:100%;
+	height:60px;
+	margin:20px auto;
+	color:#0f9983;
+	font-family:'GothamProMedium';
+	font-size:16px;
+	line-height:56px;
+	text-align:center;
+	outline:none;
+	cursor:pointer;
+	border-radius:4px;
+	border:2px solid #0f9983;
+	background-color:transparent;
+}
+.us-button-bron:hover {
+	background:#0f9983;
+	color:#fff;
+}
+.us-b360 {
+	max-width:220px;
+	width:100%;
+	height:60px;
+	margin:10px 0 12px;
+	padding:0 0 0 90px;
+	color:#fff;
+	font-family:'GothamProMedium';
+	font-size:12px;
+	line-height:14px;
+	text-align:left;
+	outline:none;
+	cursor:pointer;
+	border-radius:4px;
+	border:2px solid #fff;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-b360-00.png') 30px center no-repeat, transparent;
+	background-size:53px 30px;
+}
+.b360-0g:hover, .b360-01:hover, .b360-02:hover, .b360-03:hover {color:#b49a60;background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-b360-0g.png') 30px center no-repeat, #fff;background-size:53px 30px;}
+/*.b360-01:hover {color:#3e871e;background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-b360-01.png') 30px center no-repeat, #fff;background-size:53px 30px;}
+.b360-02:hover {color:#c24d2a;background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-b360-02.png') 30px center no-repeat, #fff;background-size:53px 30px;}
+.b360-03:hover {color:#0031D3;background:url('https://mrdata.mriyaresort.com:5343/mp/foto/ico/mr-b360-03.png') 30px center no-repeat, #fff;background-size:53px 30px;}*/
+
+/* ===[ TABLE ]=== */
+
+table.us-table-1 { width:100%; padding:0; margin:15px auto 25px; border-spacing:0; border-collapse:separate; box-shadow:0 1px 4px #aaa; }
+table.us-table-1 th, table.us-table-1 td { font-size:12px; font-weight:100; line-height:16px; padding:8px 4px; text-align:center; vertical-align:middle; }
+table.us-table-1 th { color:#fff; background:#b49a60; vertical-align:top; font-family:'GothamProMedium'; }
+table.us-table-1 td:first-child { text-align:left; padding-left:8px; }
+table.us-table-1 th:first-child { box-shadow:-1px 0 0 0 #b49a60; text-align:center; vertical-align:middle; }
+table.us-table-1 th:last-child { box-shadow:1px 0 0 0 #b49a60; }
+table.us-table-1 th+th { border-left:1px solid rgba(255,255,255,0.5); }
+table.us-table-1 th.tht { border-top:1px solid rgba(255,255,255,0.5); }
+table.us-table-1 th.thl { border-left:1px solid rgba(255,255,255,0.5); }
+table.us-table-1 tr.trf { background:#f7f7f7; }
+
+table.us-table-2 { width:100%; padding:0; margin:0; border-spacing:0; border-collapse:separate; }
+table.us-table-2 td { font-size:12px; font-family:'GothamProRegular'; line-height:16px; padding:8px; text-align:left; vertical-align:middle; border-bottom:1px dotted #e0cda7; }
+table.us-table-2 td:last-child { text-align:right; font-family:'GothamProBold'; }
+table.us-table-2 tr:last-child > td { border-bottom:none; }
+
+table.us-table-3 { width:100%; padding:0; margin:20px 0; border-spacing:0; border-collapse:separate; }
+table.us-table-3 td { text-align:left; vertical-align:middle; padding:0 6px 0; font-family:'GothamProRegular'; font-size:11px; line-height:13px; }
+table.us-table-3 td.timg { padding:0; width:36px; }
+table.us-table-3 td img { width:36px; height:36px; }
+
+/* ===[ ACCORDION ]=== */
+
+div[id^="sbox"] {
+	display:none;
+	background-color:#fff;
+	padding:0;
+}
+.accordion {
+	display:block;
+	border-bottom:1px solid rgba(180,154,96,0.8);
+}
+.accordion button.abox {
+	display:block;
+	margin:0;
+	width:100%;
+	border:none;
+	background:#B49A60;
+	text-align: left;
+	color:#fff;
+	padding:10px;
+	padding-right:40px;
+	position:relative;
+	text-decoration:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	cursor:pointer;
+	font-size:14px;
+	line-height:18px;
+}
+.accordion button.dpbox {
+	background: url('https://mrdata.mriyaresort.com:5343/mp/css/dp.png') right no-repeat, #B49A60; background-size: 30px 24px;
+}
+.accordion button.dmbox {
+	background: url('https://mrdata.mriyaresort.com:5343/mp/css/dm.png') right no-repeat, #B49A60; background-size: 30px 24px;
+}
+
+/* ===[ ACCORDION 2 ]=== */
+
+div[id^="s2box"] {
+	display:none;
+	padding:0 0 0 3px;
+	text-align:left;
+}
+.accordion2 {
+	display:block;
+	border-bottom:1px dotted #68696b;
+}
+.accordion2 button.a2box {
+	display:block;
+	margin:0;
+	width:100%;
+	border:none;
+	text-align:left;
+	padding:10px;
+	padding-left:40px;
+	position:relative;
+	text-decoration:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	cursor:pointer;
+	color:#B49A60;
+    font-size:14px;
+    font-weight:bold;
+}
+.accordion2 button.dp2box {
+	background: url('https://mrdata.mriyaresort.com:5343/mp/css/dp.png') left no-repeat; background-size: 30px 24px;
+}
+.accordion2 button.dm2box {
+	background: url('https://mrdata.mriyaresort.com:5343/mp/css/dm.png') left no-repeat; background-size: 30px 24px;
+}
+
+/* ===[ PEPPERMINT TOUCH-SLIDER ]=== */
+
+/* default appearance styles */
+.peppermint {
+    text-align:center;
+	background:url('https://mrdata.mriyaresort.com:5343/mp/css/loader.gif') center no-repeat, #000; background-size:32px 32px;
+	height:300px;
+	overflow:hidden;
+}
+.peppermint-slides {
+    padding:0;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+.peppermint-img {
+	width:100%;
+	height:300px;
+}
+/* active */
+.peppermint.peppermint-active {
+    position: relative;
+    overflow: hidden;
+    padding:0;
+}
+.peppermint.peppermint-active .peppermint-slides {
+    position: relative;
+    overflow: hidden; /* clearfix */
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+}
+.peppermint.peppermint-active .peppermint-slides > * {
+    float: left;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+.peppermint.peppermint-active .peppermint-slides a:active,
+.peppermint.peppermint-active .peppermint-slides a:active img {
+    outline: none;
+}
+.peppermint.peppermint-active,
+.peppermint.peppermint-active .peppermint-dots,
+.peppermint.peppermint-active .peppermint-slides,
+.peppermint.peppermint-active .peppermint-slides > * {
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.peppermint.peppermint-mouse .peppermint-slides {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+.peppermint.peppermint-mouse.peppermint-drag .peppermint-slides * {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+/* dots */
+ul.peppermint-dots {
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:0;
+	padding:10px 0 9px;
+    text-align:center;
+    list-style-type:none;
+}
+ul.peppermint-dots > li {
+    display: inline-block;
+    position: relative;
+    padding:0 9px;
+    width:8px;
+    height:8px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    /* ie7 fallback */
+    *display: inline;
+    *zoom: 1;
+	opacity:0.85;
+}
+ul.peppermint-dots > li.peppermint-mouse-clicked,
+ul.peppermint-dots > li:active {
+    outline: 0;
+}
+ul.peppermint-dots > li > span {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -5px 0 0 -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background:#aaaaaa;
+}
+ul.peppermint-dots > li.peppermint-active-dot > span {
+    margin: -6px 0 0 -4px;
+    width:10px;
+    height:10px;
+    background:#ff6c00;
+	border:2px solid #fff;
+}
+@media (min-width:480px) {
+	.us-top-img, .peppermint, .peppermint-img { height:400px; }
+}

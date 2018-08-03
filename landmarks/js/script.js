@@ -19,6 +19,8 @@ function load(type,id,wId) {
         wId = false;
     }
     if(type == 'contentType'){
+        $('#mainContent').hide();
+        $('#gif').show();
         document.windowsId = 1;
         localStorage.setItem("lastView",'mainContentType');
         $.get('./index.php?render=contentType&type=' + id + '&lat=' + get('lat') + '&long=' + get('long'), function (data) {
@@ -34,6 +36,8 @@ function load(type,id,wId) {
                 localStorage.setItem("bc2", $('#mainContentType').find('#backName:eq(1)').attr('text'));
             }
             console.log($('#mainContentType').find('#backName').attr('text'));
+            showBack($('div.back').attr('viewid'));
+            $('#gif').hide();
         });
         $('div.back').attr('viewid', 2);
         $("body").scrollTop(0);
@@ -49,6 +53,7 @@ function load(type,id,wId) {
             $('#mainContentObjects').append(data);
             localStorage.setItem("bc3",$('#mainContentObjects').find('#backName').attr('text'));
             $("body").scrollTop(0);
+            showBack($('div.back').attr('viewid'));
         });
         $('div.back').attr('viewid',3);
     }else if(type == 'object'){
@@ -68,9 +73,10 @@ function load(type,id,wId) {
             $('#showMaps').hide();
             localStorage.setItem("bc4",$('#mainObject').find('#backName').attr('text'));
             $("body").scrollTop(0);
+            showBack($('div.back').attr('viewid'));
         });
     }
-    showBack($('div.back').attr('viewid'));
+    //showBack($('div.back').attr('viewid'));
 }
 
 function hideAll() {
@@ -126,6 +132,3 @@ function showBack(id) {
     }
     console.log(backText,id);
 }
-$(function() {
-    dparring();
-});
