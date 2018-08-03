@@ -16,7 +16,7 @@
                     $stop = explode(' ',$item['stop_time']);
                     $eventsTypeLang = json_decode($eventsType['format'][$item['event_type']]['name'],true);
 
-                    $start[1] = implode(':',array_slice(explode(':',$stop[1]),0,2));
+                    $start[1] = implode(':',array_slice(explode(':',$start[1]),0,2));
                     $stop[1] = implode(':',array_slice(explode(':',$stop[1]),0,2));
 
                     echo

@@ -36,7 +36,7 @@ $eventTypeData = json_decode($eventsType[0]['name'],true);
                 },
                 statusCode: {
                     200: function (response) { // выполнить функцию если код ответа HTTP 200
-                        location.reload();
+                        location.href = './admin.php?load=event';
                     }
                 }
             });

@@ -10,7 +10,7 @@ class CRUD
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=db;dbname=afisha", 'root', 'Qwerty123');
+            $this->db = new PDO("mysql:host=localhost;dbname=afisha", 'mriya_manager', ')2Hh340oJoPrz34(');
             $this->db->exec("set names utf8");
         } catch (Exception $exception) {
             exit($exception->getMessage());
@@ -26,13 +26,13 @@ class CRUD
 
     public function getAllPosters()
     {
-        $query = $this->db->query("SELECT * FROM poster ORDER BY id DESC");
+        $query = $this->db->query("SELECT * FROM poster ORDER BY start DESC");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllEvents()
     {
-        $query = $this->db->query("SELECT * FROM events ORDER BY id DESC");
+        $query = $this->db->query("SELECT * FROM events ORDER BY start_time DESC");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 

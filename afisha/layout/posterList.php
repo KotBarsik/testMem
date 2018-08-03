@@ -15,7 +15,7 @@
                     $start = explode(' ',$item['start']);
                     $stop = explode(' ',$item['stop']);
 
-                    $start[1] = implode(':',array_slice(explode(':',$stop[1]),0,2));
+                    $start[1] = implode(':',array_slice(explode(':',$start[1]),0,2));
                     $stop[1] = implode(':',array_slice(explode(':',$stop[1]),0,2));
 
 

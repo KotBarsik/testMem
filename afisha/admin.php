@@ -99,7 +99,7 @@ class Admin{
                 $imgName = $this->saveImages($_FILES);
                 $this->CRUD->updateImagesById($imgName,$data['itemId']);
             }
-
+            header("Location: ./admin.php?load=poster");
         }
         $data = '';
     }

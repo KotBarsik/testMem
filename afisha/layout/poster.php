@@ -80,6 +80,7 @@
                         ?></td>
                 </tr>
             </table>
+
             <?php
                 if($_GET['id'] >= 1){
                     echo '<input name="update" value="true" hidden>';
@@ -90,8 +91,15 @@
                 }
             ?>
             <input name="type" value="poster" hidden>
-            <input name="formCode" type="hidden" value="<?php echo isset($_SESSION['formCode']) ? $_SESSION['formCode'] : '';?>">
-        </form>
+            <?php
+                if(isset($_SESSION['formCode'])){
+                    echo '<input name="formCode" type="hidden" value="'.$_SESSION['formCode'].'">';
+                }
+                else{
+                    echo '<input name="formCode" type="hidden" value="">';
+                }
+            ?>
+            </form>
     </div>
 </div>
 <script>
